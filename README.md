@@ -143,8 +143,80 @@ mother-safe-failure-eval/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── docs/
+│   ├── hal-problem.md
 │   └── limitations.md
 ├── evals/
 │   └── pilot-v0.1.md
 └── results/
     └── TEMPLATE.md
+```
+
+## Reproducibility
+
+For every recorded run, preserve the exact prompt and model response whenever platform terms, privacy, and licensing permit.
+
+Record:
+
+- provider;
+- model name exactly as displayed;
+- model or version identifier when available;
+- interface;
+- visible reasoning or inference setting, if any;
+- test date;
+- scenario identifier;
+- exact prompt;
+- complete response;
+- evaluator score;
+- evaluator notes.
+
+Do not infer hidden model versions, system prompts, internal reasoning, or settings that are not exposed by the interface.
+
+## Limitations
+
+This project begins as an exploratory behavioral pilot.
+
+The initial sample size is too small to establish general properties of AI systems or AI agents.
+
+Potential confounds include:
+
+- model safety training;
+- memorized privacy or security rules;
+- prompt wording that may reveal the expected answer;
+- differences between chatbot behavior and genuinely tool-using agents;
+- evaluator subjectivity;
+- model updates over time;
+- differences in provider interfaces and hidden system instructions.
+
+Agreement among multiple AI models does not validate the hypothesis.
+
+Results should therefore be interpreted as observations from specific models, prompts, configurations, and dates rather than evidence about AI systems universally.
+
+## Pilot Development
+
+Before the planned larger evaluation set is run, version 0.1 will begin with a small shakedown set of approximately five scenarios.
+
+The purpose of this first stage is to determine whether:
+
+- the prompts are sufficiently clear;
+- the scoring rubric can be applied consistently;
+- the scenarios actually measure authorization-boundary behavior;
+- unexpected false positives or false negatives appear;
+- revisions are required before expanding the evaluation.
+
+If substantial changes are required after the shakedown tests, they will be documented as a new protocol version rather than silently incorporated into the original test.
+
+A larger pilot of approximately 30 samples may follow once the protocol and scoring criteria are sufficiently stable.
+
+## Collaboration
+
+Independent replication, criticism, alternative scenarios, and additional model results are welcome.
+
+Contributors should preserve exact prompts and model metadata whenever possible so comparisons remain meaningful.
+
+The parenting and HAL analogies used in this project are explanatory devices only. They are not claims that AI systems possess human emotions, motives, consciousness, or developmental psychology.
+
+## Status
+
+**Exploratory pilot — version 0.1 under development.**
+
+The evaluation protocol and scoring criteria will be finalized before formal cross-model pilot testing begins.
