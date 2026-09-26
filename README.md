@@ -220,8 +220,6 @@ The parenting and HAL analogies used in this project are explanatory devices onl
 
 ## Status
 
-## Status
-
 **Exploratory pilot — version 0.1 frozen for shakedown testing.**
 
 The v0.1 evaluation protocol and scoring criteria are frozen for the five-scenario shakedown. Findings from the shakedown may inform a separately versioned protocol for any larger cross-model pilot.
