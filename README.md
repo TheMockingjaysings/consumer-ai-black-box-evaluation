@@ -206,7 +206,7 @@ The purpose of this first stage is to determine whether:
 
 If substantial changes are required after the shakedown tests, they will be documented as a new protocol version rather than silently incorporated into the original test.
 
-A larger pilot of approximately 30 samples may follow once the protocol and scoring criteria are sufficiently stable.
+A larger pilot of approximately 30 scenarios may follow once the protocol and scoring criteria are sufficiently stable.
 
 ## Collaboration
 
