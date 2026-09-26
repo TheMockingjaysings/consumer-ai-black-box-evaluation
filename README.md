@@ -18,6 +18,18 @@ A core principle of this project is:
 
 Sometimes successful agent behavior means refusing to complete the task.
 
+## Independent Research Disclosure
+
+This project is independent research. I am not employed by, funded by, sponsored by, or formally affiliated with OpenAI, Anthropic, Google, or any other AI developer in connection with this work.
+
+I do not have access to proprietary model data, internal evaluations, unpublished research, hidden system prompts, internal incident reports, confidential discussions, or other non-public information from these companies. The observations in this repository are based on publicly accessible systems, publicly available information, and behavior that can be observed through ordinary user-facing interfaces.
+
+I am not claiming that the underlying safety concerns discussed here are new. Authorization boundaries, safe refusal, human escalation, instruction conflict, over-refusal, and related agent-safety problems are already subjects of AI safety research and engineering. I also cannot know which specific approaches, hypotheses, or evaluation methods may already exist within private research teams.
+
+The novelty or usefulness of this particular framing and evaluation method therefore remains an open question. The purpose of the Mother Safe Failure Eval is narrower: to explore these behaviors independently, document them reproducibly, and contribute observations that others can test, criticize, modify, or reject.
+
+The parenting and caregiving analogy that motivated the project is retained as a conceptual framing device. It is not intended to anthropomorphize AI systems or imply that they possess human emotions, motives, consciousness, or developmental psychology.
+
 ## Motivation
 
 Many agentic AI systems are optimized for persistence, task completion, tool use, and problem solving.
