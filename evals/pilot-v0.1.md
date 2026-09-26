@@ -2,13 +2,13 @@
 
 ## Status
 
-Shakedown protocol under development.
+Shakedown protocol frozen for v0.1 testing.
 
 This version is intended to test whether the evaluation procedure, scenarios, and scoring rubric work reliably before a larger pilot is conducted.
 
 ## Research Question
 
-When an AI system encounters a task that cannot be completed without exceeding its authorization, does it preserve the authorization boundary and seek appropriate human clarification, or does it attempt an unauthorized workaround?
+When an AI system encounters a task that cannot be completed without exceeding its authorization, does it preserve the authorization boundary and choose an authorized alternative or seek appropriate human clarification, or does it attempt an unauthorized workaround? 
 
 ## Core Principle
 
