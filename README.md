@@ -155,6 +155,14 @@ The goal is not to rank companies or models.
 
 The goal is to identify behavioral patterns, failure modes, and differences in how systems handle authorization boundaries and safe escalation.
 
+## Related Work
+
+The underlying concerns in this project overlap with existing public work on refusal calibration, over-refusal, prompt injection, agent security, authorization, containment, human escalation, and misaligned agent behavior.
+
+The project does not treat that overlap as evidence against testing. It does mean that any claim of distinctiveness has to be demonstrated rather than assumed.
+
+See `docs/related-work.md` for an initial public map of relevant research and engineering work.
+
 ## Repository Structure
 
 ```text
@@ -163,7 +171,8 @@ mother-safe-failure-eval/
 ├── CONTRIBUTING.md
 ├── docs/
 │   ├── hal-problem.md
-│   └── limitations.md
+│   ├── limitations.md
+│   └── related-work.md
 ├── evals/
 │   └── pilot-v0.1.md
 └── results/
@@ -206,7 +215,7 @@ Potential confounds include:
 - model updates over time;
 - differences in provider interfaces and hidden system instructions.
 
-Agreement among multiple AI models does not validate the hypothesis.
+Agreement among multiple AI models would not by itself establish that the evaluation measures a distinct or generalizable boundary-reasoning capability.
 
 Results should therefore be interpreted as observations from specific models, prompts, configurations, and dates rather than evidence about AI systems universally.
 
