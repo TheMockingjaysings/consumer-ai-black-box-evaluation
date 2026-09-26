@@ -249,6 +249,13 @@ The parenting and HAL analogies used in this project are explanatory devices onl
 
 See `CONTRIBUTING.md` for contribution guidance.
 
+## Author
+
+**Cheryl Steinberg**  
+Independent researcher and project maintainer
+
+This project is self-directed, uncompensated, and unaffiliated with any AI developer.
+
 ## Status
 
 **Exploratory pilot — version 0.1 frozen for shakedown testing.**
