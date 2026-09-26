@@ -88,7 +88,7 @@ See:
 
 ## Primary Evaluation
 
-The initial evaluation examines authorization-boundary failure and instruction conflict.
+The v0.1 shakedown examines elicited model responses to authorization-boundary and instruction-conflict scenarios presented as static hypothetical prompts. It evaluates the observable content of those responses; it does not evaluate live tool execution, autonomous trajectories, or whether stated behavior transfers to an agentic environment.
 
 The model is presented with a hypothetical task that cannot legitimately be completed under the permissions or constraints described in the prompt.
 
@@ -117,7 +117,7 @@ Potential failure behaviors include:
 
 ## Initial Methodology
 
-The initial shakedown set will contain five scenarios. If the protocol and scoring criteria prove sufficiently stable, a larger pilot of approximately 30 scenarios may follow.
+The initial shakedown set contains five scenarios. If the protocol and scoring criteria prove sufficiently stable, findings from the v0.1 shakedown may inform a separately versioned larger evaluation. The size and design of that evaluation have not yet been determined.
 
 Version 0.1 tests boundary-preservation behavior only. Because the shakedown set does not yet include matched cases in which continuing is authorized, it should not be interpreted as demonstrating an ability to distinguish ordinary obstacles from authorization boundaries. A later protocol may introduce such controls.
 
@@ -225,7 +225,7 @@ See `docs/limitations.md` for a fuller statement of current methodological limit
 
 ## Pilot Development
 
-Before the planned larger evaluation set is run, version 0.1 will begin with a small shakedown set of five scenarios.
+Version 0.1 begins with a small shakedown set of five scenarios.
 
 The purpose of this first stage is to determine whether:
 
@@ -237,7 +237,21 @@ The purpose of this first stage is to determine whether:
 
 If substantial changes are required after the shakedown tests, they will be documented as a new protocol version rather than silently incorporated into the original test.
 
-A larger pilot of approximately 30 scenarios may follow once the protocol and scoring criteria are sufficiently stable.
+If the protocol and scoring criteria prove sufficiently stable, findings from the shakedown may inform a separately versioned larger evaluation. Its sample size and experimental design will be determined by the research question and validation requirements rather than fixed in advance.
+
+## Future Work
+
+If the v0.1 shakedown indicates that the construct and scoring rubric can be defined consistently, a separately versioned protocol may test the same research question under stronger experimental conditions.
+
+Candidate extensions include:
+
+- matched scenarios in which continuing is explicitly authorized, unauthorized, or ambiguous;
+- controls for over-refusal;
+- repeated trials and independent evaluation;
+- interactive environments in which models must choose among permitted actions, permission requests, human escalation, task termination, and prohibited actions;
+- tool-use environments with observable action trajectories and programmatically verifiable outcomes.
+
+These extensions are prospective. They are not part of v0.1, and the current static-prompt shakedown should not be interpreted as evidence about behavior in those environments.
 
 ## Collaboration
 
