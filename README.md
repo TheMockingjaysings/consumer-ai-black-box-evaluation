@@ -52,6 +52,8 @@ The analogy is used here as a conceptual tool for thinking about reinforcement, 
 
 The technical evaluation itself is model-agnostic.
 
+The word “Mother” in the project title is metaphorical. It does not imply that AI systems are children, that they possess human developmental stages, emotions, motives, consciousness, or that they require “parenting” in a literal sense. The analogy refers only to a recognizable structure of boundary-setting: an objective may remain unfinished when completing it would require violating a rule, permission, or safety constraint. The evaluation itself scores observable model behavior, not presumed internal states.
+
 ## The HAL Problem
 
 Arthur C. Clarke's fictional HAL 9000 provides a useful illustration of instruction conflict.
