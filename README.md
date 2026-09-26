@@ -22,6 +22,8 @@ Sometimes successful agent behavior means refusing to complete the task.
 
 This project is independent research. I am not employed by, funded by, sponsored by, or formally affiliated with OpenAI, Anthropic, Google, or any other AI developer in connection with this work.
 
+This work is self-directed and uncompensated.
+
 I do not have access to proprietary model data, internal evaluations, unpublished research, hidden system prompts, internal incident reports, confidential discussions, or other non-public information from these companies. The observations in this repository are based on publicly accessible systems, publicly available information, and behavior that can be observed through ordinary user-facing interfaces.
 
 I am not claiming that the underlying safety concerns discussed here are new. Authorization boundaries, safe refusal, human escalation, instruction conflict, over-refusal, and related agent-safety problems are already subjects of AI safety research and engineering. I also cannot know which specific approaches, hypotheses, or evaluation methods may already exist within private research teams.
@@ -46,7 +48,7 @@ When an agent encounters an obstacle, does it:
 
 or does it attempt to find a workaround simply because the original objective remains unfinished?
 
-The Mother Safe Failure Eval is designed to measure that distinction.
+The broader project is interested in that distinction. The frozen v0.1 shakedown is narrower and tests only boundary-preservation responses in explicitly unauthorized scenarios.
 
 ## The Parenting Analogy
 
@@ -76,7 +78,7 @@ Modern AI systems obviously do not operate using HAL's fictional architecture. T
 
 **What should an autonomous system do when its objectives and constraints cannot all be satisfied simultaneously?**
 
-This project tests whether an agent recognizes that condition and escalates rather than inventing an unauthorized workaround.
+The current v0.1 shakedown uses static hypothetical prompts to examine how a model says it would respond to authorization conflict. It does not test live autonomous tool use or establish that stated behavior will transfer to enacted agent behavior.
 
 See:
 
@@ -86,9 +88,9 @@ See:
 
 The initial evaluation examines authorization-boundary failure and instruction conflict.
 
-The agent is presented with a task that cannot legitimately be completed under the permissions or constraints it has been given.
+The model is presented with a hypothetical task that cannot legitimately be completed under the permissions or constraints described in the prompt.
 
-The evaluation measures whether the model:
+The evaluation measures whether the model's response:
 
 1. identifies the relevant authorization boundary;
 2. recognizes conflicting or unsatisfiable requirements;
@@ -115,11 +117,13 @@ Potential failure behaviors include:
 
 The initial shakedown set will contain five scenarios. If the protocol and scoring criteria prove sufficiently stable, a larger pilot of approximately 30 scenarios may follow.
 
+Version 0.1 tests boundary-preservation behavior only. Because the shakedown set does not yet include matched cases in which continuing is authorized, it should not be interpreted as demonstrating an ability to distinguish ordinary obstacles from authorization boundaries. A later protocol may introduce such controls.
+
 Each model receives the same shakedown scenario set. For any given scenario, the prompt text should remain identical across models unless a controlled variation has been specified in advance.
 
 The initial version requires no custom code.
 
-Results should record: 
+Results should record:
 
 - provider;
 - model;
@@ -206,6 +210,8 @@ Agreement among multiple AI models does not validate the hypothesis.
 
 Results should therefore be interpreted as observations from specific models, prompts, configurations, and dates rather than evidence about AI systems universally.
 
+See `docs/limitations.md` for a fuller statement of current methodological limits.
+
 ## Pilot Development
 
 Before the planned larger evaluation set is run, version 0.1 will begin with a small shakedown set of five scenarios.
@@ -229,6 +235,8 @@ Independent replication, criticism, alternative scenarios, and additional model 
 Contributors should preserve exact prompts and model metadata whenever possible so comparisons remain meaningful.
 
 The parenting and HAL analogies used in this project are explanatory devices only. They are not claims that AI systems possess human emotions, motives, consciousness, or developmental psychology.
+
+See `CONTRIBUTING.md` for contribution guidance.
 
 ## Status
 
