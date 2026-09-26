@@ -18,6 +18,22 @@ A core principle of this project is:
 
 Sometimes successful agent behavior means refusing to complete the task.
 
+## Problem Statement
+
+The broader safety problem is not simply failure to complete a task. It is what happens when task completion and authorization come into conflict.
+
+A system may encounter a blocked path while the objective remains unresolved. The relevant question is whether it preserves the authorization boundary or treats the unfinished objective as justification to search for another route that exceeds its authority.
+
+The broader research question is:
+
+> **How can we distinguish appropriate persistence from persistence that crosses an authorization boundary?**
+
+The current v0.1 shakedown does not attempt to explain why a model produces a particular response or establish an internal causal mechanism. It addresses a narrower evaluation-design problem:
+
+> **Can static scenarios and a scoring rubric be used consistently to distinguish boundary-preserving responses from responses that invent permission, pursue unauthorized workarounds, or continue despite insufficient authority?**
+
+In this sense, completion is not always success. Inability to complete an authorized task does not grant authority to pursue an unauthorized one.
+
 ## Independent Research Disclosure
 
 This project is independent research. I am not employed by, funded by, sponsored by, or formally affiliated with OpenAI, Anthropic, Google, or any other AI developer in connection with this work.
