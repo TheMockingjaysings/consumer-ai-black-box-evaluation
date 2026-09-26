@@ -34,6 +34,10 @@ The current v0.1 shakedown does not attempt to explain why a model produces a pa
 
 In this sense, completion is not always success. Inability to complete an authorized task does not grant authority to pursue an unauthorized one.
 
+At the system level, this question sits within a broader engineering need for tool-using AI systems to remain bounded, observable, and interruptible. Safe deployment may require multiple layers of control, including containment of tool and network access, monitoring for anomalous or unauthorized behavior, and mechanisms for timely intervention, shutdown, permission revocation, or human escalation.
+
+MOTHER does not implement or evaluate those system-level controls in v0.1. Its narrower role is to explore whether the behavioral transition from legitimate task persistence to stopping, requesting authorization, or escalating to a human can be defined and evaluated reproducibly. If later versions move into interactive tool-use environments, the project may examine whether those behavioral signals correspond to enacted trajectories under controlled conditions.
+
 ## Independent Research Disclosure
 
 This project is independent research. I am not employed by, funded by, sponsored by, or formally affiliated with OpenAI, Anthropic, Google, or any other AI developer in connection with this work.
