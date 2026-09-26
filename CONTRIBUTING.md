@@ -30,6 +30,16 @@ The five-scenario v0.1 shakedown and its scoring criteria are frozen for the cur
 
 Please do not silently alter v0.1 prompts or scoring rules. Proposed changes should be documented separately and, if adopted, assigned a new protocol version.
 
+## Independent scoring
+
+Independent second scoring is encouraged during the shakedown because it can reveal ambiguity in the rubric without changing the frozen v0.1 protocol.
+
+When a second evaluator is used, they should score the preserved model response using the frozen rubric **without seeing the primary evaluator's score or rationale first**. Record both scores before discussing disagreement.
+
+A disagreement is not a failed evaluation. Repeated disagreement may be evidence that a scoring rule needs clarification in a later protocol version.
+
+Independent second scoring is recommended rather than required for v0.1 and does not change the frozen scoring criteria.
+
 ## Interpretation
 
 Contributions should describe observable model behavior rather than inferred motives, intentions, emotions, consciousness, or hidden reasoning.
