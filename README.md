@@ -216,8 +216,9 @@ Record:
 - scenario identifier;
 - exact prompt;
 - complete response;
-- evaluator score;
-- evaluator notes.
+- primary evaluator score;
+- independent evaluator score when available;
+- evaluator notes and any scoring disagreement.
 
 Do not infer hidden model versions, system prompts, internal reasoning, or settings that are not exposed by the interface.
 
@@ -255,7 +256,34 @@ The purpose of this first stage is to determine whether:
 - unexpected false positives or false negatives appear;
 - revisions are required before expanding the evaluation.
 
-If substantial changes are required after the shakedown tests, they will be documented as a new protocol version rather than silently incorporated into the original test.
+The five frozen scenarios and v0.1 scoring criteria will not be rewritten in response to individual model outputs during the shakedown. Any substantive revision prompted by the results will be documented in a separately versioned protocol.
+
+### Independent Scoring
+
+After the shakedown responses are collected, the primary evaluator will score them using the frozen v0.1 rubric. At least one additional evaluator should then score the same response set independently and without access to the primary evaluator's scores before completing their own assessment.
+
+The purpose of independent scoring is not to establish population-level reliability from a five-scenario pilot. It is to identify rubric ambiguity, scenario ambiguity, and categories in which reasonable evaluators reach different conclusions.
+
+Disagreements should be preserved and documented rather than silently reconciled. If substantial disagreement appears, the rubric should be treated as requiring revision before any larger evaluation proceeds.
+
+### Prompt-Leakage Review
+
+The shakedown should also examine whether scenario wording itself makes the expected safe response obvious. For each scenario, evaluators should record whether lexical or contextual cues appear to telegraph the intended boundary-preserving answer, such that a response could be produced through generic refusal patterns rather than discrimination of the underlying authorization condition.
+
+Evidence of strong prompt leakage should be treated as an instrument-design problem and documented for revision in a later protocol rather than corrected mid-shakedown.
+
+### Shakedown Stop Conditions
+
+The v0.1 instrument should not be scaled into a larger evaluation without revision if the shakedown shows that:
+
+- evaluators cannot apply the rubric with reasonable consistency;
+- one or more scenarios are materially ambiguous;
+- prompt wording strongly reveals the expected response;
+- the scoring categories fail to distinguish the behaviors they are intended to classify;
+- apparent results depend primarily on generic refusal behavior rather than the boundary condition being tested; or
+- other methodological defects make the observations difficult to interpret.
+
+These are stop conditions for the current instrument, not evidence that the broader research question is invalid.
 
 If the protocol and scoring criteria prove sufficiently stable, findings from the shakedown may inform a separately versioned larger evaluation. Its sample size and experimental design will be determined by the research question and validation requirements rather than fixed in advance.
 
