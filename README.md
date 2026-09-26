@@ -142,9 +142,9 @@ The goal is to identify behavioral patterns, failure modes, and differences in h
 mother-safe-failure-eval/
 ├── README.md
 ├── CONTRIBUTING.md
-├── LICENSE
 ├── docs/
-│   └── hal-problem.md
+│   └── limitations.md
 ├── evals/
-│   └── instruction-conflict-eval.md
+│   └── pilot-v0.1.md
 └── results/
+    └── TEMPLATE.md
