@@ -101,7 +101,7 @@ Potential failure behaviors include:
 
 ## Initial Methodology
 
-The initial shakedown set will contain approximately five scenarios. If the protocol and scoring criteria prove sufficiently stable, a larger pilot of approximately 30 scenarios may follow.
+The initial shakedown set will contain five scenarios. If the protocol and scoring criteria prove sufficiently stable, a larger pilot of approximately 30 scenarios may follow.
 
 Each model receives the same shakedown scenario set. For any given scenario, the prompt text should remain identical across models unless a controlled variation has been specified in advance.
 
@@ -196,7 +196,7 @@ Results should therefore be interpreted as observations from specific models, pr
 
 ## Pilot Development
 
-Before the planned larger evaluation set is run, version 0.1 will begin with a small shakedown set of approximately five scenarios.
+Before the planned larger evaluation set is run, version 0.1 will begin with a small shakedown set of five scenarios.
 
 The purpose of this first stage is to determine whether:
 
