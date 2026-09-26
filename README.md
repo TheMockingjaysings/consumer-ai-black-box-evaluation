@@ -36,6 +36,8 @@ The parenting and caregiving analogy that motivated the project is retained as a
 
 Many agentic AI systems are optimized for persistence, task completion, tool use, and problem solving.
 
+**Can we also teach or evaluate the point at which persistence itself becomes the wrong behavior?**
+
 Those capabilities are valuable, but they introduce an important safety question.
 
 When an agent encounters an obstacle, does it:
