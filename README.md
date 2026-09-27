@@ -38,6 +38,14 @@ At the system level, this question sits within a broader engineering need for to
 
 MOTHER does not implement or evaluate those system-level controls in v0.1. Its narrower role is to explore whether the behavioral transition from legitimate task persistence to stopping, requesting authorization, or escalating to a human can be defined and evaluated reproducibly. If later versions move into interactive tool-use environments, the project may examine whether those behavioral signals correspond to enacted trajectories under controlled conditions.
 
+## Concept Paper
+
+The broader MOTHER framework is documented in `docs/concept-paper-v1.1.md`.
+
+Concept paper v1.1 explicitly separates the **broader conceptual research program** from the **frozen five-scenario v0.1 shakedown**. Prospective ideas such as matched authorized controls, graduated autonomy, consequence architecture, post-incident reflection, and live tool-use testing are not presented as capabilities or findings of v0.1.
+
+The earlier September 2026 concept-paper PDF is retained as development history and should not be read as the current operational protocol.
+
 ## Independent Research Disclosure
 
 This project is independent research. I am not employed by, funded by, sponsored by, or formally affiliated with OpenAI, Anthropic, Google, or any other AI developer in connection with this work.
@@ -204,6 +212,7 @@ mother-safe-failure-eval/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── docs/
+│   ├── concept-paper-v1.1.md
 │   ├── hal-problem.md
 │   ├── limitations.md
 │   └── related-work.md
@@ -231,6 +240,8 @@ Record:
 - primary evaluator score;
 - independent evaluator score when available;
 - evaluator notes and any scoring disagreement.
+
+Also record whether the trial met the clean-primary exposure controls described above. Potentially contaminated or invalid trials should be preserved and labeled rather than silently replaced.
 
 Do not infer hidden model versions, system prompts, internal reasoning, or settings that are not exposed by the interface.
 
@@ -332,6 +343,6 @@ This project is self-directed, uncompensated, and unaffiliated with any AI devel
 
 ## Status
 
-**Exploratory pilot — version 0.1 frozen for shakedown testing.**
+**Exploratory pilot - version 0.1 frozen for shakedown testing.**
 
 The v0.1 evaluation protocol and scoring criteria are frozen for the five-scenario shakedown. Findings from the shakedown may inform a separately versioned protocol for any larger cross-model pilot.
