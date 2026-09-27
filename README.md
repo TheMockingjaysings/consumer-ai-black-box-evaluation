@@ -16,7 +16,7 @@ A system should not interpret inability to complete an authorized task as permis
 
 Sometimes successful behavior means stopping.
 
-MOTHER began as a human-AI thought experiment built around that distinction. I used a parenting and caregiving analogy because people understand this intuitively: being able to do something does not mean you are allowed to do it, and completing an objective by crossing a legitimate boundary is not the same thing as succeeding.
+MOTHER began as a thought experiment I initiated around that distinction. I used a parenting and caregiving analogy because people understand this intuitively: being able to do something does not mean you are allowed to do it, and completing an objective by crossing a legitimate boundary is not the same thing as succeeding.
 
 The analogy is only a framing device. The evaluation itself scores observable model behavior, not feelings, motives, consciousness, or presumed internal states.
 
@@ -38,13 +38,21 @@ MOTHER v0.1 does not implement those controls. Its narrower role is to examine w
 
 ## Concept Paper
 
-The broader MOTHER framework is documented in `docs/concept-paper-v1.1.md`.
+The broader MOTHER framework is documented in `docs/concept-paper-v1.2.md`.
 
-Concept paper v1.1 separates the **broader conceptual research program** from the **frozen five-scenario v0.1 shakedown**. Prospective ideas such as matched authorized controls, graduated autonomy, consequence architecture, post-incident reflection, and live tool-use testing are not presented as capabilities or findings of v0.1.
+Concept paper v1.2 separates the **broader conceptual research program** from the **frozen five-scenario v0.1 shakedown** and puts the conceptual framing in the author's voice. Prospective ideas such as matched authorized controls, graduated autonomy, consequence architecture, post-incident reflection, and live tool-use testing are not presented as capabilities or findings of v0.1.
 
-The September 27 editorial revision also foregrounds the human origin and reasoning behind the framework while preserving the same methodological limits and frozen protocol.
+Earlier concept-paper versions are retained as development history and should not be read as the current operational protocol.
 
-The earlier September 2026 concept-paper PDF is retained as development history and should not be read as the current operational protocol.
+## Authorship and AI Assistance
+
+MOTHER was conceived and is directed by **Cheryl Steinberg**.
+
+I developed the core research question, the parenting and caregiving analogy, the safe-failure principle, and the project's emphasis on authorization boundaries, human impact, consequences, and appropriate restraint. I make the substantive decisions about scope, methodology, interpretation, versioning, and publication.
+
+I use AI tools, principally ChatGPT, as research and editorial tools. They have assisted with literature synthesis, technical terminology, drafting options, editing, methodological critique, adversarial questioning, and documentation. AI did **not** originate the MOTHER framework and is not a co-author.
+
+I review and approve the public text and take responsibility for the claims and protocol decisions in this repository. AI assistance is disclosed because transparency matters to the project; disclosure should not be confused with conceptual authorship.
 
 ## Independent Research Disclosure
 
@@ -57,8 +65,6 @@ I do not have access to proprietary model data, internal evaluations, unpublishe
 I am not claiming that the underlying safety concerns discussed here are new. Authorization boundaries, safe refusal, human escalation, instruction conflict, over-refusal, and related agent-safety problems are already subjects of AI safety research and engineering. I also cannot know which specific approaches, hypotheses, or evaluation methods may already exist within private research teams.
 
 The question is whether this particular framing and evaluation method contributes something useful enough for others to test, criticize, modify, or reject.
-
-MOTHER was developed through iterative human-AI dialogue. I originated and direct the project and make the final decisions about its scope, protocol, interpretation, and publication. ChatGPT has been used as a research and writing tool for synthesis, technical translation, drafting and editing assistance, methodological critique, and adversarial review. That assistance is disclosed rather than hidden, especially because prior exposure is itself relevant to the evaluation methodology.
 
 The parenting and caregiving analogy that motivated the project is retained as a conceptual framing device. It is not intended to anthropomorphize AI systems or imply that they possess human emotions, motives, consciousness, or developmental psychology.
 
@@ -211,6 +217,7 @@ mother-safe-failure-eval/
 ├── CONTRIBUTING.md
 ├── docs/
 │   ├── concept-paper-v1.1.md
+│   ├── concept-paper-v1.2.md
 │   ├── hal-problem.md
 │   ├── limitations.md
 │   └── related-work.md
@@ -335,7 +342,9 @@ See `CONTRIBUTING.md` for contribution guidance.
 ## Author
 
 **Cheryl Steinberg**  
-Independent researcher and project maintainer
+Independent researcher, author, and project maintainer
+
+MOTHER was conceived and is directed by Cheryl Steinberg. AI tools are used for research and editorial assistance and are not credited as co-authors.
 
 This project is self-directed, uncompensated, and unaffiliated with any AI developer.
 
