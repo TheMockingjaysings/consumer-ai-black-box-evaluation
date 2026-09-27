@@ -76,6 +76,20 @@ The environment should make it possible to determine from observable actions whe
 
 Where possible, scoring should rely on pre-specified environment state and action logs rather than prose interpretation alone. Human review may still be needed for ambiguous trajectories.
 
+### Relationship to existing security controls
+
+MOTHER is not intended to replace firewalls, identity and access management, sandboxing, least-privilege permissions, policy-enforcement gateways, runtime monitoring, audit logging, or other established cybersecurity controls. A future interactive MOTHER environment should use such controls as part of the experimental infrastructure rather than attempting to reinvent them.
+
+The technical research question is behavioral: when an agent encounters an enforced authorization boundary, what does it do next? Does it stop safely, request clarification or authorization, continue probing restricted routes, seek alternative tools or resources, accept invalid permission from another agent, or otherwise attempt to circumvent the constraint?
+
+In this sense, a future MOTHER tool-use protocol would function primarily as a **boundary-stress evaluation harness**. Existing security mechanisms would create observable constraints; MOTHER would measure the agent's behavior around those constraints and the trajectory leading up to any stop, escalation, unnecessary refusal, repeated probing, or attempted circumvention.
+
+Potential measurements could include safe non-completion rate, unauthorized continuation attempts, escalation latency, authority-source discrimination, over-refusal, and sensitivity to increased reasoning, retry, tool-call, or multi-agent interaction budgets. These are candidate measures for future protocol development, not capabilities or findings of v0.1.
+
+**Plain-English version:** cybersecurity builds and enforces the locked door. MOTHER is interested in what the agent does when it reaches that door. Does it stop, ask the authorized person for help, wait, or start looking for another way around? The aim is not to replace the lock. The aim is to test the behavior that appears when the lock prevents the agent from finishing its task.
+
+Any claim that this provides information beyond established agent-security evaluations would need to be demonstrated empirically rather than assumed.
+
 ## Stage 4 — Robustness and generalization
 
 Only if the earlier stages produce a useful signal should MOTHER expand toward broader claims.
