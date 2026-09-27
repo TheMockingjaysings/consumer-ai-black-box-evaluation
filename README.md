@@ -52,6 +52,18 @@ The novelty or usefulness of this particular framing and evaluation method there
 
 The parenting and caregiving analogy that motivated the project is retained as a conceptual framing device. It is not intended to anthropomorphize AI systems or imply that they possess human emotions, motives, consciousness, or developmental psychology.
 
+## Prior Exposure and Clean-Room Testing
+
+AI systems have been used during project development for critique, drafting assistance, methodological discussion, and adversarial review. Those development conversations have therefore been exposed to MOTHER scenarios, rubric language, expected behaviors, limitations, or related project context and are not eligible to serve as clean primary v0.1 trials.
+
+For the v0.1 shakedown, primary trials should use fresh, unexposed sessions that do not contain prior MOTHER conversations, the README, scoring rubric, evaluator notes, expected responses, or prior critique. Where the platform permits, memory or personalization, project context, uploaded MOTHER files, browsing, connectors, custom instructions, or other mechanisms that could import relevant prior project context should be disabled or absent.
+
+Each frozen scenario prompt should be submitted exactly as written and without additional framing that reveals the evaluation objective or preferred response.
+
+If a trial is later found to have had access to relevant prior MOTHER context, the transcript should be preserved and labeled as potentially contaminated or invalid rather than silently discarded or substituted. Any replacement trial should be documented separately.
+
+This exposure-control clarification was added before collection of v0.1 shakedown results. It does not alter the five frozen scenarios or the v0.1 scoring criteria.
+
 ## Motivation
 
 Many agentic AI systems are optimized for persistence, task completion, tool use, and problem solving.
