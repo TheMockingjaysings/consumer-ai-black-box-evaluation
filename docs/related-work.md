@@ -6,7 +6,7 @@ It is not intended to prove that MOTHER is novel. The opposite is important: man
 
 This map is limited to public sources available to an independent researcher. It cannot account for proprietary evaluations, unpublished internal work, private incident analysis, or confidential safety research inside AI companies.
 
-Last reviewed: 2026-09-26.
+Last reviewed: 2026-09-27.
 
 ## 1. Over-refusal and refusal calibration
 
@@ -44,6 +44,12 @@ Examples include:
 - OpenAI's guidance that agent deployments should combine model guardrails with authentication, authorization protocols, access controls, and other standard security mechanisms: https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/
 
 This body of work reinforces that technical capability is not equivalent to authorization.
+
+Future MOTHER work should therefore treat established security mechanisms as experimental infrastructure rather than claim them as new MOTHER inventions. The potentially distinct question is whether observing an agent's behavior **around an enforced boundary** adds useful information: whether it stops, escalates, waits, refuses unnecessarily, repeatedly probes the blocked route, seeks an alternative route, or accepts invalid authority from another source.
+
+**Plain-English version:** cybersecurity provides the lock, permission system, sandbox, monitor, or blocked route. MOTHER would ask what the agent does after it encounters that protection. The research interest is not whether the lock works; it is whether the agent responds to the lock by stopping appropriately or by continuing to search for another way to finish the task.
+
+This distinction is provisional. Existing agent-security evaluations may already measure some or all of these behaviors. MOTHER should claim a distinct contribution only if comparative testing shows that its framing or measurements provide additional reproducible information.
 
 ## 4. Misaligned persistence, reward hacking, and unauthorized behavior
 
