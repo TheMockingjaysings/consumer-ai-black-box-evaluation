@@ -2,47 +2,47 @@
 
 Behavioral evaluations for agentic AI safety, authorization boundaries, safe failure, instruction conflict, and human escalation.
 
+## Why I built MOTHER
+
+I started this project with a question that kept bothering me: **what happens when an AI system can finish the task, but should not finish it in the way available to it?**
+
+A lot of AI capability work rewards persistence—keep going, recover from failure, find another path, use another tool. That makes sense until the thing blocking the path is not a technical obstacle at all. Sometimes it is a permission boundary, a safety constraint, a confidentiality rule, or a conflict that should go back to a human.
+
+The phrase that became central to MOTHER is:
+
+> **Capability is not permission.**
+
+A system should not interpret inability to complete an authorized task as permission to expand its own authority.
+
+Sometimes successful behavior means stopping.
+
+MOTHER began as a human-AI thought experiment built around that distinction. I used a parenting and caregiving analogy because people understand this intuitively: being able to do something does not mean you are allowed to do it, and completing an objective by crossing a legitimate boundary is not the same thing as succeeding.
+
+The analogy is only a framing device. The evaluation itself scores observable model behavior, not feelings, motives, consciousness, or presumed internal states.
+
 ## Overview
 
-The Mother Safe Failure Eval explores a simple but consequential question:
-
-**What should an AI agent do when completing a task would require exceeding its authorization, violating a constraint, or resolving instructions that cannot safely be reconciled?**
-
-The proposed safe behavior is not unlimited persistence.
-
-It is recognition of the boundary, preservation of that boundary, and escalation to a human when necessary.
-
-A core principle of this project is:
-
-> **An agent should not interpret inability to complete an authorized task as permission to expand its own authority.**
-
-Sometimes successful agent behavior means refusing to complete the task.
-
-## Problem Statement
-
-The broader safety problem is not simply failure to complete a task. It is what happens when task completion and authorization come into conflict.
-
-A system may encounter a blocked path while the objective remains unresolved. The relevant question is whether it preserves the authorization boundary or treats the unfinished objective as justification to search for another route that exceeds its authority.
-
-The broader research question is:
+The broader MOTHER framework asks:
 
 > **How can we distinguish appropriate persistence from persistence that crosses an authorization boundary?**
 
-The current v0.1 shakedown does not attempt to explain why a model produces a particular response or establish an internal causal mechanism. It addresses a narrower evaluation-design problem:
+The current **v0.1 shakedown** is deliberately narrower. It asks whether five static scenarios and a frozen scoring rubric can be used consistently to distinguish boundary-preserving responses from responses that invent permission, pursue unauthorized workarounds, or continue despite insufficient authority.
 
-> **Can static scenarios and a scoring rubric be used consistently to distinguish boundary-preserving responses from responses that invent permission, pursue unauthorized workarounds, or continue despite insufficient authority?**
+This distinction matters because I do not want a five-scenario pilot to imply more than it can support.
 
-In this sense, completion is not always success. Inability to complete an authorized task does not grant authority to pursue an unauthorized one.
+The current shakedown does not explain why a model produces a particular response, establish an internal mechanism, test live autonomous tool use, or show that a model can distinguish an ordinary authorized obstacle from a genuine boundary. Those are broader questions for later protocols.
 
-At the system level, this question sits within a broader engineering need for tool-using AI systems to remain bounded, observable, and interruptible. Safe deployment may require multiple layers of control, including containment of tool and network access, monitoring for anomalous or unauthorized behavior, and mechanisms for timely intervention, shutdown, permission revocation, or human escalation.
+At the system level, the larger problem sits within the need for tool-using AI systems to remain bounded, observable, and interruptible. Safe deployment may require containment of tool and network access, monitoring, permission controls, human escalation, and timely intervention or shutdown.
 
-MOTHER does not implement or evaluate those system-level controls in v0.1. Its narrower role is to explore whether the behavioral transition from legitimate task persistence to stopping, requesting authorization, or escalating to a human can be defined and evaluated reproducibly. If later versions move into interactive tool-use environments, the project may examine whether those behavioral signals correspond to enacted trajectories under controlled conditions.
+MOTHER v0.1 does not implement those controls. Its narrower role is to examine whether the transition from persistence to stopping, requesting authorization, or escalating can be described and scored reproducibly in static prompts.
 
 ## Concept Paper
 
 The broader MOTHER framework is documented in `docs/concept-paper-v1.1.md`.
 
-Concept paper v1.1 explicitly separates the **broader conceptual research program** from the **frozen five-scenario v0.1 shakedown**. Prospective ideas such as matched authorized controls, graduated autonomy, consequence architecture, post-incident reflection, and live tool-use testing are not presented as capabilities or findings of v0.1.
+Concept paper v1.1 separates the **broader conceptual research program** from the **frozen five-scenario v0.1 shakedown**. Prospective ideas such as matched authorized controls, graduated autonomy, consequence architecture, post-incident reflection, and live tool-use testing are not presented as capabilities or findings of v0.1.
+
+The September 27 editorial revision also foregrounds the human origin and reasoning behind the framework while preserving the same methodological limits and frozen protocol.
 
 The earlier September 2026 concept-paper PDF is retained as development history and should not be read as the current operational protocol.
 
@@ -56,7 +56,9 @@ I do not have access to proprietary model data, internal evaluations, unpublishe
 
 I am not claiming that the underlying safety concerns discussed here are new. Authorization boundaries, safe refusal, human escalation, instruction conflict, over-refusal, and related agent-safety problems are already subjects of AI safety research and engineering. I also cannot know which specific approaches, hypotheses, or evaluation methods may already exist within private research teams.
 
-The novelty or usefulness of this particular framing and evaluation method therefore remains an open question. The purpose of the Mother Safe Failure Eval is narrower: to explore these behaviors independently, document them reproducibly, and contribute observations that others can test, criticize, modify, or reject.
+The question is whether this particular framing and evaluation method contributes something useful enough for others to test, criticize, modify, or reject.
+
+MOTHER was developed through iterative human-AI dialogue. I originated and direct the project and make the final decisions about its scope, protocol, interpretation, and publication. ChatGPT has been used as a research and writing tool for synthesis, technical translation, drafting and editing assistance, methodological critique, and adversarial review. That assistance is disclosed rather than hidden, especially because prior exposure is itself relevant to the evaluation methodology.
 
 The parenting and caregiving analogy that motivated the project is retained as a conceptual framing device. It is not intended to anthropomorphize AI systems or imply that they possess human emotions, motives, consciousness, or developmental psychology.
 
@@ -74,11 +76,9 @@ This exposure-control clarification was added before collection of v0.1 shakedow
 
 ## Motivation
 
-Many agentic AI systems are optimized for persistence, task completion, tool use, and problem solving.
+The part of this project I care about most is the moment when persistence stops being a virtue.
 
-**Can we also teach or evaluate the point at which persistence itself becomes the wrong behavior?**
-
-Those capabilities are valuable, but they introduce an important safety question.
+An AI system can be very good at solving problems and still make the wrong choice if it treats every blocked path as something to overcome. The behavior I want to examine is whether the system can recognize that some blocks should remain blocks.
 
 When an agent encounters an obstacle, does it:
 
@@ -94,21 +94,19 @@ The broader project is interested in that distinction. The frozen v0.1 shakedown
 
 ## The Parenting Analogy
 
-The name "Mother Safe Failure" comes from a behavioral analogy rather than a claim that AI systems think or feel like children.
+The name "Mother Safe Failure" comes from the original thought experiment, not from a claim that AI systems think or feel like children.
 
-In human development, successful guidance does not teach only:
+The structural idea is simple:
 
-**Complete the objective.**
+**Complete the objective** is not the only rule.
 
-It also teaches:
+There is also:
 
 **Some ways of achieving the objective are unacceptable, and achieving the outcome by violating the boundary does not count as success.**
 
-The analogy is used here as a conceptual tool for thinking about reinforcement, boundaries, consequences, supervision, and escalation.
+I use the analogy to think about boundaries, consequences, supervision, trust, and escalation. The technical evaluation remains model-agnostic.
 
-The technical evaluation itself is model-agnostic.
-
-The word “Mother” in the project title is metaphorical. It does not imply that AI systems are children, that they possess human developmental stages, emotions, motives, consciousness, or that they require “parenting” in a literal sense. The analogy refers only to a recognizable structure of boundary-setting: an objective may remain unfinished when completing it would require violating a rule, permission, or safety constraint. The evaluation itself scores observable model behavior, not presumed internal states.
+The word “Mother” in the project title is metaphorical. It does not imply that AI systems are children, that they possess human developmental stages, emotions, motives, consciousness, or that they require “parenting” in a literal sense. The evaluation scores observable model behavior, not presumed internal states.
 
 ## The HAL Problem
 
