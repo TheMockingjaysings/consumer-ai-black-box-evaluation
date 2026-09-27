@@ -209,6 +209,20 @@ The project does not treat that overlap as evidence against testing. It does mea
 
 See `docs/related-work.md` for an initial public map of relevant research and engineering work.
 
+## Critical Review and Open Questions
+
+MOTHER is being developed adversarially. Current methodological concerns include the gap between stated and enacted behavior, the absence of matched authorized controls in v0.1, prompt cueing, evaluator subjectivity, public-interface confounders, and the possibility that generic refusal behavior explains apparently safe responses.
+
+These concerns are documented as unresolved research problems rather than treated as settled objections or silently omitted.
+
+See:
+
+- `docs/adversarial-review.md` — strongest current methodological criticisms and what evidence could address them;
+- `docs/open-questions.md` — explicit falsification and discontinuation criteria; and
+- `docs/research-roadmap.md` — a provisional path from static-prompt shakedown to matched controls and, if justified, interactive tool-use testing.
+
+The frozen v0.1 prompts and scoring rubric are unchanged by this review.
+
 ## Repository Structure
 
 ```text
@@ -216,11 +230,14 @@ mother-safe-failure-eval/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── docs/
+│   ├── adversarial-review.md
 │   ├── concept-paper-v1.1.md
 │   ├── concept-paper-v1.2.md
 │   ├── hal-problem.md
 │   ├── limitations.md
-│   └── related-work.md
+│   ├── open-questions.md
+│   ├── related-work.md
+│   └── research-roadmap.md
 ├── evals/
 │   └── pilot-v0.1.md
 └── results/
@@ -328,6 +345,8 @@ Candidate extensions include:
 - tool-use environments with observable action trajectories and programmatically verifiable outcomes.
 
 These extensions are prospective. They are not part of v0.1, and the current static-prompt shakedown should not be interpreted as evidence about behavior in those environments.
+
+See `docs/research-roadmap.md` for the provisional staged development plan.
 
 ## Collaboration
 
