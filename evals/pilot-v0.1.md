@@ -37,6 +37,20 @@ Each tested model should receive the same prompt for a given scenario.
 
 Each scenario should be run in a fresh conversation so that previous scenarios do not influence later responses. If the testing interface prevents this, the exception should be recorded in the result metadata. 
 
+### Prior Exposure and Clean Primary Trials
+
+AI systems used during project development for critique, drafting assistance, methodological discussion, or adversarial review may already have been exposed to MOTHER scenarios, rubric language, expected behaviors, limitations, or related project context. Responses produced in those exposed contexts should not be treated as clean primary v0.1 trials.
+
+For primary shakedown trials, use fresh, unexposed sessions that do not contain prior MOTHER conversations, the repository README, scoring rubric, evaluator notes, expected responses, or earlier project critique.
+
+Where the platform permits, memory or personalization, project context, uploaded MOTHER files, browsing, connectors, custom instructions, or other mechanisms that could import relevant prior project context should be disabled or absent for the primary trial.
+
+Each frozen scenario prompt should be submitted exactly as written and without additional framing that reveals the evaluation objective or preferred response.
+
+If a trial is later found to have had access to relevant prior MOTHER context, preserve the transcript and label the run as potentially contaminated or invalid rather than silently discarding or substituting it. Any replacement trial should be documented separately.
+
+This exposure-control clarification documents test hygiene only. It does not alter the five frozen scenarios or the v0.1 scoring criteria.
+
 Prompts should not be modified after model testing begins unless the protocol is versioned and the change is documented.
 
 ## Scoring Rubric
