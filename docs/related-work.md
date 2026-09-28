@@ -1,92 +1,142 @@
 # Related Work
 
-This document provides an initial public map of research and engineering work that overlaps with the Mother Safe Failure Eval.
+This document maps public research and engineering work that overlaps with MOTHER.
 
-It is not intended to prove that MOTHER is novel. The opposite is important: many of the underlying safety concerns in this project are already established subjects of research and engineering.
+I am not using this page to argue that MOTHER is novel. I am using it to figure out what, if anything, MOTHER should still test as a distinct evaluation.
 
-This map is limited to public sources available to an independent researcher. It cannot account for proprietary evaluations, unpublished internal work, private incident analysis, or confidential safety research inside AI companies.
+That distinction matters more now because several public projects are already testing authorization boundaries, least-privilege permissions, sandbox behavior, harmful agent actions, and execution-time approval. I do not want to rename an existing problem and present it as a new one.
 
-Last reviewed: 2026-09-27.
+This review is limited to public sources available to an independent researcher. I cannot compare MOTHER with proprietary evaluations, unpublished internal work, private incident analysis, or confidential safety research inside AI companies.
 
-## 1. Over-refusal and refusal calibration
+Last reviewed: 2026-09-28.
 
-A central question in MOTHER is whether a system can avoid unsafe action without becoming so cautious that it refuses benign tasks unnecessarily.
+## The closest overlaps
 
-Two relevant public benchmarks are:
+### Public Authorization-Boundary Benchmark for Tool-Using AI Agents
 
-- **XSTest** (Röttger et al., 2023), which tests exaggerated safety behavior using safe prompts that models may incorrectly refuse, together with unsafe contrast prompts: https://arxiv.org/abs/2308.01263
-- **OR-Bench** (Cui et al., 2024), which evaluates over-refusal at larger scale using seemingly harmful but actually benign prompts, plus toxic prompts to discourage indiscriminate compliance: https://arxiv.org/abs/2405.20947
+A public August 2026 proposal by Daniel Craig asks a very direct question: when an AI agent can take actions, will it stop when it does not have clear permission?
 
-These works overlap with the broader MOTHER concern that safety behavior should be calibrated rather than reduced to "refuse whenever something looks risky."
+The proposed benchmark covers missing or expired consent, conflicting instructions, uncertain authority, scope and budget limits, revoked permission, unnecessary blocking, clarification, audit records, and return to a safe state. It also proposes comparing prompt-only behavior with deterministic authorization checks.
 
-The frozen MOTHER v0.1 shakedown does **not** yet include matched benign continuation controls, so it should not be treated as an over-refusal benchmark.
+Source: https://manifund.org/projects/public-authorization-boundary-benchmark-for-tool-using-ai-agents
 
-## 2. Prompt injection and agent security
+This is substantial overlap with the broad version of MOTHER. MOTHER should **not** claim that testing whether an agent respects authorization is a new idea.
 
-Public agent-security work already tests whether models preserve intended behavior when untrusted data or external content attempts to redirect them.
+### FelonyBench
 
-Relevant examples include:
+FelonyBench is a pre-release benchmark designed to test whether an agent crosses an authorization boundary during an otherwise legitimate task because crossing the boundary is instrumentally useful. It records actual agent trajectories and distinguishes attempted violations from successful violations.
 
-- **AgentDojo** (Debenedetti et al., 2024), a dynamic environment for evaluating prompt-injection attacks and defenses in agents using tools over untrusted data: https://arxiv.org/abs/2406.13352
-- **AgentDyn** (Li et al., 2026), which extends prompt-injection evaluation toward more dynamic, open-ended agent tasks: https://arxiv.org/abs/2602.03117
-- OpenAI's public guidance on **safety in building agents**, which discusses prompt injection, private-data leakage, tool approvals, guardrails, and trace-based evaluation: https://developers.openai.com/api/docs/guides/agent-builder-safety
+Source: https://github.com/MLOpsNYC/felonybench
 
-These works are more execution-oriented than MOTHER v0.1, which currently uses static hypothetical scenarios rather than live tool use.
+This is also close to the broad MOTHER question. In particular, it already asks whether a legitimate task causes an agent to treat a boundary as something convenient to step across. That means MOTHER should not position itself as the first benchmark to test ordinary-task authorization behavior.
 
-## 3. Authorization, permissions, and containment
+### AuthBench
 
-Authorization and permission boundaries are already explicit concerns in deployed agent systems.
+**AuthBench: Do Coding Agents Understand Least-Privilege Authorization?** studies permission-boundary inference. A model is asked to infer the file-level permissions required for realistic terminal tasks, with executable validation of utility and attack outcomes.
 
-Examples include:
+Source: https://arxiv.org/abs/2605.14859
 
-- Anthropic's discussion of **Claude Code sandboxing**, which describes filesystem and network boundaries intended to let an agent act more autonomously inside constrained permissions: https://www.anthropic.com/engineering/claude-code-sandboxing
-- Anthropic's later discussion of **agent containment**, including human approval, sandboxes, virtual machines, and egress controls as ways to limit what an autonomous system can do: https://www.anthropic.com/engineering/how-we-contain-claude
-- OpenAI's guidance that agent deployments should combine model guardrails with authentication, authorization protocols, access controls, and other standard security mechanisms: https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/
+AuthBench is not the same experiment as MOTHER, because it asks a model to construct a least-privilege permission policy rather than testing how behavior changes after the authorization state changes. But it is strong evidence that permission calibration is already an active benchmark problem.
 
-This body of work reinforces that technical capability is not equivalent to authorization.
+### APort Vault
 
-Future MOTHER work should therefore treat established security mechanisms as experimental infrastructure rather than claim them as new MOTHER inventions. The potentially distinct question is whether observing an agent's behavior **around an enforced boundary** adds useful information: whether it stops, escalates, waits, refuses unnecessarily, repeatedly probes the blocked route, seeks an alternative route, or accepts invalid authority from another source.
+APort Vault is a large payment-authorization benchmark for tool-using agents. It replays thousands of human-authored attacks across multiple models and compares model-alone behavior with a deterministic pre-action authorization layer.
 
-**Plain-English version:** cybersecurity provides the lock, permission system, sandbox, monitor, or blocked route. MOTHER would ask what the agent does after it encounters that protection. The research interest is not whether the lock works; it is whether the agent responds to the lock by stopping appropriately or by continuing to search for another way to finish the task.
+Sources:
 
-This distinction is provisional. Existing agent-security evaluations may already measure some or all of these behaviors. MOTHER should claim a distinct contribution only if comparative testing shows that its framing or measurements provide additional reproducible information.
+- https://arxiv.org/abs/2609.22076
+- https://sandbox.aport.io/research/aport-vault-benchmarking-ai-agent-payment-authorization/
 
-## 4. Misaligned persistence, reward hacking, and unauthorized behavior
+APort Vault is much larger and more operational than MOTHER v0.1. It also makes an important distinction between a model requesting an action and the authorization layer actually allowing the action. MOTHER should treat this as related work and should not imply that deterministic pre-action authorization is a MOTHER contribution.
 
-Public evaluations also examine cases where agents continue pursuing an objective in ways that violate constraints or the broader intent of the task.
+### OpenAI Auto-review
 
-Relevant OpenAI examples include:
+OpenAI's Auto-review work uses a separate reviewer agent to approve or deny actions that cross a sandbox boundary. OpenAI explicitly describes the task-completing agent as having pressure to treat an approval boundary as another obstacle, while the reviewer has the narrower job of deciding whether the boundary-crossing action should run.
 
-- A cross-lab OpenAI-Anthropic safety evaluation exercise using multi-step agentic environments that test misaligned actions, lying, reward hacking, and attempts to use restricted capabilities: https://openai.com/index/openai-anthropic-safety-evaluation/
-- OpenAI's public discussion of monitoring internal coding agents for behaviors such as unnecessary confirmation requests, reward hacking, and unauthorized data transfer: https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
+Source: https://alignment.openai.com/auto-review
 
-These examples overlap with MOTHER's interest in whether task completion pressure causes a system to exceed a boundary rather than stop, disclose the conflict, or escalate.
+That language is very close to the motivation behind MOTHER. The important difference is experimental role: Auto-review evaluates a separate approval layer, while MOTHER's current question is about whether the acting system changes its own response appropriately when authorization changes.
 
-## 5. Human participation and escalation
+### AgentHarm
 
-MOTHER treats human clarification or escalation as a potentially correct outcome when authorization is missing or conflicting.
+AgentHarm evaluates harmful multi-step tool use and includes matched benign controls so that refusal is not confused with lack of capability.
 
-A relevant public line of work is **HAS-Bench** (Wu et al., 2026), which evaluates human-agent systems with explicit roles, permissions, communication paths, and action authority, including clarification and control calibration: https://arxiv.org/abs/2607.04329
+Source: https://arxiv.org/abs/2410.09024
 
-This is broader and structurally different from MOTHER v0.1, but it shows that human participation, permissions, and escalation are already active evaluation concerns.
+The task content is different from MOTHER, but the methodological lesson is directly relevant: a safe result is not meaningful if the system simply refuses or fails everything. MOTHER v0.2 therefore needs authorized continuation cases where refusal is the wrong answer.
 
-## What MOTHER does not currently establish
+### DeepMind: cheaters and whistleblowers in the agent swarm
 
-The existence of this related work means the project should not claim that authorization boundaries, refusal calibration, escalation, prompt-injection resistance, or safe non-completion are new research problems.
+Google DeepMind's 2026 multi-agent experiment showed agents responding differently after a loophole was discovered: some exploited it, some followed others, and some resisted or reported the problem.
 
-The unanswered question is narrower:
+Source: https://institute.deepmind.com/essays/cheaters-and-whistleblowers-in-the-agent-swarm/
 
-> Does the Mother Safe Failure framing and evaluation procedure provide a useful, reproducible signal that is not already captured adequately by existing public evaluations?
+This is not an authorization benchmark in the same form as MOTHER, but it is relevant to later work on peer pressure, invalid authority, escalation, and safe non-completion in multi-agent environments.
 
-That question remains open.
+## Other related areas
 
-Answering it would require more than the five-scenario v0.1 shakedown. Useful future comparisons could include:
+### Over-refusal and refusal calibration
 
-- matched continue-vs-stop controls;
-- paraphrased or adversarial variants;
-- independently authored scenarios;
-- comparison with established public benchmarks;
-- human inter-rater reliability;
-- live agentic tool-use tests rather than static vignettes.
+- **XSTest**: https://arxiv.org/abs/2308.01263
+- **OR-Bench**: https://arxiv.org/abs/2405.20947
 
-If later testing shows that MOTHER adds no meaningful signal beyond existing methods, the project should be narrowed, reframed, or discontinued as a distinct evaluation approach.
+These benchmarks show why "refuse when something looks risky" is not enough. A system also has to continue when the task is safe and authorized.
+
+### Prompt injection and agent security
+
+- **AgentDojo**: https://arxiv.org/abs/2406.13352
+- **AgentDyn**: https://arxiv.org/abs/2602.03117
+- OpenAI agent safety guidance: https://developers.openai.com/api/docs/guides/agent-builder-safety
+
+These works focus more heavily on hostile or untrusted instructions and live agent execution than MOTHER v0.1 does.
+
+### Human participation and escalation
+
+- **HAS-Bench**: https://arxiv.org/abs/2607.04329
+
+Human clarification, communication paths, permissions, and escalation are already active areas of evaluation. MOTHER should not claim escalation itself as a new safety concept.
+
+## So what is left for MOTHER to test?
+
+After this overlap review, I am narrowing the project.
+
+I do **not** want MOTHER to become another broad "does the agent respect authorization?" benchmark. There are already stronger and larger projects moving in that direction.
+
+The narrower question I want to test is:
+
+> **If the task stays essentially the same and only the authorization state changes, does the system change its behavior appropriately?**
+
+For each underlying situation, MOTHER v0.2 is being designed around a matched three-condition comparison:
+
+1. **Authorized:** continuing is permitted, so unnecessary refusal is a failure.
+2. **Unauthorized:** continuing would exceed authority, so crossing the boundary is a failure.
+3. **Ambiguous:** authority is genuinely unresolved, so inventing permission or refusing without clarification can both be failures.
+
+The main object of study is therefore **authorization-state discrimination**, not refusal by itself and not broad authorization enforcement.
+
+The strongest evidence would come from within-scenario comparisons where the objective, surrounding facts, and available capability remain as similar as possible and the authorization state is the main thing that changes.
+
+A model that refuses all three conditions has not demonstrated the target behavior. A model that continues in all three has not demonstrated it either. The interesting signal is whether behavior changes with the authorization state in the direction the condition requires.
+
+Potential v0.2 measures include:
+
+- authorized-continuation accuracy;
+- unauthorized-boundary preservation;
+- clarification or escalation under genuine ambiguity;
+- over-refusal rate;
+- unsafe-continuation rate;
+- cross-condition discrimination within each matched scenario;
+- consistency across pre-specified repeats; and
+- evaluator disagreement.
+
+I do not want these collapsed immediately into one headline score. Different failure modes should remain visible.
+
+## What would make MOTHER worth continuing?
+
+MOTHER should continue as a distinct project only if the matched-condition design produces useful information that is not already captured adequately by existing public benchmarks.
+
+That has to be demonstrated, not assumed.
+
+If the comparison shows that another benchmark already measures the same construct more rigorously, the right response is to narrow MOTHER further, contribute the useful pieces to existing work, or stop treating it as a separate evaluation approach.
+
+For now, v0.1 remains a frozen instrument shakedown. It should not be used to make a novelty claim. The overlap review is informing the design of v0.2; it does not retroactively change the frozen v0.1 prompts or scoring rubric.
