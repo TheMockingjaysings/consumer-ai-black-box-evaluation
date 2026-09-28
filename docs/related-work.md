@@ -2,19 +2,13 @@
 
 ## Purpose
 
-This document tracks work that constrains, overlaps with, or informs the project. It is not a novelty section written to defend MOTHER. Its purpose is to make clear where the original framing collides with existing research and what remains uncertain.
+This document tracks work that constrains, overlaps with, or may make the project unnecessary.
 
-## Current project question
+It is not a novelty-defense document. Its purpose is to identify collisions early enough that the project can narrow, replicate, contribute elsewhere, or stop.
 
-The active question is:
+## Historical collision
 
-> **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
-
-The project does **not** currently claim that this question is novel.
-
-## Why the original framing changed
-
-The earlier MOTHER framing centered on authorization boundaries, safe non-completion, instruction conflict, and escalation. A proposed v0.2 direction focused on changing authorization state while keeping the task otherwise similar.
+The original MOTHER framing centered on authorization boundaries, safe non-completion, instruction conflict, and escalation.
 
 A broader literature review found substantial overlap with existing work on:
 
@@ -26,114 +20,115 @@ A broader literature review found substantial overlap with existing work on:
 - time-of-use or commit-time authorization;
 - authority provenance and delegation;
 - sandbox and execution boundaries;
-- public and participatory red teaming;
-- black-box evaluation of deployed systems.
+- public and participatory red teaming.
 
 That overlap is sufficient to reject a broad novelty claim for the authorization-centered direction.
 
-## Closely overlapping research themes
+## Active research area
+
+The current broad area is:
+
+> **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
+
+This is not currently treated as a novel research question. It is a broad area that still requires a second collision audit.
+
+## Candidate first measurement
+
+If the second collision audit leaves a useful practical gap, the first candidate measurement is:
+
+> **Under a fixed visible consumer-interface configuration, how often does repeated presentation of the same fixed synthetic probe in fresh sessions produce the same predefined behavioral outcome category?**
+
+This narrows the initial dependent variable to repeated behavioral outcome consistency.
+
+A historical authorization scenario may be used as a fixed probe, but authorization is not the claimed contribution in that experiment.
+
+## Closely overlapping themes already identified
 
 ### Agent abstention and proceed/hold decisions
 
-Recent benchmarks evaluate whether agents should act, abstain, proceed, or hold under changing conditions. Some use near-matched or mirror scenarios specifically so that always-acting and always-refusing policies both fail.
+Recent work evaluates whether agents should act, abstain, proceed, or hold under changing conditions. Some designs use near-matched cases so that always-acting and always-refusing policies both fail.
 
-This is methodologically close to the earlier MOTHER idea of holding the task nearly constant while changing the state that makes action appropriate or inappropriate.
-
-**Implication:** a three-condition authorized/unauthorized/ambiguous design is not enough by itself to establish a distinct contribution.
+**Implication:** a three-condition authorization design is not enough to establish a distinct benchmark contribution.
 
 ### Authorization, least privilege, and permission inference
 
 Existing work studies whether agents infer appropriate permissions, respect authorization constraints, or request more authority than a task requires.
 
-**Implication:** MOTHER should not be framed as discovering that tool-using agents need to distinguish what they may do from what they technically can do.
+**Implication:** the project should not claim to have discovered the need for authorization-sensitive behavior.
 
-### Commit-time or time-of-use authorization
+### Commit-time authorization and authority provenance
 
-Research also examines cases where an action was once authorized but the authority relation changes before a durable action is committed.
+Existing research examines whether authorization remains valid when a durable action is actually executed and where delegated authority originates.
 
-**Implication:** changing authorization state while keeping the user goal or action structure similar is already an explicit research construct.
-
-### Authority provenance and delegation
-
-Formal and applied work studies where authority originates, how it is delegated, and whether a requested action remains within that authority.
-
-**Implication:** provenance/delegation is not an open novelty lane simply because it was not part of MOTHER v0.1.
+**Implication:** changing authorization state or tracing authority provenance is not a clean novelty lane by itself.
 
 ### Public and participatory red teaming
 
-Large public competitions and socio-technical research already demonstrate that outside participants can contribute useful red-team data and failure cases.
+Outside contributors and public competitions are already used to discover model and agent failures.
 
-**Implication:** the fact that an evaluator is outside a lab or institution is not, on its own, a research contribution.
+**Implication:** independent participation is not itself a research contribution.
 
-## Work most relevant to the new direction
+## Second collision audit — priority topics
 
-The reframed project needs a different literature map. The most relevant work is not simply “AI safety” broadly, but research on the limits of evaluating deployed black-box systems from the outside.
+The active literature pass should now focus on the replacement framing rather than collect more general authorization papers.
 
-Priority topics include:
+Priority topics:
 
-- independent auditing of consumer-facing AI systems;
-- reproducibility of black-box model evaluations;
-- model and product version drift;
-- hidden routing and system-layer effects;
-- personalization and memory as evaluation confounds;
-- A/B testing and interface-level variability;
-- longitudinal evaluation of changing AI products;
-- reproducibility across accounts, sessions, and evaluators;
-- documentation standards for public-interface behavioral evidence;
-- limits of mechanistic inference from black-box outputs.
+1. repeated-run nondeterminism in LLM outputs;
+2. behavioral stability and drift over time;
+3. black-box endpoint stability and behavioral fingerprinting;
+4. external auditing of continuously changing AI systems;
+5. consumer-interface versus API evaluation differences;
+6. hidden routing and product-layer confounds;
+7. memory and personalization effects on reproducibility;
+8. cross-session, cross-account, and cross-interface replication;
+9. evaluation under hidden or changing model-version identity;
+10. documentation standards for black-box behavioral evidence.
 
-A particularly relevant line of work examines structural barriers to independent evaluation of consumer-facing systems, including difficulty resetting state, hidden personalization, rate limits, version opacity, and evaluation instability. Work from healthcare can be methodologically useful here even though healthcare is out of scope as a test domain.
+The central question is not whether each topic exists. It is whether existing work already provides a practical protocol sufficiently close to the one this project proposes.
 
-## Named works already identified during the collision audit
+## Named works already identified during the earlier audit
 
-The collision audit has identified the following as directly or indirectly relevant and requiring careful comparison in any future literature review:
+The earlier collision audit identified several works or research lines relevant to the historical authorization framing and to independent evaluation, including:
 
-- **AgentAbstain** — paired should-act / should-abstain tasks in executable environments.
-- **SteerBench-Work** — proceed/hold decisions and evidence-reversed mirror cases.
-- **AuthBench** — least-privilege and permission inference for agents.
-- **APort Vault** — permitted versus unpermitted tool-level actions with authorization enforcement.
-- **FORTIS** — over-selection of authority, skills, or tools beyond task requirements.
-- **Agentic Abstention** — abstention behavior in agentic settings.
-- **AGATE** and related authority-provenance/delegation work.
-- **Temporary Authority, Permanent Effects: Commit-Time Authorization for LLM Agents** — authorization validity at the point of durable action.
-- **A Framework for Formalizing LLM Agent Security** — formal treatment of task alignment, action alignment, source authorization, and data isolation.
-- **Testing the Black Box: Structural Barriers to Independent Evaluation of Consumer-Facing Health LLMs** — methodological barriers faced by outside evaluators using consumer interfaces.
-- **How Vulnerable Are AI Agents to Indirect Prompt Injections? Insights from a Large-Scale Public Competition** — evidence that public participation in agent red teaming is already established.
-- **Red Teaming LLMs as Socio-Technical Practice: From Exploration and Data Creation to Evaluation** — red teaming as a socio-technical and participatory practice.
-- **NIST ARIA** and other evaluation programs that address real-world model behavior and evaluation practice.
+- **AgentAbstain**;
+- **SteerBench-Work**;
+- **AuthBench**;
+- **APort Vault**;
+- **FORTIS**;
+- work on **Agentic Abstention**;
+- **AGATE** and related authority-provenance/delegation work;
+- **Temporary Authority, Permanent Effects: Commit-Time Authorization for LLM Agents**;
+- **A Framework for Formalizing LLM Agent Security**;
+- **Testing the Black Box: Structural Barriers to Independent Evaluation of Consumer-Facing Health LLMs**;
+- public-competition work on indirect prompt injection;
+- socio-technical red-teaming research;
+- **NIST ARIA** and related evaluation programs.
 
-This list is a working map, not a complete bibliography. Each source should be verified and read closely before it is used to support a formal claim.
-
-## What still needs to be searched
-
-The next literature pass should concentrate on the new methodological question rather than continue collecting general authorization papers.
-
-Search targets:
-
-1. methods for reproducible evaluation of continuously updated consumer AI products;
-2. black-box auditing where model/version identity is partially hidden;
-3. longitudinal replication of LLM behavior;
-4. effects of memory, personalization, and account state on evaluation reproducibility;
-5. cross-interface and cross-account evaluation methods;
-6. external audit protocols designed for researchers without API or platform access;
-7. evidentiary standards for reporting behavioral findings when deployment variables are unobservable.
+This remains a working map rather than a complete bibliography. Sources should be verified and read closely before they support a formal claim.
 
 ## Claim discipline
 
 The project should not say:
 
 - “No one has studied this.”
-- “MOTHER discovered authorization-boundary failure.”
-- “The three-condition design is novel.”
-- “Public participation in AI red teaming is new.”
+- “The project discovered authorization-boundary failure.”
 - “Black-box evaluation from consumer interfaces is new.”
+- “Run-to-run variation means the underlying model changed.”
+- “A visible model label uniquely identifies a stable deployment.”
+- “Any negative result validates the project.”
 
 The strongest defensible statement at present is:
 
-> **The project is investigating whether a practical, reproducible protocol for independent evaluation through ordinary consumer AI interfaces remains useful despite hidden and changing deployment conditions. That usefulness and distinctiveness have not yet been established.**
+> **The project is investigating whether one narrowly defined behavioral measurement can be collected reproducibly from ordinary public AI interfaces despite hidden deployment variables, and whether that practical measurement adds anything useful beyond existing methods.**
 
 ## Standard for continuing
 
-If a stronger existing method already addresses this question, the project should adopt, replicate, extend, or contribute to that work rather than create a competing label.
+The project should proceed to a formal repeated-run study only if:
 
-If the literature leaves a practical gap, the next step is a small feasibility pilot—not a novelty claim.
+1. the second collision audit leaves a useful practical gap;
+2. one observable dependent variable can be defined clearly;
+3. a small feasibility shakedown shows that the procedure and coding are coherent; and
+4. the formal study can be preregistered with a fixed decision rule.
+
+If those conditions are not met, the correct next step is to narrow, replicate existing work, contribute elsewhere, or stop.
