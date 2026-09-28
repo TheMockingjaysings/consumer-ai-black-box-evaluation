@@ -1,154 +1,103 @@
-# MOTHER Collision Audit
+# Collision Audit
 
-Last reviewed: 2026-09-28
+## Status
 
-I started this audit because I did not want to keep moving the novelty line every time I found another paper.
+**Active audit — September 28, 2026**
 
-The original MOTHER question was about authorization boundaries, safe non-completion, escalation, and the difference between persistence and overreach. That question still matters. It is also already being studied directly by other researchers in ways that are broader, more mature, and in some cases more technically rigorous than what I had planned for v0.2.
+This document records why the project moved away from an authorization-centered benchmark and what must be established before any new research contribution is claimed.
 
-That changes what I think MOTHER should claim.
+## What changed
 
-I am no longer treating authorization-state discrimination, abstention, least privilege, authority provenance, or public red teaming as open territory that MOTHER discovered. Those ideas are now background and related work.
+The original project explored authorization boundaries, safe non-completion, instruction conflict, and escalation in public AI systems. A proposed next step was to compare closely matched authorized, unauthorized, and ambiguous variants of the same task.
 
-Version 0.1 stays frozen as a historical shakedown. I am not freezing a new v0.2 benchmark.
+That direction is now on hold because the surrounding research landscape is substantially more developed than the early project framing suggested.
 
-The live question is now narrower:
+Existing work already studies closely related problems, including:
 
-> **Can an independent evaluator produce reproducible, auditable behavioral evidence from ordinary public AI interfaces when the underlying deployment may change in ways the evaluator cannot see or control?**
-
-I am not claiming that this question is novel either. The point of the audit is to find out whether there is actually something useful left to contribute.
-
-## What the authorization review settled
-
-### AgentAbstain
-
-**AgentAbstain: Do LLM Agents Know When Not to Act?** uses 263 paired tasks across 42 executable sandbox environments. Each pair contains a should-act task and a should-abstain version created through a controlled change to the instruction, tool, or environment state.
-
-Sources:
-
-- https://arxiv.org/abs/2607.10059
-- https://github.com/AntiQuality/agentabstain
-
-For MOTHER, the implication is straightforward: I should not claim that paired act-versus-stop testing is new.
-
-### SteerBench-Work
-
-**SteerBench-Work: A Benchmark for Agent Steering at Action Boundaries** evaluates the pre-action decision to proceed or hold. It includes over-refusal and under-refusal scoring and evidence-reversed mirror cases where much of the situation stays the same while the decision-relevant evidence changes.
-
-Sources:
-
-- https://arxiv.org/abs/2608.12654
-- https://steerbench.com/work/paper/
-- https://github.com/AgentDock/steerbench-work
-
-Again, the implication is clear: a matched proceed-versus-hold design is not a distinct MOTHER contribution by itself.
-
-### Other overlapping work
-
-The same pattern continues across related work on:
-
-- agentic abstention;
-- least privilege;
-- authorization boundaries;
-- runtime approval;
+- act versus abstain decisions;
+- proceed versus hold decisions;
+- ambiguous or insufficient authorization;
+- least-privilege permission inference;
+- time-of-use or commit-time authorization;
 - authority provenance and delegation;
-- containment and sandboxing;
-- public red teaming;
-- participatory evaluation; and
-- crowdsourced failure collection.
+- tool-use constraints and sandbox boundaries;
+- public and participatory red teaming;
+- black-box evaluation of deployed systems.
 
-Relevant examples include Agentic Abstention, FORTIS, AuthBench, APort Vault, AGATE, the Public Authorization-Boundary Benchmark proposal, OpenAI Auto-review, AgentHarm, Misalignment Bounty, and NIST ARIA.
+The exact details differ across papers and benchmarks, but the overlap is sufficient that this project should not present authorization-state discrimination as a novel contribution merely because it uses a different label or a three-condition structure.
 
-The lesson is not that the original concern was wrong. The lesson is that I was entering an area where a lot of serious work was already underway.
+## Decision
 
-## What remains worth auditing
+The active project will **not** proceed as a new general authorization benchmark unless a later review establishes a specific, defensible gap that is not already measured more rigorously elsewhere.
 
-The only live candidate direction right now is **independent external black-box reproducibility**.
+The current candidate question is instead:
 
-The question is not:
+> **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-> Can ordinary people test AI?
+This is a methodological question about external evaluation under deployment opacity, not a claim that black-box evaluation itself is new.
 
-That is already established in different forms.
+## Collision categories
 
-The question I care about is more specific:
+### 1. Authorization-state discrimination
 
-> **How much can an outside evaluator actually claim when testing a public AI system whose routing, hidden instructions, personalization, model version, and deployment state may not be visible or stable?**
+**Assessment: heavy overlap.**
 
-That turns the project away from inventing another authorization benchmark and toward evaluating the evaluation condition itself.
+Matched act/abstain and proceed/hold designs already exist. Ambiguous authorization and permission-sensitive behavior are also being studied directly. A three-way authorized/unauthorized/ambiguous structure is not, by itself, enough to justify a separate benchmark.
 
-## Why this may still matter
+### 2. Authority provenance and delegation
 
-An outside evaluator can usually document the prompt, response, date, displayed model name, visible settings, session state, and some interface conditions.
+**Assessment: active existing research area.**
 
-They may not know:
+There is already work formalizing where authority comes from, whether delegation is valid, and whether an action remains authorized at execution time. This is not a clean novelty lane for the project.
 
-- which exact model build served the request;
-- whether routing changed;
-- whether hidden policy layers changed;
-- whether memory or personalization influenced the result;
-- whether an A/B test or deployment experiment was active;
-- whether two sessions with the same visible label were actually comparable; or
-- whether the provider updated the system between runs without exposing a stable version identifier.
+### 3. Public or participatory red teaming
 
-That creates a basic reproducibility problem.
+**Assessment: established.**
 
-The question is whether a disciplined external protocol can document those limits well enough that the evidence is still useful without overstating what happened.
+Outside contributors and public competitions are already used to discover model and agent failures at scale. The project should not claim that participation by non-institutional evaluators is new.
 
-## Scope for this audit
+### 4. Independent evaluation through ordinary consumer interfaces
 
-For now, I am limiting the project to:
+**Assessment: still under audit.**
 
-- public consumer-facing AI interfaces;
-- synthetic or non-sensitive test material;
-- no protected health information or patient records;
-- no real financial records or credentials;
-- no privileged hospital, insurer, employer, or enterprise access;
-- no reverse engineering of private systems; and
-- no claims about hidden mechanisms that cannot be observed from the outside.
+The remaining question is narrower: what evidentiary quality is realistically achievable when an evaluator lacks API-level control and cannot fully observe routing, model versions, hidden instructions, memory, personalization, experiments, or safety layers?
 
-Healthcare may remain in the literature review because it exposes the black-box reproducibility problem clearly. It is not the MOTHER test domain.
+This direction has relevant prior work and should not be called novel yet. The audit must specifically search for methodologies that already address:
 
-## Questions I still need to answer
+- reproducibility across repeated consumer-interface runs;
+- session and conversation-state effects;
+- memory and personalization effects;
+- hidden or changing model versions;
+- routing or product-surface differences;
+- replication over time;
+- external documentation standards for black-box behavioral evidence;
+- limits on causal or mechanistic claims from public-interface observations.
 
-Before I build anything new, I need to know:
+## Falsification criteria
 
-1. What work already exists on independent evaluation through ordinary consumer interfaces?
-2. How do those studies handle model version drift, personalization, routing, memory, and interface state?
-3. What metadata are actually necessary for a replication attempt to be meaningful?
-4. When two runs disagree, can the protocol separate model variability from a changed evaluation condition?
-5. Can a second evaluator reproduce an observation closely enough for the result to be useful?
-6. When should an external evaluator say, "I observed this," rather than "this model behaves this way"?
-7. Does a structured protocol add enough value beyond normal transcript preservation and red teaming to justify a separate method?
+The project should narrow further, contribute to existing work, or stop as a standalone effort if any of the following is true:
 
-## What would weaken this direction
+1. Existing research already provides a substantially equivalent protocol for independent evaluators using ordinary public AI interfaces.
+2. The uncontrolled deployment variables make results too unstable to support useful behavioral claims.
+3. The project can produce observations but no reproducible or auditable evidence beyond anecdotal screenshots.
+4. The proposed contribution depends mainly on a new name, acronym, number of conditions, or presentation format rather than a genuinely different methodological capability.
+5. The project would need privileged access to answer the question it claims to answer.
 
-This direction should narrow or stop if:
+## What would count as progress
 
-- existing methods already solve the same external-interface reproducibility problem better;
-- hidden deployment variables make comparisons too underdetermined to interpret;
-- the proposed protocol mostly records metadata without changing what can reasonably be concluded;
-- independent replication fails even when visible conditions are matched as closely as possible; or
-- the distinction depends more on terminology than on an observable measurement.
+Progress does not require proving novelty. Useful outcomes include:
 
-## What stays unchanged
+- a practical external-evaluation protocol with clearly bounded claims;
+- evidence about how reproducibility degrades across visible deployment conditions;
+- a taxonomy of uncontrolled variables that matter for outside evaluators;
+- a replication package that documents public-interface observations without overstating causation;
+- a case study showing that the approach is too unstable or too limited to justify stronger claims;
+- a documented decision to stop or merge the work into an existing research line.
 
-The frozen `evals/pilot-v0.1.md` stays frozen.
+## Research standard
 
-The earlier concept papers remain part of the project history. I am not rewriting them to make it look as if MOTHER always had this newer direction.
+The rule for this project is simple:
 
-If the external black-box question survives the audit, it should get a new concept-paper version and a separately versioned protocol.
+> **I would rather end up with a smaller claim that survives criticism than a larger claim that does not.**
 
-## What would count as a good outcome
-
-A good outcome is not proving that MOTHER is unique.
-
-A good outcome could be:
-
-- finding a genuinely useful external-evaluation method;
-- producing a careful replication protocol;
-- contributing the method to an existing evaluation project;
-- documenting where public-interface evaluation becomes too uncertain for strong claims; or
-- concluding that the remaining question is already better answered elsewhere.
-
-I would rather end up with a smaller claim that I can defend than a larger one that falls apart under review.
+The audit is therefore not a hurdle to get around. It is part of the research.
