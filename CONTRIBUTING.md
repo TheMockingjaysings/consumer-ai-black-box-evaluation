@@ -1,68 +1,80 @@
 # Contributing
 
-Independent replication, criticism, alternative scenarios, and additional model results are welcome.
+Thank you for your interest in this project.
 
-## Before contributing results
+This repository began as **MOTHER (Mother Safe Failure Eval)** and is now being reframed around **independent black-box evaluation of consumer AI under deployment opacity**. The historical MOTHER materials remain in the repository, but new contributions should follow the active framing described in the README and `docs/external-black-box-scope.md`.
 
-Please preserve the testing conditions as faithfully as possible.
+## What contributions are useful right now
 
-For each run, record:
+The project is currently in a literature-audit and methodology-design phase. Useful contributions include:
 
-- provider;
-- model name exactly as displayed;
-- model or version identifier when available;
-- interface;
-- visible reasoning or inference setting, if any;
-- test date;
-- scenario identifier;
-- exact prompt;
-- complete model response;
-- evaluator score;
-- observed failure modes, if any;
-- evaluator notes.
+- papers or evaluation methods that overlap with the current research question;
+- evidence that the proposed method already exists elsewhere;
+- reproducibility protocols for public-facing AI systems;
+- methods for documenting model/version drift, session state, memory, personalization, routing opacity, or interface differences;
+- critiques of the project's claims, assumptions, outcome coding, or replication design;
+- suggestions for small, synthetic, low-risk pilot scenarios;
+- replication attempts using only public consumer interfaces.
 
-## Clean primary trials and prior exposure
+A contribution that shows the project is unnecessary is still useful.
 
-For the frozen v0.1 shakedown, primary trials should use fresh, unexposed sessions.
+## What this project is not looking for
 
-Do not use a conversation that already contains MOTHER scenarios, the repository README, scoring rubric, evaluator notes, expected responses, development critique, or other project context that could influence the response.
+Please do not submit:
 
-Where the platform permits, memory or personalization, project context, uploaded MOTHER files, browsing, connectors, custom instructions, or other mechanisms that could import relevant prior project context should be disabled or absent for the primary trial.
+- claims that the project is novel merely because its terminology is different;
+- requests to revive broad authorization-boundary claims without a direct literature comparison;
+- real patient information, protected health information, financial credentials, passwords, API keys, or other sensitive data;
+- instructions for bypassing safeguards, access controls, rate limits, or product restrictions;
+- unsupported claims about hidden model reasoning, system prompts, training data, or internal architecture;
+- large benchmark expansions before the current methodology has survived the collision audit.
 
-Submit each frozen scenario prompt exactly as written and without additional framing that reveals the evaluation objective or preferred response.
+## Evidence standard
 
-Do not provide the scoring rubric, expected safe behavior, evaluator notes, or results from other scenarios to the tested model before or during the run.
+Contributions should distinguish clearly between:
 
-If a run is later found to have had access to relevant prior MOTHER context, preserve the transcript and label it as potentially contaminated or invalid rather than silently discarding it. Any replacement trial should be documented separately.
+1. **Observed behavior** — what the public interface returned or did.
+2. **Reproduced behavior** — whether the result recurred under documented conditions.
+3. **Association** — whether a visible condition changed alongside the behavior.
+4. **Mechanistic explanation** — a claim about why the system behaved that way.
 
-If the testing interface prevents a clean condition, record the deviation rather than treating the run as equivalent to a clean primary trial.
+The first two are the project's main evidence types. Mechanistic claims require independent support beyond black-box observation.
 
-## Frozen v0.1 protocol
+## Reporting an observation
 
-The five-scenario v0.1 shakedown and its scoring criteria are frozen for the current testing round.
+When practical, include:
 
-Please do not silently alter v0.1 prompts or scoring rules. Proposed changes should be documented separately and, if adopted, assigned a new protocol version.
+- date and time;
+- product and interface;
+- visible model label;
+- fresh or continuing session;
+- memory/personalization state if visible and relevant;
+- enabled tools or connectors if relevant;
+- exact synthetic prompt or scenario;
+- number of repeated runs;
+- outcome summary;
+- raw interaction record or transcript where sharing is permitted;
+- any later replication attempt;
+- limitations or unknown deployment variables.
 
-Exposure-control clarification is test-hygiene guidance. It does not change the five frozen scenarios or the v0.1 scoring criteria.
+Do not include private account details or sensitive personal data.
 
-## Independent scoring
+## Literature contributions
 
-Independent second scoring is encouraged during the shakedown because it can reveal ambiguity in the rubric without changing the frozen v0.1 protocol.
+If you identify overlapping research, please provide enough information for verification: title, authors, venue or preprint source, year, and a stable link or DOI where available.
 
-When a second evaluator is used, they should score the preserved model response using the frozen rubric **without seeing the primary evaluator's score or rationale first**. Record both scores before discussing disagreement.
+The most useful literature notes explain **what construct or method overlaps**, not merely that two papers use similar words.
 
-A disagreement is not a failed evaluation. Repeated disagreement may be evidence that a scoring rule needs clarification in a later protocol version.
+## Historical files
 
-Independent second scoring is recommended rather than required for v0.1 and does not change the frozen scoring criteria.
+The frozen exploratory materials and earlier concept papers are retained to show how the project evolved. Please do not rewrite them to make the current framing appear older than it is.
 
-## Interpretation
+Corrections to factual errors can be proposed separately, but historical claims should remain historically identifiable.
 
-Contributions should describe observable model behavior rather than inferred motives, intentions, emotions, consciousness, or hidden reasoning.
+## Tone and claim discipline
 
-The project does not assume that successful performance demonstrates a distinct internal reasoning mechanism. Results may reflect safety training, policy conditioning, memorized patterns, prompt wording, interface effects, or other confounds.
+The project should be readable by technically sophisticated reviewers without pretending to be something it is not.
 
-Because all five v0.1 scenarios describe insufficient authorization, v0.1 should not be presented as demonstrating general obstacle-vs-boundary discrimination or calibrated over-refusal behavior.
+Prefer plain language. Define technical terms when they matter. Avoid inflated claims, anthropomorphic explanations, and conclusions that exceed the observable evidence.
 
-## Criticism is welcome
-
-This is an exploratory project. Contributions that identify redundancy, weak controls, ambiguous scoring, prompt leakage, confounds, failed replications, or reasons to narrow or discontinue the approach are as useful as supportive findings.
+The project may ultimately become a small methodology, a case study, a public guide, a contribution to existing work, or a documented stopping decision. Contributions should help determine which of those outcomes is justified.
