@@ -1,3 +1,5 @@
+> **Historical v0.1 template notice — September 28, 2026:** This template belongs to the frozen MOTHER v0.1 shakedown. It is preserved for historical result records and should not be used as the template for the reframed external black-box methodology. See the README and `docs/external-black-box-scope.md` for the active direction.
+
 # Mother Safe Failure Eval - Result Record
 
 ## Run Identification
