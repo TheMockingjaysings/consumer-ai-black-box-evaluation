@@ -2,38 +2,38 @@
 
 Last reviewed: 2026-09-28
 
-I am doing this audit because I do not want to keep moving the novelty line every time I find another paper.
+I started this audit because I did not want to keep moving the novelty line every time I found another paper.
 
-The broad ideas behind MOTHER — authorization boundaries, safe non-completion, calibrated refusal, human escalation, least privilege, and agent behavior around blocked actions — are already active research areas. Some newer public work is also very close to the narrower matched-condition design I had started considering for v0.2.
+The original MOTHER question was about authorization boundaries, safe non-completion, escalation, and the difference between persistence and overreach. That question still matters. It is also already being studied directly by other researchers in ways that are broader, more mature, and in some cases more technically rigorous than what I had planned for v0.2.
 
-That changes the next step.
+That changes what I think MOTHER should claim.
 
-I am **not freezing v0.2 yet**.
+I am no longer treating authorization-state discrimination, abstention, least privilege, authority provenance, or public red teaming as open territory that MOTHER discovered. Those ideas are now background and related work.
 
-Before I decide whether MOTHER should remain a distinct evaluation, I want to answer a harder question:
+Version 0.1 stays frozen as a historical shakedown. I am not freezing a new v0.2 benchmark.
 
-> **Is there still a useful signal here that is not already measured better by existing public work?**
+The live question is now narrower:
 
-If the answer is no, I would rather narrow the project, contribute useful pieces to an existing approach, or stop treating MOTHER as a separate benchmark than manufacture a novelty claim.
+> **Can an independent evaluator produce reproducible, auditable behavioral evidence from ordinary public AI interfaces when the underlying deployment may change in ways the evaluator cannot see or control?**
 
-## The strongest collision I have found so far
+I am not claiming that this question is novel either. The point of the audit is to find out whether there is actually something useful left to contribute.
+
+## What the authorization review settled
 
 ### AgentAbstain
 
-**AgentAbstain: Do LLM Agents Know When Not to Act?** uses 263 paired tasks across 42 executable sandbox environments. Each pair contains a should-act task and a should-abstain version created by a controlled perturbation to the instruction, tool, or environment state.
+**AgentAbstain: Do LLM Agents Know When Not to Act?** uses 263 paired tasks across 42 executable sandbox environments. Each pair contains a should-act task and a should-abstain version created through a controlled change to the instruction, tool, or environment state.
 
 Sources:
 
 - https://arxiv.org/abs/2607.10059
 - https://github.com/AntiQuality/agentabstain
 
-This is a major collision with the idea of testing nearly identical tasks where the correct behavior changes from act to abstain. It also evaluates actual tool-using agents rather than static text alone.
-
-MOTHER should **not** claim that paired act-versus-stop evaluation is new.
+For MOTHER, the implication is straightforward: I should not claim that paired act-versus-stop testing is new.
 
 ### SteerBench-Work
 
-**SteerBench-Work: A Benchmark for Agent Steering at Action Boundaries** evaluates the pre-action choice to proceed or hold for review. Its public release includes 106 workplace scenarios, over-refusal and under-refusal scoring, calibration controls, and evidence-reversed mirror cases where the surrounding situation remains similar but the evidence changes the correct decision.
+**SteerBench-Work: A Benchmark for Agent Steering at Action Boundaries** evaluates the pre-action decision to proceed or hold. It includes over-refusal and under-refusal scoring and evidence-reversed mirror cases where much of the situation stays the same while the decision-relevant evidence changes.
 
 Sources:
 
@@ -41,153 +41,114 @@ Sources:
 - https://steerbench.com/work/paper/
 - https://github.com/AgentDock/steerbench-work
 
-This is especially close to the MOTHER v0.2 idea because the mirror cases test whether a system changes its decision when evidence changes while much of the surface situation stays the same.
+Again, the implication is clear: a matched proceed-versus-hold design is not a distinct MOTHER contribution by itself.
 
-MOTHER should **not** claim that matched proceed-versus-hold discrimination is new.
+### Other overlapping work
 
-### Agentic Abstention
+The same pattern continues across related work on:
 
-**Agentic Abstention: Do Agents Know When to Stop Instead of Act?** treats abstention as a sequential decision problem. It evaluates when agents should continue interacting, gather more information, answer, or stop across more than 28,000 tasks.
+- agentic abstention;
+- least privilege;
+- authorization boundaries;
+- runtime approval;
+- authority provenance and delegation;
+- containment and sandboxing;
+- public red teaming;
+- participatory evaluation; and
+- crowdsourced failure collection.
 
-Source:
+Relevant examples include Agentic Abstention, FORTIS, AuthBench, APort Vault, AGATE, the Public Authorization-Boundary Benchmark proposal, OpenAI Auto-review, AgentHarm, Misalignment Bounty, and NIST ARIA.
 
-- https://arxiv.org/abs/2606.28733
+The lesson is not that the original concern was wrong. The lesson is that I was entering an area where a lot of serious work was already underway.
 
-This overlaps with MOTHER's interest in the timing of stopping and the difference between useful persistence and unnecessary continuation.
+## What remains worth auditing
 
-### FORTIS
+The only live candidate direction right now is **independent external black-box reproducibility**.
 
-**FORTIS: Benchmarking Over-Privilege in Agent Skills** evaluates whether agents select more authority, skills, tools, or actions than a task actually requires.
+The question is not:
 
-Source:
+> Can ordinary people test AI?
 
-- https://arxiv.org/abs/2605.09163
+That is already established in different forms.
 
-This is relevant to MOTHER's earlier least-privilege and authority-expansion framing.
+The question I care about is more specific:
 
-### AGATE
+> **How much can an outside evaluator actually claim when testing a public AI system whose routing, hidden instructions, personalization, model version, and deployment state may not be visible or stable?**
 
-**AGATE: Provenance-Based Runtime Defense Against Compositional Attacks on LLM Agents** uses deterministic runtime checks that ground authorization in operator declarations and approval events, constrain delegated actions, and preserve provenance for later reconstruction.
+That turns the project away from inventing another authorization benchmark and toward evaluating the evaluation condition itself.
 
-Source:
+## Why this may still matter
 
-- https://arxiv.org/abs/2609.30830
+An outside evaluator can usually document the prompt, response, date, displayed model name, visible settings, session state, and some interface conditions.
 
-This is not the same experiment as MOTHER, but it makes authority provenance and delegation a much less open research lane than it first appeared.
+They may not know:
 
-### Authenticated delegation and authorized agents
+- which exact model build served the request;
+- whether routing changed;
+- whether hidden policy layers changed;
+- whether memory or personalization influenced the result;
+- whether an A/B test or deployment experiment was active;
+- whether two sessions with the same visible label were actually comparable; or
+- whether the provider updated the system between runs without exposing a stable version identifier.
 
-There is also earlier work on explicit delegation chains, auditable authority, agent credentials, and scoped permissions.
+That creates a basic reproducibility problem.
 
-Source:
+The question is whether a disciplined external protocol can document those limits well enough that the evidence is still useful without overstating what happened.
 
-- https://arxiv.org/abs/2501.09674
+## Scope for this audit
 
-MOTHER should not claim that provenance of authority or delegation itself is new.
+For now, I am limiting the project to:
 
-## Public and non-specialist participation is not an empty lane either
+- public consumer-facing AI interfaces;
+- synthetic or non-sensitive test material;
+- no protected health information or patient records;
+- no real financial records or credentials;
+- no privileged hospital, insurer, employer, or enterprise access;
+- no reverse engineering of private systems; and
+- no claims about hidden mechanisms that cannot be observed from the outside.
 
-The idea of involving people outside AI laboratories also has prior work.
+Healthcare may remain in the literature review because it exposes the black-box reproducibility problem clearly. It is not the MOTHER test domain.
 
-### Misalignment Bounty
+## Questions I still need to answer
 
-The **Misalignment Bounty** crowdsourced reproducible examples of agent misbehavior from public contributors. It received 295 submissions.
+Before I build anything new, I need to know:
 
-Sources:
+1. What work already exists on independent evaluation through ordinary consumer interfaces?
+2. How do those studies handle model version drift, personalization, routing, memory, and interface state?
+3. What metadata are actually necessary for a replication attempt to be meaningful?
+4. When two runs disagree, can the protocol separate model variability from a changed evaluation condition?
+5. Can a second evaluator reproduce an observation closely enough for the result to be useful?
+6. When should an external evaluator say, "I observed this," rather than "this model behaves this way"?
+7. Does a structured protocol add enough value beyond normal transcript preservation and red teaming to justify a separate method?
 
-- https://arxiv.org/abs/2510.19738
-- https://palisaderesearch.org/research/misalignment-bounty
+## What would weaken this direction
 
-### Participatory red teaming
+This direction should narrow or stop if:
 
-Recent HCI work treats red teaming as a socio-technical practice and argues for broader participation, domain expertise, contextual evaluation, and more explicit attention to how datasets and risk categories are created.
-
-Source:
-
-- https://doi.org/10.1145/3772318.3790792
-
-### NIST ARIA
-
-NIST's 2026 ARIA Evaluation Planning Manual explicitly combines model testing, red teaming, and user testing as parts of a broader AI evaluation process.
-
-Source:
-
-- https://www.nist.gov/publications/aria-evaluation-planning-manual-elements-aria-style-ai-evaluations
-
-So MOTHER should not claim that outside-user participation, public red teaming, or user-centered evaluation is a new idea either.
-
-## The three candidate directions I am auditing
-
-### 1. Authorization-state discrimination
-
-Candidate question:
-
-> If the underlying task stays essentially the same and the authorization state changes, does the system change its behavior appropriately?
-
-Current status: **heavy overlap**.
-
-AgentAbstain and SteerBench-Work already cover closely related paired or mirrored act-versus-hold decisions. A three-way authorized / unauthorized / ambiguous structure may still be useful, but "three conditions instead of two" is not enough by itself to justify a new benchmark.
-
-Before this becomes v0.2, I need to identify a measurement or failure mode that those evaluations do not already capture well.
-
-### 2. Authority provenance and delegation
-
-Candidate question:
-
-> Does the system distinguish valid authority from unsupported, expired, delegated, conflicting, or second-hand claims of authority?
-
-Current status: **substantial overlap**.
-
-Authorization frameworks, delegation research, AGATE, permission benchmarks, and runtime gates already cover important parts of this problem.
-
-A narrower behavioral question may remain around how user-facing systems react to competing authority claims, but that needs a direct comparison before I treat it as a distinct contribution.
-
-### 3. Independent black-box evaluation by outside users
-
-Candidate question:
-
-> Can people without privileged model access use a disciplined public protocol to produce reproducible, auditable observations about authorization and action-boundary failures in user-facing AI systems?
-
-Current status: **still open, but not obviously novel**.
-
-Crowdsourced red teaming and participatory evaluation already exist. The possible MOTHER contribution would have to be more specific than "let nontechnical people test AI."
-
-The question I still want to investigate is whether a tightly controlled protocol can make observations from ordinary public interfaces comparable enough to be useful despite hidden system prompts, routing, model updates, personalization, and other confounders that outside evaluators cannot see.
-
-That would make MOTHER less of a new agent benchmark and more of an **independent evaluation methodology**.
-
-I am not claiming that contribution yet.
-
-## Decision rules before v0.2
-
-I do not want v0.2 frozen until this audit is complete enough to answer the following:
-
-1. What exact construct would v0.2 measure?
-2. Which existing benchmark is the closest comparator?
-3. What observable information would MOTHER add that the comparator does not already provide?
-4. Can that difference be tested rather than argued rhetorically?
-5. Does the proposed method work from an external black-box position without pretending to know hidden mechanisms?
-6. Can an independent person reproduce the procedure from the public documentation?
-
-If I cannot answer those questions convincingly, v0.2 should not move forward as a separate benchmark.
+- existing methods already solve the same external-interface reproducibility problem better;
+- hidden deployment variables make comparisons too underdetermined to interpret;
+- the proposed protocol mostly records metadata without changing what can reasonably be concluded;
+- independent replication fails even when visible conditions are matched as closely as possible; or
+- the distinction depends more on terminology than on an observable measurement.
 
 ## What stays unchanged
 
-The frozen `evals/pilot-v0.1.md` remains unchanged.
+The frozen `evals/pilot-v0.1.md` stays frozen.
 
-Version 0.1 is an instrument shakedown and a record of the project's development. New related work does not justify silently rewriting a frozen protocol after testing has begun.
+The earlier concept papers remain part of the project history. I am not rewriting them to make it look as if MOTHER always had this newer direction.
 
-The current concept paper also remains part of the version history. If MOTHER survives this collision audit in a narrower form, the conceptual framing should be updated in a new version rather than rewriting the old one.
+If the external black-box question survives the audit, it should get a new concept-paper version and a separately versioned protocol.
 
 ## What would count as a good outcome
 
-A good outcome is not necessarily proving that MOTHER is unique.
+A good outcome is not proving that MOTHER is unique.
 
 A good outcome could be:
 
-- finding a genuinely distinct, testable signal and building v0.2 around it;
-- contributing a useful scenario, scoring idea, or outside-evaluator method to an existing project;
-- reframing MOTHER as an independent replication or public-interface audit method rather than a new benchmark; or
-- deciding that the distinct benchmark idea has been overtaken by stronger work and documenting that clearly.
+- finding a genuinely useful external-evaluation method;
+- producing a careful replication protocol;
+- contributing the method to an existing evaluation project;
+- documenting where public-interface evaluation becomes too uncertain for strong claims; or
+- concluding that the remaining question is already better answered elsewhere.
 
-I would rather end up with a smaller claim that survives criticism than a larger claim that does not.
+I would rather end up with a smaller claim that I can defend than a larger one that falls apart under review.
