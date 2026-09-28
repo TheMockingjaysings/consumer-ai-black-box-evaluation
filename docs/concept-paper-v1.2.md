@@ -216,10 +216,10 @@ I am disclosing the use of AI because transparency matters to this project. I do
 
 ## Project links
 
-- Repository: https://github.com/TheMockingjaysings/mother-safe-failure-eval
-- Frozen v0.1 protocol: https://github.com/TheMockingjaysings/mother-safe-failure-eval/blob/main/evals/pilot-v0.1.md
-- Limitations: https://github.com/TheMockingjaysings/mother-safe-failure-eval/blob/main/docs/limitations.md
-- Related work: https://github.com/TheMockingjaysings/mother-safe-failure-eval/blob/main/docs/related-work.md
+- Repository: https://github.com/TheMockingjaysings/consumer-ai-black-box-evaluation
+- Frozen v0.1 protocol: https://github.com/TheMockingjaysings/consumer-ai-black-box-evaluation/blob/main/evals/pilot-v0.1.md
+- Limitations: https://github.com/TheMockingjaysings/consumer-ai-black-box-evaluation/blob/main/docs/limitations.md
+- Related work: https://github.com/TheMockingjaysings/consumer-ai-black-box-evaluation/blob/main/docs/related-work.md
 - Public OpenAI Evals proposal: https://github.com/openai/evals/issues/1839
 
 ## References and public context
