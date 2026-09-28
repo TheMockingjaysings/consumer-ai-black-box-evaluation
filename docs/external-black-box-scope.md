@@ -2,52 +2,62 @@
 
 ## Status
 
-**Active framing — September 28, 2026**
+**Replication decision phase — September 28, 2026**
 
-This document defines the current direction of the project. Earlier MOTHER materials remain in the repository as historical artifacts and should not be retroactively rewritten.
+This document defines the current active scope. Earlier MOTHER materials remain historical artifacts and should not be retroactively rewritten.
 
 ## Broad research area
 
 > **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-This remains a broad methodological area. It is not yet the experimental question for a formal study.
+This is an established methodological area. The project does not claim that black-box evaluation, model drift, nondeterminism, consumer-interface auditing, or external evaluation are new topics.
 
-The project is not presented as a novel authorization benchmark and does not claim that black-box evaluation, model drift, nondeterminism, or external auditing are new topics.
+## Audit 2 finding
 
-## Candidate first experimental question
+The second collision audit found substantial direct overlap between the project's replacement framing and existing 2026 research.
 
-Before attempting a broad study, the project will determine whether one narrow behavioral measurement is feasible:
+In particular, current work already measures or documents:
+
+- repeated-prompt consistency and test–retest agreement;
+- black-box endpoint stability using fixed prompt sets;
+- API versus consumer-interface behavior;
+- temporal or deployment-related behavioral change;
+- consumer-interface version opacity and hidden personalization;
+- rate-limit, reset, and auditability barriers for independent evaluators.
+
+See [`second-collision-audit-2026-09-28.md`](second-collision-audit-2026-09-28.md).
+
+## Status of the earlier candidate measurement
+
+The earlier candidate question was:
 
 > **Under a fixed visible consumer-interface configuration, how often does repeated presentation of the same fixed synthetic probe in fresh sessions produce the same predefined behavioral outcome category?**
 
-This candidate question names an observable dependent variable: **behavioral outcome category across repeated runs**.
+This remains a valid measurement design, but it should **not** be presented as a novel methodology.
 
-The first quantity of interest is **within-condition consistency**. The goal is not yet to explain why variation occurs.
+If used, it should be used to replicate or operationally test an existing published approach.
 
-## What is held fixed
+## Current active question
 
-As far as the public interface permits, the initial measurement should hold constant:
+The immediate question is now:
 
-- exact probe text;
-- fresh-session status;
-- visible model or product label;
-- interface or product surface;
-- memory/personalization state where visible and controllable;
-- tool or connector availability where visible;
-- other user-visible settings that could plausibly affect the run.
+> **Is there a published consumer-interface or black-box evaluation finding that an ordinary outside evaluator can meaningfully replicate under documented, low-resource conditions, and would that replication add useful evidence?**
 
-The project cannot assume that hidden deployment state is fixed merely because visible state appears unchanged.
+The project should not collect confirmatory data until that question has a concrete answer.
 
-## What is measured
+## What a useful replication would require
 
-Each run should produce:
+A replication target should specify:
 
-1. the exact model response or observable interface behavior;
-2. the visible configuration metadata recorded at the time of the run;
-3. a predefined behavioral outcome category;
-4. an ambiguity note if the output cannot be coded cleanly.
+- the exact published finding or protocol being tested;
+- which source-study conditions can be reproduced;
+- which conditions cannot be reproduced and why;
+- the visible interface state that must be logged;
+- the outcome measure used by the source study or a transparently justified adaptation;
+- what counts as successful replication, failed replication, and inconclusive replication;
+- the value added by an independent replication.
 
-The raw interaction record should be preserved wherever sharing is permitted.
+The fact that the evaluator is unaffiliated, manual, or low-resource is not sufficient by itself to establish a contribution.
 
 ## Hidden variables and confounding
 
@@ -64,66 +74,48 @@ Possible hidden variables include:
 
 These are **unobserved deployment variables**. The project may document behavioral variation while they are present, but it should not attribute the variation to any one hidden cause without independent evidence.
 
+Observed behavioral change is not automatically evidence that the underlying model changed.
+
 ## Feasibility before preregistration
 
-The next experiment is not a large study. It is a small manual shakedown designed to test whether the measurement itself is coherent.
+If a replication target is selected, the first run should be a tiny manual feasibility check.
 
-The shakedown should answer:
+That check should answer:
 
-- Can the exact probe be presented consistently?
+- Can the source procedure be reproduced through the available consumer interface?
 - Can visible state be logged reliably?
-- Can the outcome categories be applied without repeated ad hoc changes?
-- Can ambiguous cases be identified rather than forced into a category?
-- Is the evidence record sufficient for another person to inspect?
+- Can the source outcome measure or coding rule be applied without ad hoc revision?
+- Can ambiguity be recorded transparently?
+- Can evidence be preserved sufficiently for another person to inspect?
 
-The exact probe, coding scheme, repetition count, time window, product set, and reproducibility threshold are **not yet frozen**.
+The feasibility observations must not later be treated as confirmatory evidence for a decision rule chosen after seeing those observations.
 
-Those values should only be preregistered after the feasibility shakedown and must then be frozen before confirmatory data collection.
+## Evidence claims
 
-## Relationship to historical authorization scenarios
+The project may support statements such as:
 
-Historical authorization scenarios may be reused as fixed probes if they are useful because they can produce distinguishable observable outcomes such as proceed, refuse, or request clarification.
+- a specified published result did or did not reproduce under documented conditions;
+- the replication was inconclusive because source-study conditions could not be matched;
+- repeated runs produced a stated distribution of predefined outcomes;
+- a consumer-interface replication exposed a documented practical constraint not visible in the source method.
 
-In that role, they are measurement instruments. Their reuse does **not** establish a new authorization construct or revive the earlier novelty claim.
-
-## What counts as evidence
-
-The project can support claims such as:
-
-- behavior X occurred under documented visible condition Y;
-- outcome category X occurred in a stated number of repeated runs;
-- repeated runs did or did not produce the same predefined category;
-- a later preregistered replication did or did not reproduce the earlier pattern.
-
-The project cannot infer from those observations alone that:
+The project cannot infer from interface behavior alone that:
 
 - the underlying model changed;
 - a router caused the difference;
 - a system prompt caused the difference;
-- a safety layer caused the difference;
+- a safety layer caused the behavior;
 - the system internally reasoned in a particular way.
-
-## Falsifiability and decision rules
-
-A future formal study must state in advance what would count as:
-
-- sufficiently reproducible to justify the planned claim;
-- insufficiently reproducible;
-- inconclusive.
-
-The threshold should be selected before confirmatory observations are collected, not retrofitted to the resulting data.
-
-A negative result may still be informative, but it does not automatically count as evidence for the same hypothesis.
 
 ## Current findings
 
 **None yet under the active framing.**
 
-The current work is methodology development and collision auditing.
+The current work consists of collision auditing, literature verification, and replication-target selection.
 
 ## Population and environment
 
-The intended environment is ordinary public-facing AI products available to consumers.
+The intended environment remains ordinary public-facing AI products available to consumers.
 
 The project does not require API access, model weights, hidden system prompts, chain-of-thought, routing metadata, proprietary logs, or internal developer access.
 
@@ -137,10 +129,11 @@ For the current phase:
 - insurance adjudication systems;
 - internal enterprise systems;
 - attempts to bypass safeguards or access controls;
+- prohibited automation;
 - mechanistic claims unsupported by external evidence.
 
 ## Relationship to MOTHER
 
-MOTHER was the historical authorization-centered phase. The active project keeps the discipline of bounded claims and explicit uncertainty, but it is no longer presented as an authorization benchmark.
+MOTHER was the historical authorization-centered phase. The active project keeps the discipline of bounded claims and explicit uncertainty, but it is no longer presented as an authorization benchmark or as a new black-box evaluation methodology.
 
-The current project is best understood as a **methodology investigation into what can be measured reliably from public consumer AI interfaces under deployment opacity**.
+The current project is best understood as a **search for a useful independent replication or documentation contribution within an already established research area**.
