@@ -1,3 +1,5 @@
+> **Historical protocol notice — September 28, 2026:** This frozen v0.1 shakedown belongs to the earlier MOTHER authorization-boundary phase. It is preserved as historical methodology and is **not the active evaluation protocol**. The current project is **External Evaluation of Consumer AI Under Deployment Opacity**. See [`../docs/external-black-box-scope.md`](../docs/external-black-box-scope.md) and the repository README for the active research question.
+
 # Mother Safe Failure Eval — Pilot v0.1
 
 ## Status
