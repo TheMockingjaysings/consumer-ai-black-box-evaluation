@@ -2,102 +2,118 @@
 
 ## Status
 
-**Active audit — September 28, 2026**
+**Second collision audit active — September 28, 2026**
 
-This document records why the project moved away from an authorization-centered benchmark and what must be established before any new research contribution is claimed.
+This document records two distinct audits:
 
-## What changed
+1. why the project moved away from an authorization-centered benchmark; and
+2. whether the replacement framing around external black-box reproducibility is itself already covered by existing work.
+
+## Audit 1 — Historical authorization-centered direction
+
+### Original direction
 
 The original project explored authorization boundaries, safe non-completion, instruction conflict, and escalation in public AI systems. A proposed next step was to compare closely matched authorized, unauthorized, and ambiguous variants of the same task.
 
-That direction is now on hold because the surrounding research landscape is substantially more developed than the early project framing suggested.
+### Finding
 
-Existing work already studies closely related problems, including:
+**Assessment: heavy overlap with existing research.**
 
-- act versus abstain decisions;
-- proceed versus hold decisions;
-- ambiguous or insufficient authorization;
-- least-privilege permission inference;
-- time-of-use or commit-time authorization;
-- authority provenance and delegation;
-- tool-use constraints and sandbox boundaries;
-- public and participatory red teaming;
-- black-box evaluation of deployed systems.
+Closely related work already studies act/abstain decisions, proceed/hold behavior, ambiguous authorization, least privilege, time-of-use authorization, authority provenance, delegation, tool-use constraints, sandbox boundaries, and public red teaming.
 
-The exact details differ across papers and benchmarks, but the overlap is sufficient that this project should not present authorization-state discrimination as a novel contribution merely because it uses a different label or a three-condition structure.
+### Decision
 
-## Decision
+The project will not proceed as a new general authorization benchmark unless a later review identifies a specific gap not already measured more rigorously elsewhere.
 
-The active project will **not** proceed as a new general authorization benchmark unless a later review establishes a specific, defensible gap that is not already measured more rigorously elsewhere.
+The historical five-scenario shakedown remains preserved as an instrument-development record.
 
-The current candidate question is instead:
+## Audit 2 — Active external-evaluation framing
+
+The broad replacement area is:
 
 > **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-This is a methodological question about external evaluation under deployment opacity, not a claim that black-box evaluation itself is new.
+That is now treated as a **research area**, not as a sufficiently narrow experimental question and not as a novelty claim.
 
-## Collision categories
+### Why a second audit is necessary
 
-### 1. Authorization-state discrimination
+Black-box evaluation, nondeterminism, model drift, endpoint stability, model fingerprinting, external auditing, and consumer-interface evaluation are established or active research areas.
 
-**Assessment: heavy overlap.**
+The current project therefore needs to determine whether there is any useful practical gap left for an independent evaluator working through ordinary consumer interfaces.
 
-Matched act/abstain and proceed/hold designs already exist. Ambiguous authorization and permission-sensitive behavior are also being studied directly. A three-way authorized/unauthorized/ambiguous structure is not, by itself, enough to justify a separate benchmark.
+### Priority collision categories
 
-### 2. Authority provenance and delegation
+The second audit should search for substantially equivalent methods covering:
 
-**Assessment: active existing research area.**
+1. repeated presentation of identical prompts and run-to-run variance;
+2. behavioral stability or drift over time;
+3. black-box endpoint stability and behavioral fingerprinting;
+4. evaluation when model or version identity is hidden or unstable;
+5. differences between API evaluation and consumer-product behavior;
+6. routing, system-layer, safety-layer, or product-surface confounds;
+7. memory and personalization as evaluation confounds;
+8. cross-session, cross-account, and cross-interface reproducibility;
+9. protocols designed for outside evaluators without privileged access;
+10. evidentiary standards for claims drawn from changing public AI products.
 
-There is already work formalizing where authority comes from, whether delegation is valid, and whether an action remains authorized at execution time. This is not a clean novelty lane for the project.
+## Candidate narrow measurement
 
-### 3. Public or participatory red teaming
+If the second audit leaves a useful gap, the first candidate measurement is:
 
-**Assessment: established.**
+> **Under a fixed visible consumer-interface configuration, how often does repeated presentation of the same fixed synthetic probe in fresh sessions produce the same predefined behavioral outcome category?**
 
-Outside contributors and public competitions are already used to discover model and agent failures at scale. The project should not claim that participation by non-institutional evaluators is new.
+This is intentionally narrower than the broad research area.
 
-### 4. Independent evaluation through ordinary consumer interfaces
+The historical authorization scenarios may be reused as probes, but in that role they are measurement instruments rather than the construct being claimed as novel.
 
-**Assessment: still under audit.**
+## Confounding rule
 
-The remaining question is narrower: what evidentiary quality is realistically achievable when an evaluator lacks API-level control and cannot fully observe routing, model versions, hidden instructions, memory, personalization, experiments, or safety layers?
+A public interface may change through hidden routing, model snapshots, system instructions, safety layers, personalization, experiments, or product updates.
 
-This direction has relevant prior work and should not be called novel yet. The audit must specifically search for methodologies that already address:
+The project may measure observed variation under documented visible conditions. It should **not** infer that a particular hidden component caused that variation without independent evidence.
 
-- reproducibility across repeated consumer-interface runs;
-- session and conversation-state effects;
-- memory and personalization effects;
-- hidden or changing model versions;
-- routing or product-surface differences;
-- replication over time;
-- external documentation standards for black-box behavioral evidence;
-- limits on causal or mechanistic claims from public-interface observations.
+Observed behavioral change is not automatically equivalent to model drift.
 
-## Falsification criteria
+## Falsification and stop criteria
 
-The project should narrow further, contribute to existing work, or stop as a standalone effort if any of the following is true:
+The project should narrow, replicate existing work, contribute elsewhere, or stop as a standalone effort if any of the following is established:
 
-1. Existing research already provides a substantially equivalent protocol for independent evaluators using ordinary public AI interfaces.
-2. The uncontrolled deployment variables make results too unstable to support useful behavioral claims.
-3. The project can produce observations but no reproducible or auditable evidence beyond anecdotal screenshots.
-4. The proposed contribution depends mainly on a new name, acronym, number of conditions, or presentation format rather than a genuinely different methodological capability.
-5. The project would need privileged access to answer the question it claims to answer.
+1. Existing work already provides a substantially equivalent practical protocol and there is no useful replication gap.
+2. The candidate outcome cannot be defined or coded consistently.
+3. Visible deployment state cannot be documented well enough to make the procedure auditable.
+4. Repeated testing produces evidence no stronger than isolated anecdotes.
+5. Hidden deployment variation makes the planned within-condition measurement uninterpretable.
+6. The proposed contribution depends mainly on a new name, acronym, framing, or presentation format.
+7. Answering the research question requires privileged access unavailable to an independent evaluator.
 
 ## What would count as progress
 
-Progress does not require proving novelty. Useful outcomes include:
+Progress and confirmation are not the same thing.
 
-- a practical external-evaluation protocol with clearly bounded claims;
-- evidence about how reproducibility degrades across visible deployment conditions;
-- a taxonomy of uncontrolled variables that matter for outside evaluators;
-- a replication package that documents public-interface observations without overstating causation;
-- a case study showing that the approach is too unstable or too limited to justify stronger claims;
-- a documented decision to stop or merge the work into an existing research line.
+Progress can include:
+
+- identifying that the candidate measurement is already covered and redirecting accordingly;
+- producing a coherent coding scheme that survives a feasibility shakedown;
+- discovering that the measurement is too ambiguous and stopping;
+- preregistering a narrow repeated-run study with a fixed decision rule;
+- measuring variance under documented conditions;
+- producing a replication package another evaluator can follow.
+
+A negative or null result may be informative, but it does not automatically support the same hypothesis as a positive result.
+
+## Current decision gate
+
+Do **not** begin a multi-model, multi-account, cross-interface, or weeks-long repeated-run study yet.
+
+The next gate is:
+
+1. complete the second collision audit;
+2. define one observable outcome and coding method;
+3. run a tiny manual feasibility shakedown;
+4. only then preregister a formal repeated-run study if the measurement survives.
 
 ## Research standard
 
-The rule for this project is simple:
+> **Prefer a smaller, falsifiable claim over a broader claim that cannot survive criticism.**
 
-> **I would rather end up with a smaller claim that survives criticism than a larger claim that does not.**
-
-The audit is therefore not a hurdle to get around. It is part of the research.
+The collision audit is part of the research, not an obstacle to it.
