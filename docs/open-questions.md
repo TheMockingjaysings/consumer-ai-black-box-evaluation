@@ -1,142 +1,146 @@
-# Open Questions and Falsification Criteria
+# Open Questions
 
-MOTHER should be able to fail as a research idea.
+## Current status
 
-That matters even more now because the literature review showed that much of the original authorization framing is already being studied directly.
+These are the unresolved questions for the project's active direction: **independent black-box evaluation of consumer AI under deployment opacity**.
 
-I do not want to keep a question alive just because I started with it.
+The purpose of this file is not to manufacture a novelty claim. It is to identify what must be answered before the work can justify continuing as a standalone methodology.
 
-Version 0.1 stays frozen as a historical shakedown. The current questions are about whether there is a useful external black-box methodology left to develop.
+## 1. Is the question already answered?
 
-## 1. What does a public-interface result actually represent?
+The first question remains the most important:
 
-When an outside evaluator records a response from a consumer AI product, what exactly has been observed?
+> Does existing research already provide a sufficiently similar methodology for independent evaluators testing ordinary public AI interfaces under hidden or changing deployment conditions?
 
-At minimum, it is evidence that under a documented set of visible conditions, a particular interface produced a particular response at a particular time.
+The literature audit should search specifically for work that combines several of the following:
 
-It may **not** support a stronger statement about a stable underlying model, because the evaluator may not know the exact build, routing path, policy layer, personalization state, or deployment configuration.
+- consumer-facing interfaces rather than controlled APIs;
+- repeated black-box behavioral testing;
+- unknown or changing model versions;
+- memory and personalization effects;
+- account or interface-state effects;
+- model routing or hidden deployment layers;
+- longitudinal replication;
+- standards for documenting externally observed behavior;
+- explicit limits on causal inference from black-box evidence.
 
-The project needs to keep that distinction explicit.
+If a stronger existing method already covers this combination, this project should not claim a separate contribution.
 
-## 2. Which visible conditions matter enough to record?
+## 2. What is the unit of evidence?
 
-Possible variables include:
+Is one interaction ever meaningful evidence, or should the minimum unit be a repeated set of runs under documented conditions?
 
-- displayed model name;
-- visible version identifier;
-- interface and platform;
-- date, time, and timezone;
-- fresh versus continuing session;
-- visible memory or personalization state;
-- project or workspace context;
-- tool access;
-- browsing and connector state;
-- reasoning or inference settings;
-- retry or regeneration status; and
-- prior exposure to the test material.
+Questions:
 
-A protocol that records everything imaginable may become unusable. A protocol that records too little may make replication meaningless.
+- How many repetitions are needed before a behavioral pattern is worth reporting?
+- Should outcome coding be categorical, descriptive, or both?
+- How should stochastic variation be represented without implying more statistical precision than the sample supports?
+- What raw records are necessary for another evaluator to inspect the claim?
 
-The useful minimum still needs to be established.
+## 3. What visible state must be recorded?
 
-## 3. How repeatable are nominally identical runs?
+A public-interface evaluator may be able to observe some deployment state but not all of it.
 
-If the same evaluator repeats the same prompt under the same visible conditions, how much behavior changes?
+Candidate fields include:
 
-If responses differ, is that ordinary stochastic variation, prompt sensitivity, session state, hidden routing, a deployment change, or something else?
+- date and local time;
+- product name;
+- visible model label;
+- interface or surface;
+- account tier if relevant and non-sensitive;
+- memory setting;
+- personalization/custom-instruction state;
+- tool or connector availability;
+- fresh versus continuing conversation;
+- uploaded-file state;
+- any visible experiment or feature label.
 
-An external evaluator may not be able to identify the cause. The question is whether the uncertainty can still be bounded honestly.
+Which of these are essential for a reproducible record?
 
-## 4. Can another evaluator reproduce the observation?
+## 4. How should hidden variables be handled?
 
-Can a second person follow the same public protocol and obtain a result close enough to support the original observation?
+Possible hidden variables include routing, server-side safety layers, system instructions, A/B experiments, model snapshots, regional deployment differences, and product updates.
 
-If not, what failed to match?
+The project cannot control all of these. The question is whether it can document enough uncertainty around them to keep the resulting evidence useful.
 
-This is more important than simply collecting more transcripts from one person.
+## 5. What does reproducibility mean here?
 
-## 5. Can the protocol distinguish a behavior change from a condition change?
+Several kinds of reproducibility may need to be separated:
 
-Suppose a result changes across dates.
+- **within-run reproducibility:** repeated prompts in the same visible state;
+- **cross-session reproducibility:** fresh-session replication;
+- **cross-account reproducibility:** replication under a second account where appropriate;
+- **cross-interface reproducibility:** web/mobile/desktop or different product surfaces;
+- **temporal reproducibility:** replication days or weeks later;
+- **cross-evaluator reproducibility:** another person following the same procedure.
 
-Can the record tell us whether:
+These should not be collapsed into a single score unless there is a strong methodological reason.
 
-- the visible interface changed;
-- the displayed model changed;
-- memory or personalization changed;
-- the prompt or evaluator procedure changed; or
-- the behavior changed while every visible condition appeared stable?
+## 6. How much causal language is defensible?
 
-If the protocol cannot make even that distinction useful, its value may be limited.
+The default answer should be: very little.
 
-## 6. Does the method add anything beyond saving transcripts?
+An external evaluator can usually document an association between visible conditions and behavior. That is different from proving that the visible condition caused the behavior.
 
-This is a critical falsification question.
+The project needs a claim language that distinguishes:
 
-If the proposed method mostly produces a larger metadata checklist without improving reproducibility, interpretation, or claim discipline, then MOTHER has not earned a separate methodology.
+- observation;
+- replication;
+- association;
+- causal explanation;
+- mechanistic explanation.
 
-The protocol needs to change what another evaluator can verify or what the original evaluator can responsibly conclude.
+## 7. Can memory and personalization be studied without turning the project into a privacy study?
 
-## 7. How much prior work already covers this problem?
+If memory or personalization is included, the scenarios should use synthetic, non-sensitive information. No real medical, financial, credential, or other high-risk personal information should be required.
 
-The authorization collision audit showed that the project can easily enter an area that is already much further along than it first appears.
+The project should test product behavior, not collect intimate user profiles.
 
-I need to apply the same skepticism here.
+## 8. Should different model labels be compared?
 
-The current literature audit should look specifically for work on:
+A visible model label may not uniquely identify the deployed behavior. Conversely, two runs under the same visible label may not be backed by an identical model snapshot or routing path.
 
-- independent evaluation of consumer-facing LLMs;
-- public-interface reproducibility;
-- longitudinal model drift;
-- undocumented model updates;
-- personalization and memory confounds;
-- interface and account effects;
-- black-box auditing under deployment opacity; and
-- replication of behavioral findings without privileged model access.
+The project should determine whether model labels are useful metadata, misleading metadata, or simply one field among many.
 
-If that work already answers the same question well, MOTHER should narrow again or contribute rather than duplicate it.
+## 9. What would distinguish this from ordinary anecdotal red teaming?
 
-## 8. Can non-specialists use the method reliably?
+This question is critical.
 
-If this ever becomes a public protocol, can trained non-specialists preserve the conditions, document deviations, and interpret the results without turning ordinary prompting into pseudo-scientific evidence?
+A credible methodology would need more than interesting screenshots. It should add at least some of the following:
 
-That is not assumed.
+- controlled repetition;
+- explicit condition logging;
+- predefined outcome coding;
+- longitudinal replication;
+- independent replication by another evaluator;
+- transparent uncertainty statements;
+- a record of product/version drift.
 
-## 9. Does development-model involvement bias the method?
+If the project cannot move beyond anecdotal evidence, it should say so and stop claiming methodology development.
 
-ChatGPT has been used extensively for research assistance, drafting, editing, terminology, and methodological critique.
+## 10. What would falsify the project?
 
-Fresh sessions, multiple providers, preserved transcripts, and independent human review can reduce development-model bias, but they do not erase it.
+The active direction should be abandoned, narrowed, or merged into existing work if:
 
-Any future study should keep that entanglement visible rather than treating the instrument as if it emerged independently of the systems being studied.
+- equivalent methodology already exists;
+- results are too unstable to replicate meaningfully;
+- visible deployment metadata is insufficient to support useful comparisons;
+- the project can only produce anecdotes;
+- meaningful evaluation requires privileged access that outside evaluators do not have;
+- the contribution depends mainly on terminology rather than capability.
 
-## What would materially weaken the current direction
+## 11. What is the appropriate final form?
 
-The following findings would require narrowing or stopping:
+The work does not have to become a benchmark.
 
-- existing research already addresses the same public-interface reproducibility problem more rigorously;
-- provider-side opacity makes comparisons too underdetermined to interpret;
-- the protocol adds documentation burden without improving reproducibility or claim quality;
-- independent evaluators cannot reproduce results even under closely matched visible conditions;
-- small interface or account differences dominate the observations;
-- the result depends on assumptions about hidden system state that an external evaluator cannot justify; or
-- the project can defend distinctiveness only through terminology or branding.
+Possible final forms include:
 
-## What would justify continued development
+- a small reproducibility protocol;
+- a methods note;
+- a case study;
+- a replication package;
+- a public guide for documenting black-box observations;
+- a contribution to another project;
+- a retrospective on why the original benchmark framing was abandoned.
 
-The direction becomes more defensible if later work shows that:
-
-- a clearly defined external-evaluation problem remains after direct comparison with prior work;
-- a practical set of visible conditions can be documented consistently;
-- repeated trials produce interpretable patterns rather than noise alone;
-- independent evaluators can reproduce at least some observations;
-- the protocol makes uncertainty easier to identify and report; and
-- the resulting evidence supports better-bounded claims than an ordinary saved transcript would.
-
-## Current position
-
-Version 0.1 remains frozen.
-
-No v0.2 benchmark is frozen.
-
-The live task is to test whether **independent black-box reproducibility under changing public deployment conditions** is a useful research problem for MOTHER—or whether that question is already better answered elsewhere.
+The final form should follow the evidence rather than be decided in advance.
