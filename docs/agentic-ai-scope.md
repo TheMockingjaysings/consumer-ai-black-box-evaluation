@@ -1,4 +1,6 @@
-> **Historical document notice — September 28, 2026:** This file reflects an earlier stage of the MOTHER project. The active project framing has moved away from a general authorization-boundary benchmark. See [`external-black-box-scope.md`](external-black-box-scope.md) and the repository README for the current research question.
+> **Historical document notice — September 28, 2026:** This file is preserved as an unchanged record of an earlier MOTHER research stage. The body below uses the terminology and research questions that were active at that time; present-tense statements in the historical text should not be read as the project's current scope or claim. The active project is now investigating external black-box evaluation under deployment opacity. See [`external-black-box-scope.md`](external-black-box-scope.md), [`research-roadmap.md`](research-roadmap.md), and the repository README for the current framing.
+>
+> **Current relevance:** one methodological distinction from this document remains useful: a model's stated response to a hypothetical prompt is not evidence of how a tool-using agent would behave during real execution. Actual agentic behavior would require a separately designed environment with observable actions and trajectories. Such an agent evaluation is **not part of the current feasibility study**.
 
 # MOTHER and Agentic AI
 
