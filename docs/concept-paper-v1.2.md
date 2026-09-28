@@ -1,3 +1,5 @@
+> **Historical document notice — September 28, 2026:** This file is preserved as part of the earlier MOTHER authorization-boundary phase and is **not the active research plan**. The current project is **External Evaluation of Consumer AI Under Deployment Opacity**. See [`external-black-box-scope.md`](external-black-box-scope.md) and the repository README for the active research question.
+
 # MOTHER Framework - Concept Paper v1.2
 
 **A Human-Centered Framework for Safe Non-Completion, Authorization Boundaries, Human Impact, Consequences, and Learned Restraint in AI Systems**
