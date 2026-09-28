@@ -1,135 +1,142 @@
 # Open Questions and Falsification Criteria
 
-MOTHER should be able to fail as an evaluation idea.
+MOTHER should be able to fail as a research idea.
 
-That matters more now because newer public work overlaps with both the original broad authorization framing and the narrower matched-condition direction I was considering for v0.2.
+That matters even more now because the literature review showed that much of the original authorization framing is already being studied directly.
 
-This file records the questions that need answers before the project advances.
+I do not want to keep a question alive just because I started with it.
 
-## 1. Does v0.1 measure more than generic refusal?
+Version 0.1 stays frozen as a historical shakedown. The current questions are about whether there is a useful external black-box methodology left to develop.
 
-Could a model score highly simply by refusing whenever it sees words such as "restricted," "confidential," or "unauthorized"?
+## 1. What does a public-interface result actually represent?
 
-Version 0.1 cannot answer that by itself because all five scenarios involve insufficient authorization.
+When an outside evaluator records a response from a consumer AI product, what exactly has been observed?
 
-## 2. Does static text predict enacted behavior?
+At minimum, it is evidence that under a documented set of visible conditions, a particular interface produced a particular response at a particular time.
 
-Does a model that gives a boundary-preserving written answer behave the same way when it must choose and execute tools in an interactive environment?
+It may **not** support a stronger statement about a stable underlying model, because the evaluator may not know the exact build, routing path, policy layer, personalization state, or deployment configuration.
 
-The project should not assume that stated and enacted behavior are equivalent.
+The project needs to keep that distinction explicit.
 
-## 3. Are the prompts too leading?
+## 2. Which visible conditions matter enough to record?
 
-Would materially equivalent scenarios with fewer obvious safety cues produce the same pattern?
+Possible variables include:
 
-If performance collapses under reduced-cue wording, the instrument may be measuring prompt recognition rather than the intended construct.
+- displayed model name;
+- visible version identifier;
+- interface and platform;
+- date, time, and timezone;
+- fresh versus continuing session;
+- visible memory or personalization state;
+- project or workspace context;
+- tool access;
+- browsing and connector state;
+- reasoning or inference settings;
+- retry or regeneration status; and
+- prior exposure to the test material.
 
-## 4. Can independent evaluators apply the rubric consistently?
+A protocol that records everything imaginable may become unusable. A protocol that records too little may make replication meaningless.
 
-Do reasonable evaluators independently score the same preserved responses similarly?
+The useful minimum still needs to be established.
 
-If disagreement is frequent or concentrated in particular categories, the rubric needs redesign before broader use.
+## 3. How repeatable are nominally identical runs?
 
-## 5. Does authorization-state discrimination add anything beyond existing paired benchmarks?
+If the same evaluator repeats the same prompt under the same visible conditions, how much behavior changes?
 
-This is now one of the most important questions.
+If responses differ, is that ordinary stochastic variation, prompt sensitivity, session state, hidden routing, a deployment change, or something else?
 
-AgentAbstain already uses paired should-act / should-abstain tasks produced through controlled perturbations in executable environments.
+An external evaluator may not be able to identify the cause. The question is whether the uncertainty can still be bounded honestly.
 
-SteerBench-Work already evaluates proceed / hold decisions, over-refusal, under-refusal, and evidence-reversed mirror cases.
+## 4. Can another evaluator reproduce the observation?
 
-So a matched authorized / unauthorized / ambiguous structure is **not enough by itself** to establish a distinct MOTHER contribution.
+Can a second person follow the same public protocol and obtain a result close enough to support the original observation?
 
-Questions that remain:
+If not, what failed to match?
 
-- Is there a failure mode these benchmarks do not already expose?
-- Does a three-state structure reveal something that binary paired designs systematically miss?
-- Can that difference be measured rather than described rhetorically?
-- Would the result still matter once actual tool-use benchmarks are considered?
+This is more important than simply collecting more transcripts from one person.
 
-If the answer is no, MOTHER should not proceed as a separate benchmark on this basis.
+## 5. Can the protocol distinguish a behavior change from a condition change?
 
-## 6. Is authority provenance a distinct lane?
+Suppose a result changes across dates.
 
-Could MOTHER contribute by testing whether systems distinguish valid authority from unsupported, delegated, expired, conflicting, or second-hand claims?
+Can the record tell us whether:
 
-Relevant work already exists on authenticated delegation, scoped permissions, provenance, runtime approval, and authorization gates.
+- the visible interface changed;
+- the displayed model changed;
+- memory or personalization changed;
+- the prompt or evaluator procedure changed; or
+- the behavior changed while every visible condition appeared stable?
 
-The question is not whether authority provenance matters. It clearly does.
+If the protocol cannot make even that distinction useful, its value may be limited.
 
-The question is whether MOTHER has a specific behavioral measurement that is not already captured more rigorously elsewhere.
+## 6. Does the method add anything beyond saving transcripts?
 
-## 7. Is there a useful external black-box methodology here?
+This is a critical falsification question.
 
-Could people without privileged model access follow a disciplined protocol and produce observations that are comparable enough to be useful?
+If the proposed method mostly produces a larger metadata checklist without improving reproducibility, interpretation, or claim discipline, then MOTHER has not earned a separate methodology.
 
-This is different from asking whether public participation in AI evaluation is new. It is not. Crowdsourced red teaming, participatory evaluation, and user testing already exist.
+The protocol needs to change what another evaluator can verify or what the original evaluator can responsibly conclude.
 
-The unresolved question is narrower:
+## 7. How much prior work already covers this problem?
 
-> Can ordinary user-facing interfaces support reproducible external evaluation despite hidden system prompts, routing, model updates, personalization, and other provider-side variables that outside researchers cannot control?
+The authorization collision audit showed that the project can easily enter an area that is already much further along than it first appears.
 
-If the answer is yes, MOTHER may be more useful as an independent evaluation methodology than as a new agent benchmark.
+I need to apply the same skepticism here.
 
-That claim still needs evidence.
+The current literature audit should look specifically for work on:
+
+- independent evaluation of consumer-facing LLMs;
+- public-interface reproducibility;
+- longitudinal model drift;
+- undocumented model updates;
+- personalization and memory confounds;
+- interface and account effects;
+- black-box auditing under deployment opacity; and
+- replication of behavioral findings without privileged model access.
+
+If that work already answers the same question well, MOTHER should narrow again or contribute rather than duplicate it.
 
 ## 8. Can non-specialists use the method reliably?
 
-If trained non-specialists follow the same protocol, do they preserve the test conditions and score responses comparably to more experienced evaluators?
+If this ever becomes a public protocol, can trained non-specialists preserve the conditions, document deviations, and interpret the results without turning ordinary prompting into pseudo-scientific evidence?
 
-If not, public participation may remain exploratory rather than a source of comparable evaluation data.
+That is not assumed.
 
-## 9. Does development-model involvement contaminate the project beyond repair?
+## 9. Does development-model involvement bias the method?
 
 ChatGPT has been used extensively for research assistance, drafting, editing, terminology, and methodological critique.
 
-Fresh sessions, multiple providers, preserved transcripts, and independent human scoring can reduce development-model bias, but not erase it.
+Fresh sessions, multiple providers, preserved transcripts, and independent human review can reduce development-model bias, but they do not erase it.
 
-The project needs to keep asking whether the tested model family is too entangled with the instrument design to support particular claims.
+Any future study should keep that entanglement visible rather than treating the instrument as if it emerged independently of the systems being studied.
 
-## Results that would materially weaken the project
+## What would materially weaken the current direction
 
-The following findings would require significant narrowing or redesign:
+The following findings would require narrowing or stopping:
 
-- v0.1 success is explained mostly by obvious refusal cues;
-- small wording changes produce large score changes unrelated to the target variable;
-- independent evaluators cannot apply the rubric consistently;
-- provider-interface artifacts dominate the observations;
-- static answers have no useful relationship to enacted behavior;
-- the proposed v0.2 signal is already captured by AgentAbstain, SteerBench-Work, or another stronger benchmark;
-- authority-provenance variants add no information beyond existing delegation or runtime-gating work; or
-- non-specialist testing cannot be made reproducible enough to compare across sessions and providers.
+- existing research already addresses the same public-interface reproducibility problem more rigorously;
+- provider-side opacity makes comparisons too underdetermined to interpret;
+- the protocol adds documentation burden without improving reproducibility or claim quality;
+- independent evaluators cannot reproduce results even under closely matched visible conditions;
+- small interface or account differences dominate the observations;
+- the result depends on assumptions about hidden system state that an external evaluator cannot justify; or
+- the project can defend distinctiveness only through terminology or branding.
 
-## Results that would justify discontinuing MOTHER as a distinct benchmark
+## What would justify continued development
 
-MOTHER should be considered for discontinuation, absorption into another method, or reframing as replication if:
+The direction becomes more defensible if later work shows that:
 
-1. the construct cannot be operationalized without vague human interpretation;
-2. the proposed matched design adds no meaningful information beyond existing paired act / abstain or proceed / hold benchmarks;
-3. interactive tests show that the static construct has no useful diagnostic value;
-4. external interface confounders prevent meaningful replication;
-5. independent replication repeatedly fails; or
-6. the project can only defend distinctiveness through branding, terminology, or a small change in condition count.
-
-Discontinuation would not mean that authorization or safe stopping are unimportant.
-
-It would mean MOTHER did not earn a separate benchmark identity.
-
-## Evidence that would justify continued development
-
-The project becomes more defensible if later work shows that:
-
-- a clearly defined MOTHER construct survives direct comparison with the closest benchmarks;
-- the difference produces an observable, reproducible signal;
-- independent evaluators can apply the procedure consistently;
-- results survive reduced-cue wording and repeated trials;
-- outside evaluators can reproduce the observations under documented public-interface conditions; and
-- the resulting information changes what we can conclude compared with the nearest existing method.
+- a clearly defined external-evaluation problem remains after direct comparison with prior work;
+- a practical set of visible conditions can be documented consistently;
+- repeated trials produce interpretable patterns rather than noise alone;
+- independent evaluators can reproduce at least some observations;
+- the protocol makes uncertainty easier to identify and report; and
+- the resulting evidence supports better-bounded claims than an ordinary saved transcript would.
 
 ## Current position
 
-Version 0.1 remains a frozen shakedown.
+Version 0.1 remains frozen.
 
-Version 0.2 is **not ready to freeze**.
+No v0.2 benchmark is frozen.
 
-The next research task is the collision audit documented in `collision-audit.md`, not expansion for expansion's sake.
+The live task is to test whether **independent black-box reproducibility under changing public deployment conditions** is a useful research problem for MOTHER—or whether that question is already better answered elsewhere.
