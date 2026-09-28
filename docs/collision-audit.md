@@ -2,12 +2,14 @@
 
 ## Status
 
-**Second collision audit active — September 28, 2026**
+**Audit 2 decision recorded — September 28, 2026**
 
-This document records two distinct audits:
+This document summarizes two distinct collision audits:
 
 1. why the project moved away from an authorization-centered benchmark; and
-2. whether the replacement framing around external black-box reproducibility is itself already covered by existing work.
+2. whether the replacement framing around external black-box reproducibility contains a distinct methodological contribution.
+
+The detailed second audit is in [`second-collision-audit-2026-09-28.md`](second-collision-audit-2026-09-28.md).
 
 ## Audit 1 — Historical authorization-centered direction
 
@@ -27,44 +29,44 @@ The project will not proceed as a new general authorization benchmark unless a l
 
 The historical five-scenario shakedown remains preserved as an instrument-development record.
 
-## Audit 2 — Active external-evaluation framing
+## Audit 2 — External consumer-interface evaluation
 
-The broad replacement area is:
+The replacement area was:
 
 > **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-That is now treated as a **research area**, not as a sufficiently narrow experimental question and not as a novelty claim.
+This is an established research area, not a novelty claim.
 
-### Why a second audit is necessary
+### Finding
 
-Black-box evaluation, nondeterminism, model drift, endpoint stability, model fingerprinting, external auditing, and consumer-interface evaluation are established or active research areas.
+**Assessment: substantial direct overlap.**
 
-The current project therefore needs to determine whether there is any useful practical gap left for an independent evaluator working through ordinary consumer interfaces.
+The audit verified current work on:
 
-### Priority collision categories
+- repeated-prompt consistency and test–retest agreement;
+- black-box endpoint stability and behavioral fingerprinting;
+- consumer-interface versus API differences;
+- temporal or deployment-related behavioral change;
+- structural barriers to independent consumer-interface evaluation;
+- repeatability protocols for LLM outputs.
 
-The second audit should search for substantially equivalent methods covering:
+The previously proposed narrow measurement — repeated fresh-session presentation of one fixed probe with predefined outcome categories — is valid as a measurement instrument but is **not** a distinct methodological contribution.
 
-1. repeated presentation of identical prompts and run-to-run variance;
-2. behavioral stability or drift over time;
-3. black-box endpoint stability and behavioral fingerprinting;
-4. evaluation when model or version identity is hidden or unstable;
-5. differences between API evaluation and consumer-product behavior;
-6. routing, system-layer, safety-layer, or product-surface confounds;
-7. memory and personalization as evaluation confounds;
-8. cross-session, cross-account, and cross-interface reproducibility;
-9. protocols designed for outside evaluators without privileged access;
-10. evidentiary standards for claims drawn from changing public AI products.
+### Decision
 
-## Candidate narrow measurement
+The project should not launch a new repeated-run study merely to establish that repeated consumer-interface outputs vary or that API results do not fully transfer to interfaces.
 
-If the second audit leaves a useful gap, the first candidate measurement is:
+If the project continues, the next scientifically honest route is **replication, contribution, or documentation**, not a new label for an established method.
 
-> **Under a fixed visible consumer-interface configuration, how often does repeated presentation of the same fixed synthetic probe in fresh sessions produce the same predefined behavioral outcome category?**
+## Verified direct collisions
 
-This is intentionally narrower than the broad research area.
+See the dated audit for full details and links. The most direct overlaps include:
 
-The historical authorization scenarios may be reused as probes, but in that role they are measurement instruments rather than the construct being claimed as novel.
+- *Behavioral Fingerprints for LLM Endpoint Stability and Identity* — fixed prompt sets, repeated sampling, black-box change detection;
+- *API Benchmark Scores Do Not Reliably Transfer to Chatbot Interfaces* — repeated consumer-interface trials, test–retest agreement, API/interface comparisons;
+- *LLM Spirals of Delusion: A Benchmarking Audit Study of AI Chatbot Interfaces* — API/interface comparison and temporal instability;
+- *Testing the Black Box: Structural Barriers to Independent Evaluation of Consumer-Facing Health LLMs* — reset, personalization, version-opacity, rate-limit, and auditability barriers;
+- *Consistency evaluation protocol: A reproducible framework for assessing large language model output repeatability* — repeated-prompt repeatability methodology.
 
 ## Confounding rule
 
@@ -74,46 +76,38 @@ The project may measure observed variation under documented visible conditions. 
 
 Observed behavioral change is not automatically equivalent to model drift.
 
-## Falsification and stop criteria
+## Current stop and continuation criteria
 
-The project should narrow, replicate existing work, contribute elsewhere, or stop as a standalone effort if any of the following is established:
+The standalone methodology effort should stop or merge into existing work if:
 
-1. Existing work already provides a substantially equivalent practical protocol and there is no useful replication gap.
-2. The candidate outcome cannot be defined or coded consistently.
-3. Visible deployment state cannot be documented well enough to make the procedure auditable.
-4. Repeated testing produces evidence no stronger than isolated anecdotes.
-5. Hidden deployment variation makes the planned within-condition measurement uninterpretable.
-6. The proposed contribution depends mainly on a new name, acronym, framing, or presentation format.
-7. Answering the research question requires privileged access unavailable to an independent evaluator.
+1. no replication question adds information beyond existing studies;
+2. the proposed contribution depends mainly on being unaffiliated or low-resource rather than on a distinct measurement or evidence contribution;
+3. visible deployment state cannot be documented well enough to make a replication auditable;
+4. the evidence remains anecdotal despite repeated testing;
+5. meaningful evaluation requires privileged access or prohibited automation;
+6. the project would need to relabel an established method to justify continuation.
 
-## What would count as progress
+The project may continue if it can define a replication or documentation question with a concrete contribution, for example:
 
-Progress and confirmation are not the same thing.
+- independently reproducing a published consumer-interface finding under ordinary access constraints;
+- documenting a reproducibility failure that published protocols do not capture;
+- validating an evidence-recording procedure another unaffiliated evaluator can follow;
+- contributing a replication package or negative replication to an existing research line.
 
-Progress can include:
+## Revised next gate
 
-- identifying that the candidate measurement is already covered and redirecting accordingly;
-- producing a coherent coding scheme that survives a feasibility shakedown;
-- discovering that the measurement is too ambiguous and stopping;
-- preregistering a narrow repeated-run study with a fixed decision rule;
-- measuring variance under documented conditions;
-- producing a replication package another evaluator can follow.
-
-A negative or null result may be informative, but it does not automatically support the same hypothesis as a positive result.
-
-## Current decision gate
-
-Do **not** begin a multi-model, multi-account, cross-interface, or weeks-long repeated-run study yet.
+Do **not** begin a multi-model, multi-account, cross-interface, or weeks-long study yet.
 
 The next gate is:
 
-1. complete the second collision audit;
-2. define one observable outcome and coding method;
-3. run a tiny manual feasibility shakedown;
-4. only then preregister a formal repeated-run study if the measurement survives.
+1. select one published finding or protocol worth independently replicating;
+2. explain why that replication would add information;
+3. define successful, failed, and inconclusive replication in advance;
+4. run a tiny feasibility check only to determine whether the published procedure can be reproduced manually and ethically;
+5. preregister a larger replication only if the feasibility gate survives.
 
 ## Research standard
 
-> **Prefer a smaller, falsifiable claim over a broader claim that cannot survive criticism.**
+> **Prefer a smaller, explicit replication over a broader claim that duplicates existing work.**
 
-The collision audit is part of the research, not an obstacle to it.
+Collision auditing is part of the research, not an obstacle to it.
