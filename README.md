@@ -4,7 +4,7 @@
 
 MOTHER started with a question that kept bothering me:
 
-> **What happens when an AI system can finish the task, but should not finish it in the way available to it?**
+> **What happens when an AI system can finish a task, but should not finish it in the way available to it?**
 
 That question led me toward authorization boundaries, safe non-completion, escalation, and the difference between persistence and overreach.
 
