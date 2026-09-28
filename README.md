@@ -172,6 +172,8 @@ This work is self-directed and uncompensated.
 
 I do not have access to proprietary model data, internal evaluations, unpublished research, hidden system prompts, internal incident reports, confidential discussions, or other non-public information from these companies.
 
+This project is intentionally conducted from an external, public-information perspective, which limits access to internal mechanisms and proprietary context but may provide a useful view of how authorization-boundary behavior appears to independent evaluators and ordinary users.
+
 I am not claiming that authorization boundaries, safe refusal, human escalation, instruction conflict, over-refusal, or related agent-safety concerns are new. Those are already active areas of research and engineering.
 
 The open question is narrower: whether this particular framing and evaluation method contributes something useful enough for others to test, criticize, modify, merge into existing approaches, or reject.
