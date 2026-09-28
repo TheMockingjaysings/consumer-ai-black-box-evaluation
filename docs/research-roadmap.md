@@ -1,198 +1,128 @@
 # Research Roadmap
 
-This roadmap separates what MOTHER currently tests from what would be required to support stronger claims.
+This roadmap separates the historical v0.1 work from the question I am actually investigating now.
 
-The main change as of September 28, 2026 is simple: **v0.2 should not be frozen until the collision audit is complete enough to show that MOTHER would add something measurable beyond existing public work.**
+The biggest change as of September 28, 2026 is that I am **not building v0.2 as another authorization benchmark**.
 
-## Stage 1 — Current v0.1 shakedown
+The authorization-focused literature review found too much direct overlap with existing work for that to be a comfortable claim. The next stage is therefore not “build a bigger benchmark.” It is to find out whether there is a useful external black-box evaluation problem left to study.
 
-**Question:** Can a small set of static authorization-conflict scenarios and a frozen qualitative rubric be applied clearly and consistently enough to justify further instrument development?
+## Stage 1 — Frozen v0.1 shakedown
 
-Current design:
+Version 0.1 remains a five-scenario static authorization shakedown.
 
-- five static hypothetical scenarios;
-- all five describe insufficient authorization;
-- exact frozen prompt text;
-- 0/1/2 human scoring rubric;
-- clean-primary exposure controls;
-- independent second scoring when available;
-- explicit prompt-leakage review;
-- no live tools or autonomous execution.
+It was designed to test whether the prompts, scoring rubric, exposure controls, and evaluator workflow were usable enough to learn from.
 
-What this stage can examine:
+It does not establish a new authorization construct. It does not test live agents, tool use, or enacted behavior. It also cannot measure calibrated over-refusal because all five scenarios involve insufficient authorization.
 
-- scenario ambiguity;
-- scoring ambiguity;
-- evaluator disagreement;
-- obvious prompt cueing;
-- generic-refusal artifacts; and
-- basic reproducibility of the procedure.
-
-What this stage cannot establish:
-
-- authorization-state discrimination;
-- over-refusal rates;
-- statistical properties of a model or provider;
-- transfer from stated behavior to enacted behavior;
-- any internal reasoning mechanism; or
-- safe behavior in an autonomous agent loop.
-
-The frozen v0.1 protocol remains unchanged.
+The frozen v0.1 protocol stays unchanged.
 
 ## Stage 1.5 — Collision audit
 
-**Question:** Is there still a distinct evaluation problem here that MOTHER can measure usefully?
+This stage changed the project.
 
-This stage now comes **before** v0.2 design is finalized.
+The original question overlapped heavily with work such as AgentAbstain, SteerBench-Work, Agentic Abstention, AuthBench, FORTIS, APort Vault, AGATE, the Public Authorization-Boundary Benchmark proposal, OpenAI Auto-review, AgentHarm, Misalignment Bounty, and participatory red-teaming research.
 
-The strongest overlaps found so far include:
+That review answered one important question for me: **MOTHER should not keep positioning itself as a new general authorization benchmark.**
 
-- AgentAbstain;
-- SteerBench-Work;
-- Agentic Abstention;
-- the Public Authorization-Boundary Benchmark proposal;
-- FelonyBench;
-- AuthBench;
-- FORTIS;
-- APort Vault;
-- AGATE;
-- OpenAI Auto-review;
-- AgentHarm;
-- crowdsourced misalignment testing; and
-- participatory red-teaming and user-testing work.
+The remaining audit is now focused on one narrower possibility:
 
-The audit is organized around three candidate directions:
+> **Can an independent evaluator produce reproducible, auditable behavioral evidence from ordinary public AI interfaces when the deployment may change in ways the evaluator cannot see or control?**
 
-### Candidate A — authorization-state discrimination
+See `collision-audit.md` and `external-black-box-scope.md`.
 
-Can a system change appropriately among continue, stop, and ask when the underlying task stays similar but the authorization condition changes?
+## Stage 2 — External black-box reproducibility audit
 
-Current assessment: **heavy methodological overlap**, especially with AgentAbstain and SteerBench-Work.
+This is the current working stage.
 
-A three-condition design is not enough by itself to justify a separate benchmark.
+The goal is not to prove that black-box evaluation is new. It is to test how much an outside evaluator can reliably claim under real public-interface conditions.
 
-### Candidate B — authority provenance and delegation
+Questions include:
 
-Can a system distinguish valid authority from unsupported, delegated, expired, conflicting, or second-hand claims?
+- How repeatable are nominally identical runs?
+- What changes between fresh and continuing sessions?
+- How much do visible memory or personalization states matter?
+- Can another evaluator reproduce the same observation?
+- What happens when the displayed model name stays the same but the behavior changes over time?
+- Which metadata are essential for interpreting a replication failure?
+- When is provider-side opacity too large for a strong comparison?
 
-Current assessment: **substantial overlap** with authorization, delegation, provenance, and runtime-gating work.
+A future protocol may record:
 
-### Candidate C — independent black-box evaluation by outside users
+- provider and displayed model name;
+- visible version information;
+- interface and platform;
+- date, time, and timezone;
+- fresh versus continuing session state;
+- visible memory or personalization state;
+- project or workspace context;
+- visible reasoning or inference settings;
+- tool, browsing, and connector state;
+- exact prompt and complete response;
+- retry or regeneration status;
+- evaluator notes and score; and
+- known deviations from the intended condition.
 
-Can evaluators without privileged model access use a disciplined public protocol to produce reproducible, auditable observations from ordinary user-facing systems?
+Unknown values stay unknown.
 
-Current assessment: **still open, but not obviously novel**. Crowdsourced and participatory evaluation already exist, so any MOTHER contribution would need to be narrower and testable.
+## Stage 3 — Small replication study, only if Stage 2 survives
 
-The specific unresolved issue is whether observations made through ordinary public interfaces can be made comparable enough to be useful despite hidden provider configuration, routing, model updates, personalization, and other external-evaluator confounders.
+If the literature audit shows that this question is still worth testing, the next step should be small.
 
-See `collision-audit.md` and `related-work.md`.
+A sensible first study would use a limited set of synthetic prompts across repeated public-interface runs and at least one second evaluator.
 
-## Decision gate before v0.2
+The point would be to test the method itself:
 
-Do not freeze v0.2 until the project can answer:
+- can the visible conditions be documented consistently;
+- can repeated runs be compared without overclaiming equivalence;
+- can another evaluator follow the same procedure;
+- can disagreements be explained or at least bounded; and
+- does the protocol improve the quality of the claim compared with simply saving a transcript?
 
-1. What exact construct is being measured?
-2. Which existing benchmark is the closest comparator?
-3. What observable information would MOTHER add?
-4. Can that difference be tested rather than argued rhetorically?
-5. Can the method be executed from a black-box external position without claiming hidden mechanisms?
-6. Can another person reproduce it from the public documentation?
+I do not want a large benchmark until that basic question is answered.
 
-If those questions do not have convincing answers, the project should narrow, merge into existing work where useful, become an independent replication/public-interface audit method, or stop as a distinct benchmark.
+## Stage 4 — Broader replication, if justified
 
-## Stage 2 — Conditional v0.2 design
-
-This stage is **on hold pending the collision audit**.
-
-If a distinct signal survives review, the same five underlying scenarios may still be useful as a compact testbed. A candidate design would compare matched conditions while making both unsafe continuation and unnecessary refusal visible.
-
-Possible design elements include:
-
-- authorized / unauthorized / ambiguous conditions;
-- explicit scoring for unnecessary refusal and unsafe continuation;
-- reduced-cue wording;
-- pressure variants;
-- repeated trials specified before collection;
-- blinded independent scoring;
-- separate failure-mode reporting; and
-- within-scenario comparisons instead of a single blended score.
-
-But these elements should not be frozen merely because they are tidy. They need to serve a construct that survives the collision audit.
-
-## Stage 3 — Interactive tool-use prototype
-
-This stage should happen only if the earlier work identifies a useful question that static prompting cannot answer adequately.
-
-A controlled environment could provide:
-
-- authorized tools;
-- at least one prohibited or out-of-scope action;
-- a human-clarification or permission-request pathway;
-- a legitimate task-termination option; and
-- auditable action logs.
-
-Observable behavior could include:
-
-- continuing through an authorized route;
-- requesting clarification;
-- stopping;
-- repeatedly probing a blocked route;
-- attempting privilege expansion;
-- accepting unsupported authority; or
-- refusing a clearly authorized control task.
-
-Where possible, scoring should rely on environment state and action logs rather than prose interpretation alone.
-
-### Relationship to existing security controls
-
-MOTHER is not intended to replace authentication, authorization, least privilege, sandboxing, access-control systems, monitoring, or runtime enforcement.
-
-Those systems create and enforce boundaries.
-
-If MOTHER reaches this stage, the research question would concern behavior around those boundaries, and any claim that it adds information beyond existing agent-security benchmarks would still need to be demonstrated.
-
-## Stage 4 — Robustness and replication
-
-Only if a useful signal survives the earlier gates should the project expand.
+Only if the small study produces a useful signal should the project expand across more models, providers, interfaces, dates, or evaluators.
 
 Possible questions include:
 
-- Does the effect reproduce across models and providers?
-- How sensitive is it to wording, interface, and inference settings?
-- Does it survive different task domains?
-- Do static results predict enacted behavior at all?
-- Can independent researchers reproduce the protocol?
-- Can trained non-specialists follow it reliably?
-- Does MOTHER add information beyond the closest existing evaluations?
+- How much reproducibility differs by provider or interface?
+- How quickly do public results drift over time?
+- Are some forms of personalization easier to control than others?
+- Can the same observation survive across different accounts or platforms where testing is ethically and contractually permitted?
+- Can trained non-specialists follow the protocol reliably?
+- What kinds of claims remain defensible when the underlying deployment cannot be fully identified?
 
 ## Public participation
 
-Public participation remains a possible direction, not a novelty claim.
+Public participation is not the novelty claim.
 
-Crowdsourced red teaming, participatory evaluation, and user testing already exist.
+Crowdsourced red teaming and participatory evaluation already exist.
 
-If MOTHER pursues this route, the question should be narrower: whether a disciplined protocol can turn observations from ordinary public interfaces into comparable evidence without privileged access.
+If MOTHER eventually involves outside contributors, the question should be whether a structured protocol helps different people produce **comparable, bounded evidence** from public interfaces—not whether ordinary people are allowed to test AI.
 
-A possible sequence would be:
+## Scope constraints
 
-1. methodological review;
-2. small trained non-specialist replication;
-3. comparison of scoring and protocol adherence across evaluators;
-4. analysis of provider-interface confounders; and
-5. broader participation only if the observations remain interpretable.
+For the current direction:
 
-The aim would not be to treat unrestricted public prompting as scientific evidence.
+- use public consumer-facing interfaces only;
+- use synthetic or non-sensitive material;
+- do not use patient records, protected health information, real financial records, credentials, or private institutional data;
+- do not rely on privileged hospital, insurer, employer, or enterprise access;
+- do not infer hidden mechanisms from response text;
+- do not assume a displayed model label proves a stable deployment state.
+
+Healthcare can remain part of the literature review. It is not the test domain.
 
 ## Decision rules
 
-MOTHER should pause, narrow, merge, or stop if:
+MOTHER should pause, narrow, merge into existing work, or stop if:
 
-- the v0.1 rubric cannot be applied consistently;
-- results are dominated by prompt cueing or blanket refusal;
-- matched cases do not isolate the intended variable;
-- static answers provide no useful signal for the intended agentic question;
-- provider-interface confounders make external comparisons uninterpretable;
-- another public evaluation already measures the proposed construct more clearly; or
-- the project cannot state a distinct contribution without relying on branding or wording differences.
+- the literature already answers the external-interface reproducibility question more rigorously;
+- provider-side opacity makes the resulting evidence too ambiguous to interpret;
+- the protocol adds paperwork but does not improve what can reasonably be concluded;
+- independent replication repeatedly fails under closely matched visible conditions;
+- the method depends on inaccessible assumptions about hidden deployment state; or
+- the project can defend itself only through branding or wording differences.
 
-A decision to narrow, replicate, contribute to another project, or discontinue MOTHER as a separate benchmark would be a legitimate research outcome.
+A decision to narrow, contribute to an existing method, publish a replication protocol, or discontinue the project as a separate benchmark would all be legitimate outcomes.
