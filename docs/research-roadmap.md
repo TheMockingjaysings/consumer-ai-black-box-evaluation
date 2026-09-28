@@ -1,128 +1,130 @@
 # Research Roadmap
 
-This roadmap separates the historical v0.1 work from the question I am actually investigating now.
+## Current direction
 
-The biggest change as of September 28, 2026 is that I am **not building v0.2 as another authorization benchmark**.
+The project is in a **framing reset and methodology-audit phase**.
 
-The authorization-focused literature review found too much direct overlap with existing work for that to be a comfortable claim. The next stage is therefore not “build a bigger benchmark.” It is to find out whether there is a useful external black-box evaluation problem left to study.
+The active question is:
 
-## Stage 1 — Frozen v0.1 shakedown
+> **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-Version 0.1 remains a five-scenario static authorization shakedown.
+The roadmap no longer assumes that the next step is a larger authorization benchmark.
 
-It was designed to test whether the prompts, scoring rubric, exposure controls, and evaluator workflow were usable enough to learn from.
+## Stage 0 — Historical exploratory work
 
-It does not establish a new authorization construct. It does not test live agents, tool use, or enacted behavior. It also cannot measure calibrated over-refusal because all five scenarios involve insufficient authorization.
+**Status: complete and preserved**
 
-The frozen v0.1 protocol stays unchanged.
+The original MOTHER work produced a five-scenario exploratory shakedown and early concept papers focused on authorization boundaries, safe non-completion, instruction conflict, and escalation.
 
-## Stage 1.5 — Collision audit
+These materials are retained as project history. They are not the current claim and should not be retroactively rewritten to fit the new direction.
 
-This stage changed the project.
+## Stage 1 — Collision audit
 
-The original question overlapped heavily with work such as AgentAbstain, SteerBench-Work, Agentic Abstention, AuthBench, FORTIS, APort Vault, AGATE, the Public Authorization-Boundary Benchmark proposal, OpenAI Auto-review, AgentHarm, Misalignment Bounty, and participatory red-teaming research.
+**Status: active**
 
-That review answered one important question for me: **MOTHER should not keep positioning itself as a new general authorization benchmark.**
+Purpose: determine where the original idea overlaps with existing work and whether a narrower independent-evaluation question remains useful.
 
-The remaining audit is now focused on one narrower possibility:
+Tasks:
 
-> **Can an independent evaluator produce reproducible, auditable behavioral evidence from ordinary public AI interfaces when the deployment may change in ways the evaluator cannot see or control?**
+- map the closest work on act/abstain and proceed/hold evaluation;
+- map authorization, least-privilege, delegation, and time-of-use authorization work;
+- map public and participatory red teaming;
+- map black-box auditing and consumer-interface evaluation;
+- identify work on version drift, model opacity, personalization, routing, memory, and reproducibility;
+- record which proposed claims are already answered better elsewhere.
 
-See `collision-audit.md` and `external-black-box-scope.md`.
+Exit condition: a written decision about whether an external-evaluation methodology is worth piloting.
 
-## Stage 2 — External black-box reproducibility audit
+## Stage 2 — Protocol design
 
-This is the current working stage.
+**Status: pending Stage 1**
 
-The goal is not to prove that black-box evaluation is new. It is to test how much an outside evaluator can reliably claim under real public-interface conditions.
+If the collision audit leaves a meaningful question, design a small protocol for public consumer AI interfaces.
 
-Questions include:
+The protocol should define:
 
-- How repeatable are nominally identical runs?
-- What changes between fresh and continuing sessions?
-- How much do visible memory or personalization states matter?
-- Can another evaluator reproduce the same observation?
-- What happens when the displayed model name stays the same but the behavior changes over time?
-- Which metadata are essential for interpreting a replication failure?
-- When is provider-side opacity too large for a strong comparison?
+- synthetic scenarios that do not require regulated or sensitive data;
+- visible configuration information to record;
+- repeated-run procedure;
+- fresh-session versus continuing-session procedure;
+- memory/personalization conditions where the product exposes controls;
+- product surface and account-state documentation;
+- time-separated replication;
+- outcome coding focused on observable behavior;
+- explicit limits on causal or mechanistic interpretation.
 
-A future protocol may record:
+The design should be intentionally small. The goal is to test whether useful evidence can be produced, not to maximize scenario count.
 
-- provider and displayed model name;
-- visible version information;
-- interface and platform;
-- date, time, and timezone;
-- fresh versus continuing session state;
-- visible memory or personalization state;
-- project or workspace context;
-- visible reasoning or inference settings;
-- tool, browsing, and connector state;
-- exact prompt and complete response;
-- retry or regeneration status;
-- evaluator notes and score; and
-- known deviations from the intended condition.
+## Stage 3 — Feasibility pilot
 
-Unknown values stay unknown.
+**Status: not started**
 
-## Stage 3 — Small replication study, only if Stage 2 survives
+Run the protocol on a limited number of consumer-facing systems and scenarios.
 
-If the literature audit shows that this question is still worth testing, the next step should be small.
+Primary questions:
 
-A sensible first study would use a limited set of synthetic prompts across repeated public-interface runs and at least one second evaluator.
+1. Can another evaluator reproduce the procedure from the documentation?
+2. How much within-condition variance appears across repeated runs?
+3. Which visible state changes are associated with behavioral changes?
+4. Can later runs reproduce earlier observations?
+5. Does the interface expose enough version/configuration information to make replication meaningful?
+6. Are the resulting claims stronger than anecdotal screenshots but still appropriately bounded?
 
-The point would be to test the method itself:
+Stopping condition: if the pilot cannot produce evidence that is meaningfully reproducible or auditable, do not expand it into a benchmark.
 
-- can the visible conditions be documented consistently;
-- can repeated runs be compared without overclaiming equivalence;
-- can another evaluator follow the same procedure;
-- can disagreements be explained or at least bounded; and
-- does the protocol improve the quality of the claim compared with simply saving a transcript?
+## Stage 4 — Replication package
 
-I do not want a large benchmark until that basic question is answered.
+**Status: contingent**
 
-## Stage 4 — Broader replication, if justified
+If the pilot is useful, package the procedure so another outside evaluator can repeat it without privileged access.
 
-Only if the small study produces a useful signal should the project expand across more models, providers, interfaces, dates, or evaluators.
+A replication package should include:
 
-Possible questions include:
+- scenario text;
+- run instructions;
+- visible configuration checklist;
+- timestamps and product labels;
+- outcome coding guide;
+- raw interaction records where sharing is permitted;
+- uncertainty and limitation statements;
+- change log for product/model drift.
 
-- How much reproducibility differs by provider or interface?
-- How quickly do public results drift over time?
-- Are some forms of personalization easier to control than others?
-- Can the same observation survive across different accounts or platforms where testing is ethically and contractually permitted?
-- Can trained non-specialists follow the protocol reliably?
-- What kinds of claims remain defensible when the underlying deployment cannot be fully identified?
+## Stage 5 — External review
 
-## Public participation
+**Status: contingent**
 
-Public participation is not the novelty claim.
+Seek criticism from researchers and practitioners familiar with evaluation methodology, HCI, red teaming, model auditing, and deployed-system reproducibility.
 
-Crowdsourced red teaming and participatory evaluation already exist.
+Questions for reviewers:
 
-If MOTHER eventually involves outside contributors, the question should be whether a structured protocol helps different people produce **comparable, bounded evidence** from public interfaces—not whether ordinary people are allowed to test AI.
+- Does this protocol measure anything that existing methods do not already capture better?
+- Are the claims calibrated to the evidence?
+- Are uncontrolled variables documented adequately?
+- Is the protocol useful to independent evaluators?
+- Should the work remain a case study rather than become a larger evaluation framework?
+
+## Stage 6 — Decide what the project becomes
+
+Possible outcomes:
+
+- a small independent-evaluation methodology;
+- a reproducibility case study;
+- a public guide for documenting black-box observations;
+- a contribution to an existing benchmark or research project;
+- a retrospective article about the collision audit and research pivot;
+- a documented decision to stop.
+
+None of these outcomes should be treated as failure merely because the project does not become a novel benchmark.
 
 ## Scope constraints
 
-For the current direction:
+For the current roadmap:
 
-- use public consumer-facing interfaces only;
-- use synthetic or non-sensitive material;
-- do not use patient records, protected health information, real financial records, credentials, or private institutional data;
-- do not rely on privileged hospital, insurer, employer, or enterprise access;
-- do not infer hidden mechanisms from response text;
-- do not assume a displayed model label proves a stable deployment state.
-
-Healthcare can remain part of the literature review. It is not the test domain.
-
-## Decision rules
-
-MOTHER should pause, narrow, merge into existing work, or stop if:
-
-- the literature already answers the external-interface reproducibility question more rigorously;
-- provider-side opacity makes the resulting evidence too ambiguous to interpret;
-- the protocol adds paperwork but does not improve what can reasonably be concluded;
-- independent replication repeatedly fails under closely matched visible conditions;
-- the method depends on inaccessible assumptions about hidden deployment state; or
-- the project can defend itself only through branding or wording differences.
-
-A decision to narrow, contribute to an existing method, publish a replication protocol, or discontinue the project as a separate benchmark would all be legitimate outcomes.
+- public consumer AI only;
+- synthetic/non-sensitive scenarios;
+- no healthcare deployment testing;
+- no patient data;
+- no insurance adjudication testing;
+- no real credentials or financial records;
+- no claims about hidden reasoning or internal architecture without independent evidence;
+- no novelty claim until the collision audit supports one.
