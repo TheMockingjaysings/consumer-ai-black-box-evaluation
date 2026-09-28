@@ -2,123 +2,130 @@
 
 ## Current status
 
-The active project is in a **second collision-audit and measurement-definition phase**.
+The project has completed a second collision audit and is now in a **replication decision phase**.
 
-The broad area is independent black-box evaluation of consumer AI under deployment opacity. Before the project runs a formal study, it needs to answer a smaller set of operational questions.
+The audit found substantial overlap with existing work on repeated-prompt consistency, black-box endpoint stability, consumer-interface/API differences, and structural barriers to independent evaluation.
 
-## 1. Is the new direction already covered?
+The immediate question is no longer whether repeated consumer-interface behavior can be measured. It can. The question is whether an independent replication can add useful evidence.
 
-Does existing research already provide a substantially equivalent methodology for repeated black-box evaluation of public consumer AI interfaces under hidden or changing deployment conditions?
+## 1. Which published result is worth replicating?
 
-The second collision audit should concentrate on:
+A replication target should be narrow and explicit.
 
-- repeated-run nondeterminism;
-- behavioral stability and drift;
-- endpoint stability and behavioral fingerprinting;
-- longitudinal black-box evaluation;
+Candidate source areas include:
+
 - consumer-interface versus API differences;
-- memory and personalization confounds;
-- account and interface-state effects;
-- hidden routing and product-layer variation;
-- standards for reproducible outside evaluation.
+- test–retest agreement in consumer interfaces;
+- black-box stability monitoring;
+- practical barriers to reproducing consumer-interface evaluations;
+- repeated consumer-facing recommendation or behavioral audits.
 
-If a stronger existing method already answers the question, the project should replicate, contribute, narrow further, or stop rather than create a competing label.
+The project should choose one target rather than combine several into a new umbrella method.
 
-## 2. What exactly is the first dependent variable?
+## 2. Why would the replication add information?
 
-The candidate first variable is:
+Being an unaffiliated or low-resource evaluator is not automatically a research contribution.
 
-> **behavioral outcome category across repeated presentations of one fixed synthetic probe under the same visible fresh-session configuration**
+The project needs to state what an outside replication could reveal that is not already established, for example:
 
-This still requires an exact operational definition before a formal study.
+- whether a published result reproduces under ordinary consumer access;
+- whether a source protocol depends on infrastructure unavailable to independent evaluators;
+- whether published documentation is sufficient for another evaluator to reproduce the procedure;
+- whether version opacity makes a nominal replication inconclusive;
+- whether a manual evidence-recording procedure can preserve enough state for independent audit.
 
-Questions:
+If no additional information is likely, the study should not be run merely to keep the project alive.
 
-- What categories are necessary and sufficient?
-- Can ambiguous outputs be marked ambiguous instead of forced into a class?
-- What constitutes the same outcome versus a materially different outcome?
-- Can the coding rule be applied without repeatedly changing it after seeing new responses?
+## 3. What counts as successful, failed, or inconclusive replication?
 
-## 3. Which probe should be used?
+These criteria must be defined before confirmatory data collection.
 
-The first probe should be simple enough that the expected behavioral categories can be defined clearly.
+A replication should distinguish among:
 
-A historical authorization scenario may be used as a probe, but only as a measurement instrument. The study would be about repeated behavioral consistency, not about claiming a new authorization construct.
+- **successful replication:** the prespecified target finding is reproduced under the allowed tolerance;
+- **failed replication:** the prespecified finding is not reproduced under sufficiently matched conditions;
+- **inconclusive replication:** the source conditions cannot be matched or uncertainty is too large to support either conclusion.
 
-The probe should be frozen before confirmatory collection.
+The tolerance or decision rule should be derived from the source study and justified before collection.
 
-## 4. What visible state must be recorded?
+## 4. Which source-study conditions can actually be reproduced?
 
 Candidate fields include:
+
+- exact prompt or item text;
+- fresh versus continuing session;
+- visible model or product label;
+- interface or product surface;
+- memory/history/personalization state where visible;
+- tool or web-search state;
+- account tier where relevant and non-sensitive;
+- number of repetitions;
+- timing and spacing of runs;
+- scoring or coding method.
+
+Any material mismatch from the source protocol should be documented as a replication deviation.
+
+## 5. What visible state must be recorded?
+
+At minimum, a future replication may need:
 
 - date and local time;
 - product name;
 - visible model label;
 - interface or surface;
-- account tier if relevant and non-sensitive;
 - fresh versus continuing session;
-- memory setting;
-- personalization/custom-instruction state;
-- tool or connector availability;
+- memory/history/personalization settings where visible;
+- enabled tools or connectors;
 - uploaded-file state;
-- any visible experiment or feature label.
+- any visible feature or experiment label.
 
-The feasibility shakedown should determine which fields are practical and necessary.
+The final checklist should be driven by the selected source study rather than by a generic wish list.
 
-## 5. Can the measurement be applied consistently?
+## 6. Can the source outcome measure be reproduced faithfully?
 
-Before choosing a formal threshold, a small feasibility shakedown should test whether:
+The project should prefer the source study's scoring or coding rule when practical.
 
-- the probe can be presented consistently;
-- the visible state can be recorded reliably;
-- the coding guide can classify outputs without repeated ad hoc revision;
-- ambiguity can be recorded transparently;
-- the raw record is sufficient for later inspection.
+If adaptation is necessary, it should be explicit:
 
-If these conditions fail, the project should revise the instrument or stop before a larger study.
+- what changed;
+- why it changed;
+- how the change affects comparability;
+- whether the replication should still be called direct or should instead be described as a conceptual replication.
 
-## 6. What will count as reproducible enough?
+Ambiguous outputs should be recorded rather than forced into a category.
 
-This must be defined before confirmatory data collection.
+## 7. Can the procedure be run manually and ethically?
 
-The project should eventually preregister:
+The project should not evade rate limits, bot detection, safeguards, access controls, or product terms in order to create cleaner data.
 
-- the primary consistency measure;
-- the number of repetitions;
-- the time window;
-- exclusion and missing-data rules;
-- a threshold or decision rule for sufficiently reproducible, insufficiently reproducible, and inconclusive outcomes.
+A tiny feasibility check should determine whether the source procedure can be reproduced through permitted ordinary access.
 
-The feasibility observations may inform the design, but those same observations should not then be treated as confirmatory evidence for a threshold chosen after seeing them.
+If it cannot, that may make the replication infeasible or change it into a documentation case study.
 
-## 7. How should hidden variables be represented?
+## 8. How should hidden variables be represented?
 
 Possible hidden variables include routing, model snapshots, system instructions, safety layers, A/B experiments, server-side personalization, regional deployment differences, and silent product updates.
 
-The project cannot control or identify all of them.
+The default rule remains:
 
-The appropriate default is therefore:
-
-- describe the visible state;
-- record the observed behavior;
-- quantify repeated variation where possible;
+- describe visible state;
+- record observed behavior;
+- quantify repeated variation where the source protocol requires it;
 - do not infer a hidden cause from the output alone.
 
-## 8. Should multiple models, accounts, interfaces, or time periods be included?
+## 9. Does the project need multiple models, accounts, interfaces, or time periods?
 
-Not in the first feasibility shakedown unless necessary to validate the measurement itself.
+Only if the selected source study or replication claim requires them.
 
-Those comparisons introduce additional sources of variance and should only be added after the within-condition measurement is coherent.
+Adding dimensions simply because they are available increases confounding and workload without necessarily adding evidentiary value.
 
-If later included, within-session, cross-session, cross-account, cross-interface, and temporal variation should be reported separately rather than collapsed into one score without justification.
+## 10. Can another evaluator audit the replication?
 
-## 9. Can another evaluator reproduce the procedure?
+A useful replication package should include:
 
-A later replication package should make it possible for another outside evaluator to follow the procedure without privileged access.
-
-This requires:
-
-- exact probe text;
+- source study and target claim;
+- exact prompt or probe text;
+- source-protocol deviations;
 - visible-state checklist;
 - run instructions;
 - outcome coding guide;
@@ -128,38 +135,27 @@ This requires:
 
 Cross-evaluator disagreement should be reported rather than hidden.
 
-## 10. What would falsify or stop the project?
+## 11. What would stop the project?
 
-The active direction should narrow, merge into existing work, or stop if:
+The project should stop as a standalone research effort or become a retrospective/documentation resource if:
 
-- equivalent methodology already exists and there is no useful replication gap;
-- the outcome cannot be defined or coded consistently;
-- visible conditions cannot be documented well enough to make the procedure auditable;
-- the evidence remains anecdotal despite repeated testing;
-- hidden deployment variation overwhelms any interpretable within-condition measurement;
-- the contribution depends mainly on terminology or presentation;
-- meaningful evaluation requires privileged access unavailable to an outside evaluator.
+- no replication target adds useful information;
+- the source procedure cannot be reproduced through permitted access;
+- visible conditions cannot be documented well enough to make replication auditable;
+- the result would only restate an already established finding;
+- the contribution depends mainly on terminology, branding, or the evaluator's lack of affiliation;
+- meaningful evaluation requires privileged access unavailable to the project.
 
-## 11. What outcomes are possible?
-
-A formal study should distinguish among:
-
-- evidence supporting continuation;
-- evidence arguing against continuation;
-- inconclusive evidence.
-
-A negative or null result may be useful, but that does not make every possible result confirmation of the project.
-
-## 12. What is the appropriate final form?
+## 12. What final forms remain legitimate?
 
 Possible final forms include:
 
-- a small reproducibility protocol;
-- a methods or replication note;
-- a case study;
-- a documentation guide;
-- a contribution to an existing project;
-- a retrospective on the research reset;
+- a small independent replication study;
+- a negative or inconclusive replication report;
+- a low-resource replication guide;
+- a public evidence-recording checklist;
+- a contribution to an existing research project;
+- a retrospective on the research reset and collision audits;
 - a documented stopping decision.
 
-The final form should follow the evidence.
+The final form should follow the evidence rather than be selected in advance.
