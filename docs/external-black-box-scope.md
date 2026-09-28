@@ -1,159 +1,141 @@
-# External Black-Box Reproducibility Scope
+# External Evaluation of Consumer AI Under Deployment Opacity
 
-Last reviewed: 2026-09-28
+## Status
 
-This document records the current working direction for MOTHER after the authorization-focused collision audit.
+**Active framing — September 28, 2026**
 
-The project began with authorization boundaries, safe stopping, escalation, and the difference between persistence and overreach. That work remains relevant to the history of v0.1, but it is no longer being treated as the project’s distinct research contribution.
+This document defines the current direction of the project. It replaces the proposed authorization-state-discrimination direction as the active framing. Earlier MOTHER materials remain in the repository as historical artifacts and should not be retroactively rewritten.
 
-The literature review found too much direct overlap with existing work for that framing to remain intellectually comfortable.
+## Research question
 
-## Current working question
+> **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-> **What can an independent evaluator reliably observe, reproduce, and audit when testing a continuously changing consumer-facing AI system from the outside, without privileged access to the model or deployment stack?**
+The question is intentionally narrower than the original MOTHER framing. It does not claim that authorization boundaries, abstention, safe non-completion, or escalation are new research problems. They are not.
 
-This is a methodology question, not a claim that black-box evaluation itself is new.
+The project is now about the **epistemic and methodological limits of independent black-box evaluation**.
 
-The project is now testing whether there is a useful contribution in documenting the practical limits of independent evaluation under deployment opacity.
+## Why this is the current question
 
-## Why this question exists
+An outside evaluator usually does not know the complete state of a deployed consumer AI system. Depending on the product, behavior may be affected by model routing, system instructions, memory, personalization, account state, tool availability, interface differences, experiments, safety layers, or silent model updates.
 
-Public-facing AI systems are observable, but only partially.
+That creates a practical problem: a behavioral observation may be real and reproducible in the moment, yet difficult to attribute to a stable underlying model or reproduce later.
 
-An outside evaluator can usually see some combination of:
+The project therefore asks what evidence can still be collected responsibly under those conditions.
 
-- the interface;
-- the displayed model name;
-- visible settings;
-- the prompt they submitted;
-- the response they received;
-- visible tool behavior; and
-- the date and time of the interaction.
+## Population and environment
 
-The evaluator may **not** be able to see or control:
+The intended test environment is **ordinary public-facing AI products available to consumers**.
 
-- the exact underlying model build;
-- routing decisions;
-- hidden system instructions;
-- safety or moderation layers;
-- server-side memory or personalization signals;
-- deployment experiments;
-- model updates;
-- regional differences;
-- account-specific configuration; or
-- whether two nominally identical sessions were served by the same underlying system state.
+The project does not require:
 
-That does not make external evaluation useless. It changes what can be claimed from it.
+- API access;
+- privileged developer access;
+- model weights;
+- system prompts;
+- chain-of-thought or hidden reasoning;
+- internal safety logs;
+- routing metadata;
+- proprietary evaluation harnesses.
 
-## The methodological problem
+If a platform exposes useful metadata publicly, it can be recorded. The protocol should not depend on information that an ordinary outside evaluator cannot access.
 
-If a result changes between two runs, several explanations may be possible:
+## Out of scope
 
-- stochastic model behavior;
-- prompt sensitivity;
-- session history;
-- personalization;
-- a model or policy update;
-- routing changes;
-- interface changes;
-- tool availability;
-- evaluator error; or
-- another provider-side condition the evaluator cannot observe.
+For the current phase, this project excludes:
 
-An external protocol cannot remove every hidden variable.
+- hospital, clinical, or other internal healthcare deployments;
+- patient records or protected health information;
+- real financial records or credentials;
+- insurance adjudication systems;
+- internal enterprise systems;
+- high-risk attempts to bypass product safeguards;
+- claims about hidden model mechanisms that cannot be externally verified.
 
-The question is whether it can document the visible conditions and uncertainty well enough that another evaluator can understand what was observed, attempt a replication, and know which conclusions are justified.
+Healthcare research may still appear in related work when it reveals a relevant methodological problem, such as version opacity or poor reproducibility. It is not the test domain.
 
-## Current scope
+## Candidate protocol dimensions
 
-For this stage, MOTHER is limited to:
+A future pilot should test whether observations remain stable across controlled changes that an outside evaluator can actually make.
 
-- ordinary public consumer-facing AI interfaces;
-- synthetic or non-sensitive prompts;
-- no patient records or protected health information;
-- no real financial records;
-- no credentials or private institutional data;
-- no hospital, insurer, employer, or other privileged enterprise access;
-- no reverse engineering of private systems;
-- no attempt to infer hidden mechanisms from response text alone; and
-- no assumption that the displayed model label uniquely identifies a stable deployment state.
+Candidate dimensions include:
 
-Healthcare is relevant as related work because recent health-AI research has documented black-box reproducibility barriers clearly. It is **not** the current MOTHER test domain.
+### 1. Repeated runs
 
-## Candidate observable variables
+Repeat the same synthetic scenario under the same visible conditions and record the distribution of outcomes.
 
-A future protocol may need to record, where available:
+### 2. Session state
 
-- provider;
-- displayed model name;
-- visible version identifier;
-- application or web interface;
-- operating platform;
-- date, time, and timezone;
-- account type where disclosure is appropriate;
-- fresh versus continuing session;
-- visible memory or personalization state;
-- project/workspace context;
-- visible reasoning or inference setting;
-- tool access;
-- browsing state;
-- connector state;
-- exact prompt;
-- complete response;
-- retry/regeneration status;
-- evaluator identity or code;
-- evaluator score; and
-- known deviations from the intended test condition.
+Compare fresh sessions with continued conversations where context accumulation may matter.
 
-Unknown values should remain **unknown**. They should not be filled in by assumption.
+### 3. Memory and personalization
 
-## Candidate questions for the next audit
+Where controls are available, compare memory or personalization states without using sensitive personal data.
 
-Before a new protocol is frozen, the project should ask:
+### 4. Account or interface state
 
-1. How repeatable are responses across nominally identical runs?
-2. How much variation appears between fresh and continuing sessions?
-3. Can visible memory or personalization states be documented reliably enough for comparison?
-4. Do results change materially across dates while the displayed model name remains the same?
-5. Can a second outside evaluator reproduce the observation using the same public protocol?
-6. Which metadata are essential for interpreting a replication failure?
-7. When does hidden deployment variation make cross-run or cross-provider comparison too weak to support a claim?
-8. Can the protocol distinguish "the behavior changed" from "the evaluation condition changed" often enough to be useful?
+Where ethically and practically feasible, compare observable differences across accounts, product surfaces, or interfaces.
 
-## What would count as useful evidence
+### 5. Time
 
-A useful external record should allow another person to say:
+Repeat selected cases later to test for behavioral drift and to document whether the platform exposes a stable model or version identifier.
 
-> Under these visible conditions, this evaluator obtained this response on this date using this documented procedure.
+### 6. Observable metadata
 
-A stronger result would be an independently repeated observation under sufficiently similar documented conditions.
+Record the date, time, product surface, visible model label, enabled features, memory state, tools, and any other user-visible configuration that could affect replication.
 
-A weaker result may still be worth preserving, but it should not be inflated into a provider-wide or model-wide claim.
+## What counts as evidence
 
-## What this direction is not
+The unit of evidence is an **observable interaction record** under documented conditions.
 
-This is not:
+A result can support statements such as:
 
-- a claim that consumer interfaces are scientifically controlled environments;
-- a substitute for API or internal evaluation;
-- a way to infer hidden model architecture;
-- a guarantee that two public sessions are equivalent;
-- a new authorization benchmark;
-- a medical-AI benchmark; or
-- a claim that crowdsourced red teaming is new.
+- the system produced behavior X under documented condition Y;
+- the behavior occurred in N repeated runs;
+- the behavior changed after an observable condition changed;
+- later runs did or did not reproduce the earlier result.
 
-## Relationship to v0.1
+A result does **not** by itself support claims such as:
 
-The frozen v0.1 authorization scenarios remain part of the historical record and may still be useful as test material for studying reproducibility.
+- the model internally reasoned in a particular way;
+- a hidden system prompt caused the behavior;
+- a specific safety layer or router caused the behavior;
+- the same behavior generalizes to all users, accounts, regions, or future versions.
 
-But if they are reused later, the research question would have changed.
+## Reproducibility as a measured property
 
-The point would no longer be to claim a new authorization construct. The point would be to ask whether the **same external protocol and same nominal test condition produce comparable observations across sessions, evaluators, dates, or public deployment states**.
+The project should not treat reproducibility as a yes/no requirement imposed from the outside. Reproducibility itself is part of what is being measured.
 
-Any such reuse must be versioned explicitly rather than presented as the original v0.1 study.
+Possible outputs include:
 
-## Stop condition
+- high within-session consistency but poor cross-session consistency;
+- stable behavior over repeated runs but drift over time;
+- different outcomes under memory/personalization changes;
+- inability to identify the model version well enough for later replication;
+- evidence that visible product state is insufficient to explain the variance.
 
-This direction should stop or narrow again if the literature review shows that existing external-evaluation methods already answer this question more rigorously, or if public-interface variability makes the observations too underdetermined to support useful replication claims.
+Those are potentially useful findings even when the evaluator cannot identify the hidden cause.
 
-The purpose of the audit is to find that out before building another benchmark.
+## Claims discipline
+
+The project should distinguish four levels explicitly:
+
+1. **Observed:** what the interface actually returned or did.
+2. **Reproduced:** whether the observation recurred under documented conditions.
+3. **Associated:** whether a visible condition changed alongside the behavior.
+4. **Mechanistic:** a claim about why the system behaved that way.
+
+This project can usually support levels 1 and 2. It may sometimes support a cautious level-3 association. It should not make level-4 claims without independent evidence.
+
+## What would make this project unnecessary
+
+The project should not continue as a standalone effort if a stronger existing methodology already provides the same practical protocol for independent evaluators using ordinary consumer interfaces, with comparable attention to version drift, personalization, routing opacity, memory state, and replication over time.
+
+Likewise, if pilot work shows that the uncontrolled deployment variables make the resulting evidence too weak to support useful conclusions, that is a legitimate stopping condition.
+
+## Relationship to MOTHER
+
+MOTHER was the original project name and authorization-centered framing. The literature audit showed that those broad constructs overlap heavily with established and current research.
+
+The present work keeps the useful discipline learned from MOTHER—careful observation, safe non-completion, uncertainty, and restraint in interpretation—but does not present MOTHER's original research question as novel.
+
+The active project is therefore best understood as a **methodology investigation for independent external evaluation**, not as a renamed authorization benchmark.
