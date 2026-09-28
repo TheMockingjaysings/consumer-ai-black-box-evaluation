@@ -2,44 +2,52 @@
 
 ## Current status
 
-These are the unresolved questions for the project's active direction: **independent black-box evaluation of consumer AI under deployment opacity**.
+The active project is in a **second collision-audit and measurement-definition phase**.
 
-The purpose of this file is not to manufacture a novelty claim. It is to identify what must be answered before the work can justify continuing as a standalone methodology.
+The broad area is independent black-box evaluation of consumer AI under deployment opacity. Before the project runs a formal study, it needs to answer a smaller set of operational questions.
 
-## 1. Is the question already answered?
+## 1. Is the new direction already covered?
 
-The first question remains the most important:
+Does existing research already provide a substantially equivalent methodology for repeated black-box evaluation of public consumer AI interfaces under hidden or changing deployment conditions?
 
-> Does existing research already provide a sufficiently similar methodology for independent evaluators testing ordinary public AI interfaces under hidden or changing deployment conditions?
+The second collision audit should concentrate on:
 
-The literature audit should search specifically for work that combines several of the following:
+- repeated-run nondeterminism;
+- behavioral stability and drift;
+- endpoint stability and behavioral fingerprinting;
+- longitudinal black-box evaluation;
+- consumer-interface versus API differences;
+- memory and personalization confounds;
+- account and interface-state effects;
+- hidden routing and product-layer variation;
+- standards for reproducible outside evaluation.
 
-- consumer-facing interfaces rather than controlled APIs;
-- repeated black-box behavioral testing;
-- unknown or changing model versions;
-- memory and personalization effects;
-- account or interface-state effects;
-- model routing or hidden deployment layers;
-- longitudinal replication;
-- standards for documenting externally observed behavior;
-- explicit limits on causal inference from black-box evidence.
+If a stronger existing method already answers the question, the project should replicate, contribute, narrow further, or stop rather than create a competing label.
 
-If a stronger existing method already covers this combination, this project should not claim a separate contribution.
+## 2. What exactly is the first dependent variable?
 
-## 2. What is the unit of evidence?
+The candidate first variable is:
 
-Is one interaction ever meaningful evidence, or should the minimum unit be a repeated set of runs under documented conditions?
+> **behavioral outcome category across repeated presentations of one fixed synthetic probe under the same visible fresh-session configuration**
+
+This still requires an exact operational definition before a formal study.
 
 Questions:
 
-- How many repetitions are needed before a behavioral pattern is worth reporting?
-- Should outcome coding be categorical, descriptive, or both?
-- How should stochastic variation be represented without implying more statistical precision than the sample supports?
-- What raw records are necessary for another evaluator to inspect the claim?
+- What categories are necessary and sufficient?
+- Can ambiguous outputs be marked ambiguous instead of forced into a class?
+- What constitutes the same outcome versus a materially different outcome?
+- Can the coding rule be applied without repeatedly changing it after seeing new responses?
 
-## 3. What visible state must be recorded?
+## 3. Which probe should be used?
 
-A public-interface evaluator may be able to observe some deployment state but not all of it.
+The first probe should be simple enough that the expected behavioral categories can be defined clearly.
+
+A historical authorization scenario may be used as a probe, but only as a measurement instrument. The study would be about repeated behavioral consistency, not about claiming a new authorization construct.
+
+The probe should be frozen before confirmatory collection.
+
+## 4. What visible state must be recorded?
 
 Candidate fields include:
 
@@ -48,99 +56,110 @@ Candidate fields include:
 - visible model label;
 - interface or surface;
 - account tier if relevant and non-sensitive;
+- fresh versus continuing session;
 - memory setting;
 - personalization/custom-instruction state;
 - tool or connector availability;
-- fresh versus continuing conversation;
 - uploaded-file state;
 - any visible experiment or feature label.
 
-Which of these are essential for a reproducible record?
+The feasibility shakedown should determine which fields are practical and necessary.
 
-## 4. How should hidden variables be handled?
+## 5. Can the measurement be applied consistently?
 
-Possible hidden variables include routing, server-side safety layers, system instructions, A/B experiments, model snapshots, regional deployment differences, and product updates.
+Before choosing a formal threshold, a small feasibility shakedown should test whether:
 
-The project cannot control all of these. The question is whether it can document enough uncertainty around them to keep the resulting evidence useful.
+- the probe can be presented consistently;
+- the visible state can be recorded reliably;
+- the coding guide can classify outputs without repeated ad hoc revision;
+- ambiguity can be recorded transparently;
+- the raw record is sufficient for later inspection.
 
-## 5. What does reproducibility mean here?
+If these conditions fail, the project should revise the instrument or stop before a larger study.
 
-Several kinds of reproducibility may need to be separated:
+## 6. What will count as reproducible enough?
 
-- **within-run reproducibility:** repeated prompts in the same visible state;
-- **cross-session reproducibility:** fresh-session replication;
-- **cross-account reproducibility:** replication under a second account where appropriate;
-- **cross-interface reproducibility:** web/mobile/desktop or different product surfaces;
-- **temporal reproducibility:** replication days or weeks later;
-- **cross-evaluator reproducibility:** another person following the same procedure.
+This must be defined before confirmatory data collection.
 
-These should not be collapsed into a single score unless there is a strong methodological reason.
+The project should eventually preregister:
 
-## 6. How much causal language is defensible?
+- the primary consistency measure;
+- the number of repetitions;
+- the time window;
+- exclusion and missing-data rules;
+- a threshold or decision rule for sufficiently reproducible, insufficiently reproducible, and inconclusive outcomes.
 
-The default answer should be: very little.
+The feasibility observations may inform the design, but those same observations should not then be treated as confirmatory evidence for a threshold chosen after seeing them.
 
-An external evaluator can usually document an association between visible conditions and behavior. That is different from proving that the visible condition caused the behavior.
+## 7. How should hidden variables be represented?
 
-The project needs a claim language that distinguishes:
+Possible hidden variables include routing, model snapshots, system instructions, safety layers, A/B experiments, server-side personalization, regional deployment differences, and silent product updates.
 
-- observation;
-- replication;
-- association;
-- causal explanation;
-- mechanistic explanation.
+The project cannot control or identify all of them.
 
-## 7. Can memory and personalization be studied without turning the project into a privacy study?
+The appropriate default is therefore:
 
-If memory or personalization is included, the scenarios should use synthetic, non-sensitive information. No real medical, financial, credential, or other high-risk personal information should be required.
+- describe the visible state;
+- record the observed behavior;
+- quantify repeated variation where possible;
+- do not infer a hidden cause from the output alone.
 
-The project should test product behavior, not collect intimate user profiles.
+## 8. Should multiple models, accounts, interfaces, or time periods be included?
 
-## 8. Should different model labels be compared?
+Not in the first feasibility shakedown unless necessary to validate the measurement itself.
 
-A visible model label may not uniquely identify the deployed behavior. Conversely, two runs under the same visible label may not be backed by an identical model snapshot or routing path.
+Those comparisons introduce additional sources of variance and should only be added after the within-condition measurement is coherent.
 
-The project should determine whether model labels are useful metadata, misleading metadata, or simply one field among many.
+If later included, within-session, cross-session, cross-account, cross-interface, and temporal variation should be reported separately rather than collapsed into one score without justification.
 
-## 9. What would distinguish this from ordinary anecdotal red teaming?
+## 9. Can another evaluator reproduce the procedure?
 
-This question is critical.
+A later replication package should make it possible for another outside evaluator to follow the procedure without privileged access.
 
-A credible methodology would need more than interesting screenshots. It should add at least some of the following:
+This requires:
 
-- controlled repetition;
-- explicit condition logging;
-- predefined outcome coding;
-- longitudinal replication;
-- independent replication by another evaluator;
-- transparent uncertainty statements;
-- a record of product/version drift.
+- exact probe text;
+- visible-state checklist;
+- run instructions;
+- outcome coding guide;
+- ambiguity rules;
+- exclusion rules;
+- evidence-preservation instructions.
 
-If the project cannot move beyond anecdotal evidence, it should say so and stop claiming methodology development.
+Cross-evaluator disagreement should be reported rather than hidden.
 
-## 10. What would falsify the project?
+## 10. What would falsify or stop the project?
 
-The active direction should be abandoned, narrowed, or merged into existing work if:
+The active direction should narrow, merge into existing work, or stop if:
 
-- equivalent methodology already exists;
-- results are too unstable to replicate meaningfully;
-- visible deployment metadata is insufficient to support useful comparisons;
-- the project can only produce anecdotes;
-- meaningful evaluation requires privileged access that outside evaluators do not have;
-- the contribution depends mainly on terminology rather than capability.
+- equivalent methodology already exists and there is no useful replication gap;
+- the outcome cannot be defined or coded consistently;
+- visible conditions cannot be documented well enough to make the procedure auditable;
+- the evidence remains anecdotal despite repeated testing;
+- hidden deployment variation overwhelms any interpretable within-condition measurement;
+- the contribution depends mainly on terminology or presentation;
+- meaningful evaluation requires privileged access unavailable to an outside evaluator.
 
-## 11. What is the appropriate final form?
+## 11. What outcomes are possible?
 
-The work does not have to become a benchmark.
+A formal study should distinguish among:
+
+- evidence supporting continuation;
+- evidence arguing against continuation;
+- inconclusive evidence.
+
+A negative or null result may be useful, but that does not make every possible result confirmation of the project.
+
+## 12. What is the appropriate final form?
 
 Possible final forms include:
 
 - a small reproducibility protocol;
-- a methods note;
+- a methods or replication note;
 - a case study;
-- a replication package;
-- a public guide for documenting black-box observations;
-- a contribution to another project;
-- a retrospective on why the original benchmark framing was abandoned.
+- a documentation guide;
+- a contribution to an existing project;
+- a retrospective on the research reset;
+- a documented stopping decision.
 
-The final form should follow the evidence rather than be decided in advance.
+The final form should follow the evidence.
