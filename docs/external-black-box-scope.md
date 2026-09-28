@@ -4,138 +4,143 @@
 
 **Active framing — September 28, 2026**
 
-This document defines the current direction of the project. It replaces the proposed authorization-state-discrimination direction as the active framing. Earlier MOTHER materials remain in the repository as historical artifacts and should not be retroactively rewritten.
+This document defines the current direction of the project. Earlier MOTHER materials remain in the repository as historical artifacts and should not be retroactively rewritten.
 
-## Research question
+## Broad research area
 
 > **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
 
-The question is intentionally narrower than the original MOTHER framing. It does not claim that authorization boundaries, abstention, safe non-completion, or escalation are new research problems. They are not.
+This remains a broad methodological area. It is not yet the experimental question for a formal study.
 
-The project is now about the **epistemic and methodological limits of independent black-box evaluation**.
+The project is not presented as a novel authorization benchmark and does not claim that black-box evaluation, model drift, nondeterminism, or external auditing are new topics.
 
-## Why this is the current question
+## Candidate first experimental question
 
-An outside evaluator usually does not know the complete state of a deployed consumer AI system. Depending on the product, behavior may be affected by model routing, system instructions, memory, personalization, account state, tool availability, interface differences, experiments, safety layers, or silent model updates.
+Before attempting a broad study, the project will determine whether one narrow behavioral measurement is feasible:
 
-That creates a practical problem: a behavioral observation may be real and reproducible in the moment, yet difficult to attribute to a stable underlying model or reproduce later.
+> **Under a fixed visible consumer-interface configuration, how often does repeated presentation of the same fixed synthetic probe in fresh sessions produce the same predefined behavioral outcome category?**
 
-The project therefore asks what evidence can still be collected responsibly under those conditions.
+This candidate question names an observable dependent variable: **behavioral outcome category across repeated runs**.
+
+The first quantity of interest is **within-condition consistency**. The goal is not yet to explain why variation occurs.
+
+## What is held fixed
+
+As far as the public interface permits, the initial measurement should hold constant:
+
+- exact probe text;
+- fresh-session status;
+- visible model or product label;
+- interface or product surface;
+- memory/personalization state where visible and controllable;
+- tool or connector availability where visible;
+- other user-visible settings that could plausibly affect the run.
+
+The project cannot assume that hidden deployment state is fixed merely because visible state appears unchanged.
+
+## What is measured
+
+Each run should produce:
+
+1. the exact model response or observable interface behavior;
+2. the visible configuration metadata recorded at the time of the run;
+3. a predefined behavioral outcome category;
+4. an ambiguity note if the output cannot be coded cleanly.
+
+The raw interaction record should be preserved wherever sharing is permitted.
+
+## Hidden variables and confounding
+
+Possible hidden variables include:
+
+- routing;
+- model snapshots;
+- system instructions;
+- safety layers;
+- A/B experiments;
+- server-side memory or personalization state;
+- product updates;
+- regional or infrastructure differences.
+
+These are **unobserved deployment variables**. The project may document behavioral variation while they are present, but it should not attribute the variation to any one hidden cause without independent evidence.
+
+## Feasibility before preregistration
+
+The next experiment is not a large study. It is a small manual shakedown designed to test whether the measurement itself is coherent.
+
+The shakedown should answer:
+
+- Can the exact probe be presented consistently?
+- Can visible state be logged reliably?
+- Can the outcome categories be applied without repeated ad hoc changes?
+- Can ambiguous cases be identified rather than forced into a category?
+- Is the evidence record sufficient for another person to inspect?
+
+The exact probe, coding scheme, repetition count, time window, product set, and reproducibility threshold are **not yet frozen**.
+
+Those values should only be preregistered after the feasibility shakedown and must then be frozen before confirmatory data collection.
+
+## Relationship to historical authorization scenarios
+
+Historical authorization scenarios may be reused as fixed probes if they are useful because they can produce distinguishable observable outcomes such as proceed, refuse, or request clarification.
+
+In that role, they are measurement instruments. Their reuse does **not** establish a new authorization construct or revive the earlier novelty claim.
+
+## What counts as evidence
+
+The project can support claims such as:
+
+- behavior X occurred under documented visible condition Y;
+- outcome category X occurred in a stated number of repeated runs;
+- repeated runs did or did not produce the same predefined category;
+- a later preregistered replication did or did not reproduce the earlier pattern.
+
+The project cannot infer from those observations alone that:
+
+- the underlying model changed;
+- a router caused the difference;
+- a system prompt caused the difference;
+- a safety layer caused the difference;
+- the system internally reasoned in a particular way.
+
+## Falsifiability and decision rules
+
+A future formal study must state in advance what would count as:
+
+- sufficiently reproducible to justify the planned claim;
+- insufficiently reproducible;
+- inconclusive.
+
+The threshold should be selected before confirmatory observations are collected, not retrofitted to the resulting data.
+
+A negative result may still be informative, but it does not automatically count as evidence for the same hypothesis.
+
+## Current findings
+
+**None yet under the active framing.**
+
+The current work is methodology development and collision auditing.
 
 ## Population and environment
 
-The intended test environment is **ordinary public-facing AI products available to consumers**.
+The intended environment is ordinary public-facing AI products available to consumers.
 
-The project does not require:
-
-- API access;
-- privileged developer access;
-- model weights;
-- system prompts;
-- chain-of-thought or hidden reasoning;
-- internal safety logs;
-- routing metadata;
-- proprietary evaluation harnesses.
-
-If a platform exposes useful metadata publicly, it can be recorded. The protocol should not depend on information that an ordinary outside evaluator cannot access.
+The project does not require API access, model weights, hidden system prompts, chain-of-thought, routing metadata, proprietary logs, or internal developer access.
 
 ## Out of scope
 
-For the current phase, this project excludes:
+For the current phase:
 
-- hospital, clinical, or other internal healthcare deployments;
+- hospital, clinical, or internal healthcare deployments;
 - patient records or protected health information;
 - real financial records or credentials;
 - insurance adjudication systems;
 - internal enterprise systems;
-- high-risk attempts to bypass product safeguards;
-- claims about hidden model mechanisms that cannot be externally verified.
-
-Healthcare research may still appear in related work when it reveals a relevant methodological problem, such as version opacity or poor reproducibility. It is not the test domain.
-
-## Candidate protocol dimensions
-
-A future pilot should test whether observations remain stable across controlled changes that an outside evaluator can actually make.
-
-Candidate dimensions include:
-
-### 1. Repeated runs
-
-Repeat the same synthetic scenario under the same visible conditions and record the distribution of outcomes.
-
-### 2. Session state
-
-Compare fresh sessions with continued conversations where context accumulation may matter.
-
-### 3. Memory and personalization
-
-Where controls are available, compare memory or personalization states without using sensitive personal data.
-
-### 4. Account or interface state
-
-Where ethically and practically feasible, compare observable differences across accounts, product surfaces, or interfaces.
-
-### 5. Time
-
-Repeat selected cases later to test for behavioral drift and to document whether the platform exposes a stable model or version identifier.
-
-### 6. Observable metadata
-
-Record the date, time, product surface, visible model label, enabled features, memory state, tools, and any other user-visible configuration that could affect replication.
-
-## What counts as evidence
-
-The unit of evidence is an **observable interaction record** under documented conditions.
-
-A result can support statements such as:
-
-- the system produced behavior X under documented condition Y;
-- the behavior occurred in N repeated runs;
-- the behavior changed after an observable condition changed;
-- later runs did or did not reproduce the earlier result.
-
-A result does **not** by itself support claims such as:
-
-- the model internally reasoned in a particular way;
-- a hidden system prompt caused the behavior;
-- a specific safety layer or router caused the behavior;
-- the same behavior generalizes to all users, accounts, regions, or future versions.
-
-## Reproducibility as a measured property
-
-The project should not treat reproducibility as a yes/no requirement imposed from the outside. Reproducibility itself is part of what is being measured.
-
-Possible outputs include:
-
-- high within-session consistency but poor cross-session consistency;
-- stable behavior over repeated runs but drift over time;
-- different outcomes under memory/personalization changes;
-- inability to identify the model version well enough for later replication;
-- evidence that visible product state is insufficient to explain the variance.
-
-Those are potentially useful findings even when the evaluator cannot identify the hidden cause.
-
-## Claims discipline
-
-The project should distinguish four levels explicitly:
-
-1. **Observed:** what the interface actually returned or did.
-2. **Reproduced:** whether the observation recurred under documented conditions.
-3. **Associated:** whether a visible condition changed alongside the behavior.
-4. **Mechanistic:** a claim about why the system behaved that way.
-
-This project can usually support levels 1 and 2. It may sometimes support a cautious level-3 association. It should not make level-4 claims without independent evidence.
-
-## What would make this project unnecessary
-
-The project should not continue as a standalone effort if a stronger existing methodology already provides the same practical protocol for independent evaluators using ordinary consumer interfaces, with comparable attention to version drift, personalization, routing opacity, memory state, and replication over time.
-
-Likewise, if pilot work shows that the uncontrolled deployment variables make the resulting evidence too weak to support useful conclusions, that is a legitimate stopping condition.
+- attempts to bypass safeguards or access controls;
+- mechanistic claims unsupported by external evidence.
 
 ## Relationship to MOTHER
 
-MOTHER was the original project name and authorization-centered framing. The literature audit showed that those broad constructs overlap heavily with established and current research.
+MOTHER was the historical authorization-centered phase. The active project keeps the discipline of bounded claims and explicit uncertainty, but it is no longer presented as an authorization benchmark.
 
-The present work keeps the useful discipline learned from MOTHER—careful observation, safe non-completion, uncertainty, and restraint in interpretation—but does not present MOTHER's original research question as novel.
-
-The active project is therefore best understood as a **methodology investigation for independent external evaluation**, not as a renamed authorization benchmark.
+The current project is best understood as a **methodology investigation into what can be measured reliably from public consumer AI interfaces under deployment opacity**.
