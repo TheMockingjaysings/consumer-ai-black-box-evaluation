@@ -1,6 +1,6 @@
 # External Evaluation of Consumer AI Under Deployment Opacity
 
-> Historical note: this repository began as **MOTHER (Mother Safe Failure Eval)**, an exploratory project about authorization boundaries, safe non-completion, and escalation. The original name and frozen v0.1 materials are preserved as part of the project record. The active research framing has changed after a literature and collision audit found substantial overlap with existing work.
+> Historical note: this repository began as **MOTHER (Mother Safe Failure Eval)**, an exploratory project about authorization boundaries, safe non-completion, and escalation. The original name and frozen v0.1 materials are preserved as part of the project record. The active research framing changed after a literature and collision audit found substantial overlap with existing work.
 
 ## Current research question
 
@@ -89,6 +89,6 @@ The next step is not to expand the old benchmark. It is to test whether a discip
 
 That includes trying to falsify the project again. If the literature or pilot work shows that this question is already well covered or that public-interface conditions make reliable inference too weak, the project should say so plainly.
 
-## Background
+## Naming history
 
-MOTHER originally stood for **Mother Safe Failure Eval**. The name is kept here only as project history. The active work uses a descriptive research title so the project is evaluated on its methods and evidence rather than on a science-fiction reference or acronym.
+The project originally used the name **MOTHER (Mother Safe Failure Eval)**. That name now refers only to the historical authorization-centered phase and frozen v0.1 materials. The active work uses the descriptive title **External Evaluation of Consumer AI Under Deployment Opacity** so the current research question is clear without relying on an acronym or science-fiction reference.
