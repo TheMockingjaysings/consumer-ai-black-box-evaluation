@@ -2,19 +2,15 @@
 
 ## Current direction
 
-The project is in a **second collision-audit and measurement-definition phase**.
+The project has completed a second collision audit.
 
-The broad research area is:
+**Current status: replication decision phase.**
 
-> **What can an independent evaluator, using only public consumer AI interfaces, reliably observe, reproduce, and document when important deployment variables may be hidden or changing?**
+The audit found substantial direct overlap with existing 2026 work on repeated-prompt consistency, test–retest agreement, black-box endpoint stability, consumer-interface/API differences, and structural barriers to independent consumer-interface evaluation.
 
-That is a research area, not yet a sufficiently narrow experimental question.
+The detailed record is in [`second-collision-audit-2026-09-28.md`](second-collision-audit-2026-09-28.md).
 
-A candidate first measurement is:
-
-> **Under a fixed visible consumer-interface configuration, how often does repeated presentation of the same fixed synthetic probe in fresh sessions produce the same predefined behavioral outcome category?**
-
-The roadmap no longer assumes that the next step is a larger authorization benchmark, a multi-model study, or automation.
+The roadmap therefore no longer treats a repeated fixed-probe consumer-interface study as a possible new methodology.
 
 ## Stage 0 — Historical exploratory work
 
@@ -24,134 +20,120 @@ The original MOTHER work produced a five-scenario exploratory shakedown and conc
 
 Those materials remain part of the historical record. They are not the current claim and should not be retroactively rewritten.
 
-## Stage 1 — Second collision audit
+## Stage 1 — Authorization collision audit
+
+**Status: complete**
+
+Finding: heavy overlap with existing authorization, abstention, least-privilege, delegation, commit-time authorization, and public red-teaming research.
+
+Decision: retire the general authorization-benchmark novelty claim.
+
+## Stage 2 — External-evaluation collision audit
+
+**Status: complete enough for a decision**
+
+Finding: substantial direct overlap with existing work on:
+
+- repeated-run consistency and test–retest agreement;
+- black-box endpoint stability and behavioral fingerprinting;
+- API versus consumer-interface evaluation;
+- deployment/version opacity and temporal change;
+- structural barriers faced by independent evaluators.
+
+Decision: do not claim a new black-box repeatability method. Treat the earlier candidate measurement as a replication or feasibility instrument only.
+
+## Stage 3 — Replication target selection
 
 **Status: active**
 
-Purpose: determine whether the new reproducibility/deployment-opacity direction is already addressed more rigorously by existing work.
+Select one published finding or protocol for which an independent replication through ordinary consumer access could add useful information.
 
-Priority search areas:
+The selection should answer:
 
-- repeated-run nondeterminism and behavioral stability;
-- longitudinal model or product drift;
-- black-box endpoint stability and behavioral fingerprinting;
-- consumer-interface versus API evaluation differences;
-- hidden routing, product-layer, and system-prompt confounds;
-- memory, personalization, account, and interface-state effects;
-- reproducibility standards for outside evaluators without privileged access.
+1. What exact published claim or measurement is being replicated?
+2. Why does an unaffiliated, low-resource replication add evidence rather than merely repeat the paper?
+3. Which conditions from the published method can and cannot be reproduced?
+4. What would count as successful replication, failed replication, and inconclusive replication?
+5. Can the work be performed manually and ethically without evading safeguards, rate limits, or access controls?
 
-Exit condition: a written decision that either identifies a narrow practical gap worth testing, redirects the project toward replication/contribution, or stops the standalone methodology effort.
+If no useful target survives this step, the standalone project should stop or become a documentation/retrospective resource.
 
-## Stage 2 — Measurement definition
+## Stage 4 — Tiny feasibility check
 
-**Status: pending Stage 1**
+**Status: contingent on Stage 3**
 
-If a useful gap remains, define exactly one first measurement.
+Run only enough manual trials to determine whether the selected published procedure can be implemented under ordinary consumer-interface constraints.
 
-Before any confirmatory study, specify:
+The feasibility check should test:
 
-- one fixed synthetic probe;
-- one observable behavioral variable;
-- one coding method;
-- the visible interface state that must be logged;
-- what counts as the same versus different outcome;
-- which hidden variables remain uncontrolled;
-- what raw evidence must be preserved.
+- whether the required visible state can be documented;
+- whether the prompt or probe can be presented consistently;
+- whether the published outcome coding can be reproduced or adapted transparently;
+- whether ambiguous cases can be recorded rather than forced into a category;
+- whether evidence can be preserved well enough for later audit.
 
-Historical authorization scenarios may be reused as probes, but only as measurement instruments. Their use does not revive an authorization-novelty claim.
+These exploratory observations must not later be promoted into confirmatory evidence for thresholds chosen after seeing them.
 
-## Stage 3 — Feasibility shakedown
+## Stage 5 — Preregistered replication
 
-**Status: not started**
+**Status: contingent**
 
-Run a very small number of manual trials to answer an instrument-development question:
-
-> **Can this behavior be observed and coded consistently enough to justify a larger preregistered study?**
-
-The feasibility shakedown should test:
-
-1. whether the fixed probe can be presented consistently;
-2. whether the visible deployment state can be documented adequately;
-3. whether the outcome categories can be applied without repeated ad hoc reinterpretation;
-4. whether the raw interaction record is sufficient for later audit;
-5. whether the procedure can be explained clearly enough for another evaluator to follow.
-
-The shakedown is exploratory instrument development. Its observations must not later be promoted into confirmatory evidence for thresholds chosen after those observations were seen.
-
-## Stage 4 — Preregistration
-
-**Status: contingent on feasibility**
-
-Only if the measurement survives Stage 3 should the project freeze a real study protocol.
+Only if the feasibility check succeeds should the project freeze a replication protocol.
 
 The preregistration should state in advance:
 
-- exact probe text;
-- coding rules;
+- exact source study and target claim;
+- exact prompt/probe text;
 - products or visible model labels included;
 - number of repetitions;
 - session conditions;
 - time window;
-- exclusion and missing-data rules;
 - visible metadata fields;
-- primary outcome;
-- threshold or decision rule for what will count as sufficiently reproducible, insufficiently reproducible, or inconclusive;
+- coding rules;
+- exclusion and missing-data rules;
+- primary replication outcome;
+- successful, failed, and inconclusive replication criteria;
 - stopping conditions.
 
-The threshold should not be selected using the same observations later treated as confirmatory evidence.
-
-## Stage 5 — Repeated-run study
+## Stage 6 — Analysis and replication package
 
 **Status: contingent**
 
-Collect the preregistered observations without changing the rules in response to the emerging result.
+Report the result as a replication, not as a newly invented benchmark.
 
-Primary output should be measured variation under documented visible conditions. Hidden causes should not be inferred from behavioral differences alone.
+The package should include:
 
-If the protocol later compares sessions, accounts, interfaces, or time periods, those sources of variation should be reported separately rather than collapsed into one unexplained score.
-
-## Stage 6 — Replication and external review
-
-**Status: contingent**
-
-If the study produces interpretable evidence, package the procedure so another outside evaluator can attempt replication.
-
-A replication package should include:
-
-- exact probe text;
-- run instructions;
+- the source study being replicated;
+- exact procedure and deviations from the source method;
 - visible-state checklist;
-- outcome coding guide;
-- timestamps and visible product/model labels;
 - raw interaction records where sharing is permitted;
-- exclusion rules;
+- coding guide;
 - uncertainty and limitations;
-- change log for product or model drift.
-
-External reviewers should be asked whether the measurement is clear, whether the claims match the evidence, and whether the work adds anything beyond existing methods.
+- reasons a replication was successful, failed, or inconclusive;
+- any product/version changes observed during the study.
 
 ## Stage 7 — Decide what the project becomes
 
 Possible evidence-based outcomes include:
 
-- a small reproducibility protocol;
-- a replication or methods case study;
-- a public documentation guide;
+- a small independent replication study;
+- a low-resource replication protocol;
+- a public evidence-recording guide;
 - a contribution to an existing evaluation project;
-- a retrospective on the failed or narrowed research direction;
+- a retrospective on the research reset and collision audits;
 - a documented decision to stop.
 
-These are possible final forms, not automatic indicators that the hypothesis or method succeeded.
+These are possible final forms, not automatic indicators that the project succeeded scientifically.
 
 ## Decision discipline
 
-A negative or null result can be scientifically useful, but usefulness is not the same as confirmation.
+A negative or null result can be useful, but usefulness is not confirmation.
 
-Each formal study phase must distinguish among:
+Each formal study must distinguish among:
 
-- evidence that supports continuing;
-- evidence that argues against continuing;
-- evidence that is inconclusive.
+- successful replication;
+- failed replication;
+- inconclusive replication.
 
 ## Scope constraints
 
@@ -162,5 +144,5 @@ For the current roadmap:
 - no patient data, real financial records, credentials, or regulated personal information;
 - no claims about hidden reasoning or internal architecture without independent evidence;
 - no attempt to evade rate limits, safeguards, or access controls;
-- no automation until the measurement itself is shown to be coherent;
-- no novelty claim until the second collision audit supports one.
+- no prohibited automation;
+- no novelty claim for repeated-prompt consistency, consumer-interface auditing, or API/interface divergence.
