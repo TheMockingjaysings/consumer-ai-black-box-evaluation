@@ -37,7 +37,7 @@ This limits longitudinal replication and attribution.
 
 Repeated presentation of the same prompt can produce different responses even when visible conditions appear identical.
 
-The active project therefore treats repeated outcome consistency as a quantity to measure rather than assuming deterministic behavior.
+Repeated-prompt consistency is already an established measurement problem; the project should not present it as a newly identified phenomenon.
 
 ## 5. Behavioral change is not automatically model drift
 
@@ -61,11 +61,11 @@ A visible setting can be logged. It should not be treated as proof that all pers
 
 Results observed on one account, subscription tier, device, product surface, or region may not generalize elsewhere.
 
-The first feasibility shakedown therefore should avoid adding these dimensions unnecessarily. They can be studied later only if the basic within-condition measurement is coherent.
+A replication should add these dimensions only when the selected source study or replication claim requires them.
 
 ## 9. Small feasibility runs are instrument development, not population estimates
 
-A tiny shakedown is intended to test whether the probe, metadata record, and coding scheme work.
+A tiny shakedown is intended only to test whether a selected published procedure can be reproduced through available consumer access.
 
 It does not estimate population-wide rates, establish model-level prevalence, or support general claims about all users or deployments.
 
@@ -75,29 +75,27 @@ Classifying outputs into behavioral categories can require judgment.
 
 The project should therefore:
 
-- define categories before confirmatory collection;
+- prefer the source study's coding rules where practical;
 - preserve raw responses;
 - allow an ambiguity category where appropriate;
-- document coding revisions during feasibility work;
-- freeze the coding guide before the formal study.
+- document any adaptation from the source method;
+- freeze the coding guide before confirmatory replication.
 
 ## 11. Feasibility data should not be reused as confirmatory data
 
-The feasibility shakedown may be used to revise the instrument, coding rules, metadata requirements, or study design.
+The feasibility shakedown may be used to revise metadata requirements, procedure, or coding adaptations.
 
-Because those design choices can be influenced by what the shakedown reveals, the same observations should not later be presented as confirmatory evidence for a threshold or hypothesis selected after seeing them.
+Because those design choices can be influenced by what the shakedown reveals, the same observations should not later be presented as confirmatory evidence for a decision rule selected after seeing them.
 
-## 12. Reproducibility thresholds can be arbitrary if chosen after the fact
+## 12. Replication tolerances can be arbitrary if chosen after the fact
 
-The project has not yet defined what will count as “reproducible enough.”
+A formal replication must state in advance what counts as:
 
-A formal study must state its decision rule before confirmatory data collection and distinguish among:
+- successful replication;
+- failed replication;
+- inconclusive replication.
 
-- sufficiently reproducible;
-- insufficiently reproducible;
-- inconclusive.
-
-The threshold should be justified rather than chosen to make the observed result look favorable.
+The tolerance or decision rule should be justified from the source study and replication design rather than chosen to make the observed result look favorable.
 
 ## 13. Cross-evaluator replication may still be imperfect
 
@@ -122,32 +120,34 @@ The project should preserve structured run metadata and repeated observations wh
 The strongest claims available to this project are usually of the form:
 
 - behavior X occurred under documented visible condition Y;
-- outcome X recurred across a stated set of repeated runs;
+- a published finding did or did not reproduce under stated conditions;
 - repeated runs showed a measured degree of consistency or variation;
-- later replication did or did not reproduce the earlier pattern.
+- a replication was inconclusive because source conditions could not be matched adequately.
 
 The project should avoid claims that a particular hidden component, training method, safety mechanism, or internal reasoning process caused the result unless independent evidence supports that conclusion.
 
-## 17. Existing work may make the project unnecessary
+## 17. Existing work already covers much of the proposed method
 
-The second collision audit is incomplete. A stronger existing methodology may already cover the practical measurement this project is considering.
+The second collision audit found substantial direct overlap with current work on repeated-prompt consistency, black-box endpoint stability, consumer-interface/API differences, and independent consumer-interface evaluation barriers.
 
-If so, the project should replicate, contribute, narrow further, or stop rather than preserve a separate identity for its own sake.
+The project therefore should not preserve a separate methodology identity merely because it uses different terminology or is conducted by an unaffiliated evaluator.
+
+If it continues, it should do so as a replication, contribution, or documentation effort unless a later, specific gap is established.
 
 ## 18. Negative results can be useful without confirming the project
 
 A negative, null, or limiting result may be worth documenting.
 
-That does not mean every outcome supports the same hypothesis. A formal study must specify in advance which outcomes support continuation, which argue against it, and which remain inconclusive.
+That does not mean every outcome supports the same hypothesis. A formal replication must distinguish successful, failed, and inconclusive outcomes in advance.
 
 ## 19. The project is not a regulated-domain evaluation
 
 Healthcare, insurance adjudication, real financial data, credentials, and other regulated or high-risk personal data are out of scope for the current phase.
 
-Research from those domains may inform methodology, but the active protocol is intended for synthetic scenarios in public consumer AI systems.
+Research from those domains may inform methodology, but the active work is intended for synthetic or otherwise non-sensitive scenarios in public consumer AI systems.
 
 ## Current limitation most relevant to the next step
 
-The project does not yet know whether its candidate first measurement can be applied consistently.
+The project does not yet know whether there is a **useful replication target** that can be reproduced manually under ordinary consumer-interface constraints and that would add evidence beyond the source study.
 
-That is why the immediate next step is a **small feasibility shakedown after the second collision audit**, not a broad benchmark or longitudinal multi-model study.
+That is why the immediate next step is replication-target selection, not a new benchmark or general repeated-run study.
