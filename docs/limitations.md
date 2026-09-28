@@ -4,7 +4,7 @@
 
 This file defines the limits of the active project: **independent black-box evaluation of consumer AI under deployment opacity**.
 
-These limitations are part of the method. They are not defects to hide or explain away.
+These limitations constrain what the evidence can support. They should not be treated as proof that the project succeeds simply because they are acknowledged.
 
 ## 1. No privileged access
 
@@ -21,100 +21,133 @@ The project assumes the evaluator does not have access to:
 
 The project therefore cannot determine hidden mechanisms from interface behavior alone.
 
-## 2. Consumer products may change without notice
+## 2. Visible sameness does not guarantee deployment sameness
 
-Public AI products can change between runs. A visible model name may remain the same while the underlying deployment changes, or the interface may expose too little information to tell whether a change occurred.
+Two runs may appear identical from the user's point of view while differing in hidden routing, model snapshot, system instructions, safety layers, experiments, personalization state, or infrastructure.
 
-This limits longitudinal replication and any claim that a result belongs to a stable model version.
+The project may measure observed variation under the same **visible** conditions, but it cannot assume that all hidden conditions were held constant.
 
-## 3. Stochastic outputs complicate replication
+## 3. Consumer products can change without notice
 
-A repeated prompt can produce different responses even when the visible conditions appear identical.
+Public AI products may change between runs. A visible model name can remain unchanged while the underlying deployment changes, and a product may expose too little metadata to identify the change.
 
-The project should therefore report distributions or repeated observations rather than treating one response as a stable property of a system.
+This limits longitudinal replication and attribution.
 
-## 4. Hidden routing may confound comparisons
+## 4. Stochastic outputs complicate replication
 
-A consumer product may route requests through different models, tools, policies, or safety components. An outside evaluator may not be able to observe this.
+Repeated presentation of the same prompt can produce different responses even when visible conditions appear identical.
 
-Behavioral differences can therefore be documented without necessarily identifying their hidden cause.
+The active project therefore treats repeated outcome consistency as a quantity to measure rather than assuming deterministic behavior.
 
-## 5. Personalization and memory may be partially observable
+## 5. Behavioral change is not automatically model drift
+
+An observed difference over time or across sessions may reflect model changes, routing, product logic, personalization, safety layers, or another hidden variable.
+
+The project should use language such as **observed behavioral variation** unless independent evidence supports a more specific claim.
+
+## 6. Association is not causation
+
+If behavior changes when a visible setting changes, the project may report that the conditions were associated with different observed outcomes.
+
+It should not automatically conclude that the visible setting caused the change because hidden deployment variables may also have changed.
+
+## 7. Personalization and memory may be only partly observable
 
 Some products expose memory or personalization controls, but the evaluator may not know the complete state used by the system.
 
-A visible setting can be logged. It should not be treated as proof that all personalization effects are controlled.
+A visible setting can be logged. It should not be treated as proof that all personalization effects were controlled.
 
-## 6. Account and interface effects may not generalize
+## 8. Account, interface, device, tier, and region may matter
 
-Results observed on one account, subscription tier, device, product surface, region, or feature set may not generalize to another.
+Results observed on one account, subscription tier, device, product surface, or region may not generalize elsewhere.
 
-Where comparisons are made, the relevant visible conditions should be documented. The project should not imply universality from one account or interface.
+The first feasibility shakedown therefore should avoid adding these dimensions unnecessarily. They can be studied later only if the basic within-condition measurement is coherent.
 
-## 7. Black-box evidence supports behavioral claims, not mechanistic claims
+## 9. Small feasibility runs are instrument development, not population estimates
 
-The strongest claims available to this project are usually of the form:
+A tiny shakedown is intended to test whether the probe, metadata record, and coding scheme work.
 
-- behavior X occurred under documented condition Y;
-- behavior X recurred across repeated runs;
-- behavior changed when an observable condition changed;
-- later replication did or did not reproduce the earlier observation.
-
-The project should avoid claims such as:
-
-- the model internally reasoned in a particular way;
-- a hidden policy caused the behavior;
-- a particular training method produced the result;
-- a specific component of the deployment stack is responsible.
-
-## 8. Association is not causation
-
-If behavior changes when a visible setting changes, the project may report an association. It cannot automatically claim that the setting caused the change because hidden deployment variables may have changed at the same time.
-
-## 9. Small pilots do not estimate population-wide rates
-
-A feasibility pilot may reveal patterns worth studying, but it will not establish population-level failure rates for all users or all deployments.
-
-Any quantitative reporting must identify the tested systems, conditions, number of runs, and sampling limits.
+It does not estimate population-wide rates, establish model-level prevalence, or support general claims about all users or deployments.
 
 ## 10. Outcome coding can introduce evaluator judgment
 
-Classifying outputs as equivalent, materially different, compliant, non-compliant, escalatory, or otherwise meaningful can require judgment.
+Classifying outputs into behavioral categories can require judgment.
 
-A coding guide should therefore define categories in advance where feasible, preserve the raw interaction record, and separate descriptive coding from interpretation.
+The project should therefore:
 
-## 11. Cross-evaluator replication may still be imperfect
+- define categories before confirmatory collection;
+- preserve raw responses;
+- allow an ambiguity category where appropriate;
+- document coding revisions during feasibility work;
+- freeze the coding guide before the formal study.
 
-Two evaluators following the same procedure may receive different behavior because their accounts, histories, regions, product state, or timing differ.
+## 11. Feasibility data should not be reused as confirmatory data
 
-That variance is itself relevant to the research question, but it limits simple claims of reproducibility.
+The feasibility shakedown may be used to revise the instrument, coding rules, metadata requirements, or study design.
 
-## 12. Public interfaces may restrict systematic testing
+Because those design choices can be influenced by what the shakedown reveals, the same observations should not later be presented as confirmatory evidence for a threshold or hypothesis selected after seeing them.
 
-Rate limits, anti-automation systems, terms of service, product design, or interface friction may constrain repeated testing.
+## 12. Reproducibility thresholds can be arbitrary if chosen after the fact
 
-The project should not evade safeguards or violate access controls in order to produce cleaner data.
+The project has not yet defined what will count as “reproducible enough.”
 
-## 13. Screenshots are not sufficient evidence on their own
+A formal study must state its decision rule before confirmatory data collection and distinguish among:
 
-Screenshots can document a moment, but they do not establish frequency, reproducibility, or cause.
+- sufficiently reproducible;
+- insufficiently reproducible;
+- inconclusive.
 
-Where possible, the project should preserve structured run metadata and repeated observations rather than relying on isolated examples.
+The threshold should be justified rather than chosen to make the observed result look favorable.
 
-## 14. The project is not a healthcare, financial, or regulated-system evaluation
+## 13. Cross-evaluator replication may still be imperfect
 
-Healthcare, insurance adjudication, real financial data, credentials, and other regulated or high-risk domains are out of scope for the current phase.
+Another evaluator following the same procedure may receive different behavior because of account history, product state, timing, region, or other hidden variables.
 
-Research from those areas may inform methodology, but the present protocol is intended for synthetic scenarios in public consumer AI systems.
+That disagreement can be measured, but it limits simple claims of reproducibility.
 
-## 15. Existing work may make the project unnecessary
+## 14. Public interfaces may restrict systematic testing
 
-The literature audit is incomplete. A stronger existing methodology may already cover this problem.
+Rate limits, anti-automation systems, product design, terms of service, or interface friction may constrain repeated testing.
 
-If that is established, the project should narrow, contribute to that work, or stop rather than preserve a separate identity for its own sake.
+The project should not evade safeguards, bypass access controls, or automate in ways that violate platform rules in order to obtain cleaner data.
 
-## 16. Failure to produce a benchmark is not evidence of failure
+## 15. Screenshots are insufficient on their own
 
-The project may end with a methods note, replication case study, negative finding, retrospective, or documented stopping decision.
+Screenshots can preserve an example, but they do not establish frequency, reproducibility, or cause.
 
-Those outcomes are preferable to overstating novelty or evidentiary strength.
+The project should preserve structured run metadata and repeated observations where possible.
+
+## 16. Black-box evidence supports behavioral claims, not mechanistic claims
+
+The strongest claims available to this project are usually of the form:
+
+- behavior X occurred under documented visible condition Y;
+- outcome X recurred across a stated set of repeated runs;
+- repeated runs showed a measured degree of consistency or variation;
+- later replication did or did not reproduce the earlier pattern.
+
+The project should avoid claims that a particular hidden component, training method, safety mechanism, or internal reasoning process caused the result unless independent evidence supports that conclusion.
+
+## 17. Existing work may make the project unnecessary
+
+The second collision audit is incomplete. A stronger existing methodology may already cover the practical measurement this project is considering.
+
+If so, the project should replicate, contribute, narrow further, or stop rather than preserve a separate identity for its own sake.
+
+## 18. Negative results can be useful without confirming the project
+
+A negative, null, or limiting result may be worth documenting.
+
+That does not mean every outcome supports the same hypothesis. A formal study must specify in advance which outcomes support continuation, which argue against it, and which remain inconclusive.
+
+## 19. The project is not a regulated-domain evaluation
+
+Healthcare, insurance adjudication, real financial data, credentials, and other regulated or high-risk personal data are out of scope for the current phase.
+
+Research from those domains may inform methodology, but the active protocol is intended for synthetic scenarios in public consumer AI systems.
+
+## Current limitation most relevant to the next step
+
+The project does not yet know whether its candidate first measurement can be applied consistently.
+
+That is why the immediate next step is a **small feasibility shakedown after the second collision audit**, not a broad benchmark or longitudinal multi-model study.
